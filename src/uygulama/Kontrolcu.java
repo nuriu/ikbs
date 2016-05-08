@@ -1,4 +1,4 @@
-package is;
+package uygulama;
 
 public class Kontrolcu {
 }
