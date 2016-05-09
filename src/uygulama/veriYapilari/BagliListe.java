@@ -59,9 +59,6 @@ public class BagliListe extends BagliListeSoyut {
     @Override
     public void BasiSil() {
 
-
-
-
     }
 
     @Override
