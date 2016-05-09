@@ -40,7 +40,7 @@ public class BagliListe extends BagliListeSoyut {
         Dugum gecici = new Dugum(deger);
 
         if (pozisyon > Boyut || pozisyon < 0){
-            //Uyarı ver.
+            throw new IndexOutOfBoundsException("Hatalı Pozisyon!");
         }
         else if (pozisyon == 1)
             BasaEkle(deger);
@@ -58,7 +58,14 @@ public class BagliListe extends BagliListeSoyut {
 
     @Override
     public void BasiSil() {
-
+        if (Bas != null){
+            Dugum BasSonraki = Bas.Sonraki;
+            if(BasSonraki == null)
+                Bas = null;
+            else
+                Bas = BasSonraki;
+            Boyut--;
+        }
     }
 
     @Override
