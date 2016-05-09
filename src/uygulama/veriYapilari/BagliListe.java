@@ -58,7 +58,14 @@ public class BagliListe extends BagliListeSoyut {
 
     @Override
     public void BasiSil() {
-
+        if (Bas != null){
+            Dugum BasSonraki = Bas.Sonraki;
+            if(BasSonraki == null)
+                Bas = null;
+            else
+                Bas = BasSonraki;
+            Boyut--;
+        }
     }
 
     @Override
