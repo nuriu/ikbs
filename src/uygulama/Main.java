@@ -21,15 +21,12 @@ public class Main extends Application {
         arayuz = FXMLLoader.load(getClass().getResource("karsilamaEkrani.fxml"));
 
         pencere.setTitle("İnsan Kaynakları Bilgi Sistemi");
-        pencere.setScene(new Scene(arayuz, 1024, 768));
+        pencere.setScene(new Scene(arayuz, 1280, 700));
         pencere.show();
 
         pencere.setOnCloseRequest(e -> {
             e.consume();
             pencere.close();
         });
-    }
-
-    private void programiKapat() {
     }
 }
