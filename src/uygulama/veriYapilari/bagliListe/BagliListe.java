@@ -8,7 +8,7 @@ import uygulama.veriYapilari.bagliListe.Dugum;
  */
 public class BagliListe extends BagliListeSoyut {
     @Override
-    public void BasaEkle(int deger) {
+    public void basaEkle(int deger) {
         Dugum gecici = new Dugum(deger);
 
         if(Bas == null)
@@ -21,7 +21,7 @@ public class BagliListe extends BagliListeSoyut {
     }
 
     @Override
-    public void SonaEkle(int deger) {
+    public void sonaEkle(int deger) {
         Dugum gecici = new Dugum(deger);
 
         if(Bas == null)
@@ -36,14 +36,14 @@ public class BagliListe extends BagliListeSoyut {
     }
 
     @Override
-    public void PozisyonaEkle(int pozisyon, int deger) {
+    public void pozisyonaEkle(int pozisyon, int deger) {
         Dugum gecici = new Dugum(deger);
 
         if (pozisyon > Boyut || pozisyon < 0){
             throw new IndexOutOfBoundsException("Hatalı Pozisyon!");
         }
         else if (pozisyon == 1)
-            BasaEkle(deger);
+            basaEkle(deger);
         else {
             Dugum sayac = Bas;
             for (int i = 1; i < pozisyon - 1; i++) {
@@ -57,7 +57,7 @@ public class BagliListe extends BagliListeSoyut {
     }
 
     @Override
-    public void BasiSil() {
+    public void basiSil() {
         if (Bas != null){
             Dugum BasSonraki = Bas.Sonraki;
             if(BasSonraki == null)
@@ -69,7 +69,7 @@ public class BagliListe extends BagliListeSoyut {
     }
 
     @Override
-    public void SonuSil() {
+    public void sonuSil() {
         Dugum sayac = Bas;
         while (sayac != null){
             if (sayac.Sonraki.Sonraki == null){
@@ -83,12 +83,12 @@ public class BagliListe extends BagliListeSoyut {
     }
 
     @Override
-    public void PozisyonuSil(int pozisyon) {
+    public void pozisyonuSil(int pozisyon) {
         if (pozisyon > Boyut || pozisyon < 0){
             //Hata ver
         }
         else if (pozisyon == 1)
-            BasiSil();
+            basiSil();
         else{
             Dugum sayac = Bas;
             Dugum gecici = new Dugum();
@@ -105,7 +105,7 @@ public class BagliListe extends BagliListeSoyut {
     }
 
     @Override
-    public Dugum ElemanGetir(int pozisyon) {
+    public Dugum elemanGetir(int pozisyon) {
         Dugum sayac = Bas;
         if (pozisyon > Boyut || pozisyon < 0){
             //Hata ver
@@ -120,7 +120,7 @@ public class BagliListe extends BagliListeSoyut {
     }
 
     @Override
-    public String ElemanlariListele() {
+    public String elemanlariListele() {
         String gecici = "";
         Dugum eleman = Bas;
         while (eleman != null){
