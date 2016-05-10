@@ -7,6 +7,10 @@ public class Dugum {
     public int Veri;
     public Dugum Sonraki;
 
+    public Dugum() {
+
+    }
+
     public Dugum(int veri) {
         Veri = veri;
     }

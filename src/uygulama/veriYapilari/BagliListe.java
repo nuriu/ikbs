@@ -70,21 +70,63 @@ public class BagliListe extends BagliListeSoyut {
 
     @Override
     public void SonuSil() {
-
+        Dugum sayac = Bas;
+        while (sayac != null){
+            if (sayac.Sonraki.Sonraki == null){
+                sayac.Sonraki = null;
+                break;
+            }
+            else
+                sayac = sayac.Sonraki;
+        }
+        Boyut--;
     }
 
     @Override
     public void PozisyonuSil(int pozisyon) {
-
+        if (pozisyon > Boyut || pozisyon < 0){
+            //Hata ver
+        }
+        else if (pozisyon == 1)
+            BasiSil();
+        else{
+            Dugum sayac = Bas;
+            Dugum gecici = new Dugum();
+            for (int i = 1; i < pozisyon - 1; i++){
+                if (sayac.Sonraki != null)
+                    sayac = sayac.Sonraki;
+            }
+            gecici = sayac;
+            sayac = sayac.Sonraki;
+            gecici.Sonraki = sayac.Sonraki;
+            sayac = null;
+            Boyut--;
+        }
     }
 
     @Override
     public Dugum ElemanGetir(int pozisyon) {
-        return null;
+        Dugum sayac = Bas;
+        if (pozisyon > Boyut || pozisyon < 0){
+            //Hata ver
+        }
+        else{
+            for (int i = 1; i < pozisyon; i++){
+                if (sayac.Sonraki != null)
+                    sayac = sayac.Sonraki;
+            }
+        }
+        return  sayac;
     }
 
     @Override
     public String ElemanlariListele() {
-        return null;
+        String gecici = "";
+        Dugum eleman = Bas;
+        while (eleman != null){
+            gecici += "-" + eleman.Veri;
+            eleman = eleman.Sonraki;
+        }
+        return  gecici;
     }
 }
