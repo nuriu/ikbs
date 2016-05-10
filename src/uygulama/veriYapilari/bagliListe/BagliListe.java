@@ -1,4 +1,4 @@
-package uygulama.veriYapilari;
+package uygulama.veriYapilari.bagliListe;
 
 import uygulama.veriYapilari.bagliListe.BagliListeSoyut;
 import uygulama.veriYapilari.bagliListe.Dugum;
