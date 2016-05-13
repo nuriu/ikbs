@@ -52,176 +52,38 @@ public class IkiliAramaAgaci{
         dugumler += dugum.kisi.Ad + " ";
     }
 
-    public void preOrder() {
-        dugumler = "";
-        preOrderInt(kok);
-    }
-
-    private void preOrderInt(Dugum dugum) {
-        if (dugum == null)
-            return;;
-        ziyaret(dugum);
-        preOrderInt(dugum.sol);
-        preOrderInt(dugum.sag);
-    }
-
-    public void inOrder() {
-        dugumler = "";
-        inOrderInt(kok);
-    }
-
-    private void inOrderInt(Dugum dugum) {
-        if (dugum == null)
-            return;
-        inOrderInt(dugum.sol);
-        ziyaret(dugum);
-        inOrderInt(dugum.sag);
-    }
-
-    public void postOrder(){
-        dugumler = "";
-        postOrderInt(kok);
-    }
-
-    private void postOrderInt (Dugum dugum){
-        if (dugum == null)
-            return;
-        postOrderInt(dugum.sol);
-        postOrderInt(dugum.sag);
-        ziyaret(dugum);
-    }
-
-    /* TODO: kişi adına göre ekleme yap
-    public void ekle(int deger){
+    public void kisiEkle(Kisi kisi){
         Dugum ebeveyn = new Dugum();
         Dugum arama = kok;
 
         while (arama != null){
             ebeveyn = arama;
-            if (deger == (int)arama.veri)
+            // Aynı ada sahip kişi var ise
+            if (kisi.Ad.compareTo(arama.kisi.Ad) == 0)
                 return;
-            else if (deger < (int)arama.veri)
+            // Adı daha küçükse (alfabetik olarak) (TODO: testler yapılacak)
+            else if (kisi.Ad.compareTo(arama.kisi.Ad) < 0)
                 arama = arama.sol;
             else
                 arama = arama.sag;
         }
 
-        Dugum eklenecek = new Dugum(deger);
-        if(kok == null)
-            kok = eklenecek;
-        else if (deger < (int)ebeveyn.veri)
-            ebeveyn.sol = eklenecek;
+        if(kok.kisi == null)
+        {
+            if (kok == null)
+                kok = new Dugum();
+
+            kok.kisi = kisi;
+        }
+        else if (kisi.Ad.compareTo(ebeveyn.kisi.Ad) < 0)
+        {
+            ebeveyn.sol = new Dugum();
+            ebeveyn.sol.kisi = kisi;
+        }
         else
-            ebeveyn.sag = eklenecek;
-    }
-    */
-
-    /* TODO: kişi adına göre arama yap
-    public Dugum ara(int anahtar){
-        return  araInt(kok, anahtar);
-    }
-
-    private Dugum araInt(Dugum dugum, int anahtar){
-        if (dugum == null)
-            return  null;
-        else if ((int)dugum.veri == anahtar)
-            return  dugum;
-        else if ((int)dugum.veri > anahtar)
-            return araInt(dugum.sol, anahtar);
-        else
-            return araInt(dugum.sag, anahtar);
-    }
-    */
-    public Dugum minDeger(){
-        Dugum gecici = kok;
-        while (gecici.sol != null)
-            gecici = gecici.sol;
-        return gecici;
-    }
-
-    public Dugum maxDeger(){
-        Dugum gecici = kok;
-        while(gecici.sag != null)
-            gecici = gecici.sag;
-        return  gecici;
-    }
-
-    private Dugum successor(Dugum dugum){
-        Dugum ebeveyn = dugum;
-        Dugum successor = dugum;
-        Dugum simdiki = dugum.sag;
-        while (simdiki != null){
-            ebeveyn = successor;
-            successor = simdiki;
-            simdiki = simdiki.sol;
+        {
+            ebeveyn.sag = new Dugum();
+            ebeveyn.sag.kisi = kisi;
         }
-        if (successor != dugum.sag){
-            ebeveyn.sol = successor.sag;
-            successor.sag = dugum.sag;
-        }
-        return successor;
     }
-
-    /* TODO: Kişilere göre silme yap
-    public boolean sil(int deger){
-        Dugum simdiki = kok;
-        Dugum ebeveyn = kok;
-        boolean solMu = true;
-        while ((int)simdiki.veri != deger){
-            ebeveyn = simdiki;
-            if (deger < (int)simdiki.veri){
-                solMu = true;
-                simdiki = simdiki.sol;
-            }
-            else{
-                solMu = false;
-                simdiki = simdiki.sag;
-            }
-            if (simdiki == null)
-                return false;
-        }
-
-        //Durum 1
-        if (simdiki.sol == null && simdiki.sag == null){
-            if (simdiki == kok)
-                kok = null;
-            else if (solMu)
-                ebeveyn.sol = null;
-            else
-                ebeveyn.sag = null;
-        }
-
-        //Durum 2
-        else if (simdiki.sag == null){
-            if (simdiki == kok)
-                kok = simdiki.sol;
-            else if (solMu)
-                ebeveyn.sol = simdiki.sol;
-            else
-                ebeveyn.sag = simdiki.sol;
-        }
-        else if (simdiki.sol == null){
-            if (simdiki == kok)
-                kok = simdiki.sag;
-            else if (solMu)
-                ebeveyn.sol = simdiki.sag;
-            else
-                ebeveyn.sag = simdiki.sag;
-        }
-
-        //Durum 3
-        else {
-            Dugum successor = successor(simdiki);
-            if (simdiki == kok)
-                kok = successor;
-            else if (solMu)
-                ebeveyn.sol = successor;
-            else
-                ebeveyn.sag = successor;
-
-            successor.sol = simdiki.sol;
-        }
-        return true;
-    }
-    */
 }
