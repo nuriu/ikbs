@@ -129,4 +129,19 @@ public class IkiliAramaAgaci{
         soldanKoke(dugum.sag);
         ziyaret(dugum);
     }
+
+    public Kisi kisiAra(Kisi kisi){
+        return aramaYap(kok, kisi);
+    }
+
+    private Kisi aramaYap(Dugum dugum, Kisi kisi){
+        if (dugum == null)
+            return null;
+        else if (dugum.kisi == kisi)
+            return dugum.kisi;
+        else if (kisi.Ad.compareTo(dugum.kisi.Ad) < 0)
+            return aramaYap(dugum.sol, kisi);
+        else
+            return aramaYap(dugum.sag, kisi);
+    }
 }
