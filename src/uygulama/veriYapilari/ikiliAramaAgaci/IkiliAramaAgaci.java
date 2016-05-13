@@ -3,6 +3,7 @@ package uygulama.veriYapilari.ikiliAramaAgaci;
 /**
  * Created by Sefa on 10.05.2016.
  */
+
 public class IkiliAramaAgaci{
 
     private Dugum kok;
@@ -85,5 +86,47 @@ public class IkiliAramaAgaci{
             ebeveyn.sag = new Dugum();
             ebeveyn.sag.kisi = kisi;
         }
+    }
+
+    public String koktenSagaDolas() {
+        dugumler = "";
+        koktenSaga(kok);
+        return this.dugumler;
+    }
+
+    private void koktenSaga(Dugum dugum) {
+        if (dugum == null)
+            return;
+        ziyaret(dugum);
+        koktenSaga(dugum.sol);
+        koktenSaga(dugum.sag);
+    }
+
+    public String soldanSagaDolas() {
+        dugumler = "";
+        soldanSaga(kok);
+        return this.dugumler;
+    }
+
+    private void soldanSaga(Dugum dugum) {
+        if (dugum == null)
+            return;
+        soldanSaga(dugum.sol);
+        ziyaret(dugum);
+        soldanSaga(dugum.sag);
+    }
+
+    public String soldanKokeDolas(){
+        dugumler = "";
+        soldanKoke(kok);
+        return this.dugumler;
+    }
+
+    private void soldanKoke(Dugum dugum){
+        if (dugum == null)
+            return;
+        soldanKoke(dugum.sol);
+        soldanKoke(dugum.sag);
+        ziyaret(dugum);
     }
 }
