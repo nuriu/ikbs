@@ -1,14 +1,12 @@
 package uygulama.veriYapilari.bagliListe;
 
-import uygulama.veriYapilari.bagliListe.BagliListeSoyut;
-import uygulama.veriYapilari.bagliListe.Dugum;
-
 /**
  * Created by Sefa on 9.05.2016.
  */
+
 public class BagliListe extends BagliListeSoyut {
     @Override
-    public void basaEkle(int deger) {
+    public void basaEkle(Object deger) {
         Dugum gecici = new Dugum(deger);
 
         if(Bas == null)
@@ -21,7 +19,7 @@ public class BagliListe extends BagliListeSoyut {
     }
 
     @Override
-    public void sonaEkle(int deger) {
+    public void sonaEkle(Object deger) {
         Dugum gecici = new Dugum(deger);
 
         if(Bas == null)
@@ -36,7 +34,7 @@ public class BagliListe extends BagliListeSoyut {
     }
 
     @Override
-    public void pozisyonaEkle(int pozisyon, int deger) {
+    public void pozisyonaEkle(int pozisyon, Object deger) {
         Dugum gecici = new Dugum(deger);
 
         if (pozisyon > Boyut || pozisyon < 0){
@@ -85,7 +83,7 @@ public class BagliListe extends BagliListeSoyut {
     @Override
     public void pozisyonuSil(int pozisyon) {
         if (pozisyon > Boyut || pozisyon < 0){
-            //Hata ver
+            throw new IndexOutOfBoundsException("Hatalı Pozisyon!");
         }
         else if (pozisyon == 1)
             basiSil();
@@ -108,7 +106,7 @@ public class BagliListe extends BagliListeSoyut {
     public Dugum elemanGetir(int pozisyon) {
         Dugum sayac = Bas;
         if (pozisyon > Boyut || pozisyon < 0){
-            //Hata ver
+            throw new IndexOutOfBoundsException("Hatalı Pozisyon!");
         }
         else{
             for (int i = 1; i < pozisyon; i++){

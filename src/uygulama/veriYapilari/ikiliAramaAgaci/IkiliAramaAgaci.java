@@ -4,8 +4,10 @@ package uygulama.veriYapilari.ikiliAramaAgaci;
  * Created by Sefa on 10.05.2016.
  */
 public class IkiliAramaAgaci{
+
     private Dugum kok;
     private String dugumler;
+
     public IkiliAramaAgaci() {
     }
 
@@ -47,7 +49,7 @@ public class IkiliAramaAgaci{
     }
 
     private void ziyaret(Dugum dugum){
-        dugumler += dugum.veri + " ";
+        dugumler += dugum.kisi.Ad + " ";
     }
 
     public void preOrder() {
@@ -89,7 +91,8 @@ public class IkiliAramaAgaci{
         ziyaret(dugum);
     }
 
-    public void  ekle(int deger){
+    /* TODO: kişi adına göre ekleme yap
+    public void ekle(int deger){
         Dugum ebeveyn = new Dugum();
         Dugum arama = kok;
 
@@ -111,7 +114,9 @@ public class IkiliAramaAgaci{
         else
             ebeveyn.sag = eklenecek;
     }
+    */
 
+    /* TODO: kişi adına göre arama yap
     public Dugum ara(int anahtar){
         return  araInt(kok, anahtar);
     }
@@ -126,7 +131,7 @@ public class IkiliAramaAgaci{
         else
             return araInt(dugum.sag, anahtar);
     }
-
+    */
     public Dugum minDeger(){
         Dugum gecici = kok;
         while (gecici.sol != null)
@@ -157,6 +162,7 @@ public class IkiliAramaAgaci{
         return successor;
     }
 
+    /* TODO: Kişilere göre silme yap
     public boolean sil(int deger){
         Dugum simdiki = kok;
         Dugum ebeveyn = kok;
@@ -217,4 +223,5 @@ public class IkiliAramaAgaci{
         }
         return true;
     }
+    */
 }
