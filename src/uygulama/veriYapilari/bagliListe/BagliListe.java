@@ -11,7 +11,7 @@ public class BagliListe extends BagliListeSoyut {
 
         if(Bas == null)
             Bas = gecici;
-        else{
+        else {
             gecici.Sonraki = Bas;
             Bas = gecici;
         }
@@ -24,7 +24,7 @@ public class BagliListe extends BagliListeSoyut {
 
         if(Bas == null)
             Bas = gecici;
-        else{
+        else {
             Dugum sayac = Bas;
             while(sayac.Sonraki != null)
                 sayac = sayac.Sonraki;
@@ -37,7 +37,7 @@ public class BagliListe extends BagliListeSoyut {
     public void pozisyonaEkle(int pozisyon, Object deger) {
         Dugum gecici = new Dugum(deger);
 
-        if (pozisyon > Boyut || pozisyon < 0){
+        if (pozisyon > Boyut || pozisyon < 0) {
             throw new IndexOutOfBoundsException("Hatalı Pozisyon!");
         }
         else if (pozisyon == 1)
@@ -56,7 +56,7 @@ public class BagliListe extends BagliListeSoyut {
 
     @Override
     public void basiSil() {
-        if (Bas != null){
+        if (Bas != null) {
             Dugum BasSonraki = Bas.Sonraki;
             if(BasSonraki == null)
                 Bas = null;
@@ -69,8 +69,8 @@ public class BagliListe extends BagliListeSoyut {
     @Override
     public void sonuSil() {
         Dugum sayac = Bas;
-        while (sayac != null){
-            if (sayac.Sonraki.Sonraki == null){
+        while (sayac != null) {
+            if (sayac.Sonraki.Sonraki == null) {
                 sayac.Sonraki = null;
                 break;
             }
@@ -82,12 +82,12 @@ public class BagliListe extends BagliListeSoyut {
 
     @Override
     public void pozisyonuSil(int pozisyon) {
-        if (pozisyon > Boyut || pozisyon < 0){
+        if (pozisyon > Boyut || pozisyon < 0) {
             throw new IndexOutOfBoundsException("Hatalı Pozisyon!");
         }
         else if (pozisyon == 1)
             basiSil();
-        else{
+        else {
             Dugum sayac = Bas;
             Dugum gecici = new Dugum();
             for (int i = 1; i < pozisyon - 1; i++){
@@ -105,11 +105,10 @@ public class BagliListe extends BagliListeSoyut {
     @Override
     public Dugum elemanGetir(int pozisyon) {
         Dugum sayac = Bas;
-        if (pozisyon > Boyut || pozisyon < 0){
+        if (pozisyon > Boyut || pozisyon < 0) {
             throw new IndexOutOfBoundsException("Hatalı Pozisyon!");
-        }
-        else{
-            for (int i = 1; i < pozisyon; i++){
+        } else {
+            for (int i = 1; i < pozisyon; i++) {
                 if (sayac.Sonraki != null)
                     sayac = sayac.Sonraki;
             }
@@ -121,7 +120,7 @@ public class BagliListe extends BagliListeSoyut {
     public String elemanlariListele() {
         String gecici = "";
         Dugum eleman = Bas;
-        while (eleman != null){
+        while (eleman != null) {
             gecici += "-" + eleman.Veri;
             eleman = eleman.Sonraki;
         }
