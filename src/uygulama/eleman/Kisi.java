@@ -3,12 +3,6 @@ package uygulama.eleman;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Paket:           uygulama.eleman
- * Oluşturan:       Nuri UZUNOĞLU
- * Oluşturma:       08.05.2016 | 19:31
- */
-
 public class Kisi {
     public String Ad;
     public String Adres;
@@ -27,13 +21,39 @@ public class Kisi {
     }
 
     // TODO: Sisteme kayıt (kendi kişisel bilgilerini girme)
-    public void Kayit() {
-
+    public void Kayit(String ad, String adres, Long telefon, String eposta,
+                      String uyruk, String dogumYeri, Date dogumTarihi,
+                      String medeniDurum, String yabanciDil, String ilgiAlanlari,
+                      List<Kisi> referanslar) {
+        this.Ad = ad;
+        this.Adres = adres;
+        this.Telefon = telefon;
+        this.Eposta = eposta;
+        this.Uyruk = uyruk;
+        this.DogumYeri = dogumYeri;
+        this.DogumTarihi = dogumTarihi;
+        this.MedeniDurum = medeniDurum;
+        this.YabanciDil = yabanciDil;
+        this.IlgiAlanlari = ilgiAlanlari;
+        this.Referanslar = referanslar;
     }
 
     // TODO: Sistemdeki bilgilerini güncelleme
-    public void Guncelle() {
-
+    public void Guncelle(String ad, String adres, Long telefon, String eposta,
+                         String uyruk, String dogumYeri, Date dogumTarihi,
+                         String medeniDurum, String yabanciDil, String ilgiAlanlari,
+                         List<Kisi> referanslar) {
+        this.Ad = ad;
+        this.Adres = adres;
+        this.Telefon = telefon;
+        this.Eposta = eposta;
+        this.Uyruk = uyruk;
+        this.DogumYeri = dogumYeri;
+        this.DogumTarihi = dogumTarihi;
+        this.MedeniDurum = medeniDurum;
+        this.YabanciDil = yabanciDil;
+        this.IlgiAlanlari = ilgiAlanlari;
+        this.Referanslar = referanslar;
     }
 
     // TODO: Sistemden çıkma (bilgilerini silme)
@@ -41,7 +61,7 @@ public class Kisi {
 
     }
 
-    // TODO: Sistemdeki bir işe başvurma (başvurusu bulunan yere tekrar başvuramamalı)
+    // TODO: Sistemdeki bir işe başvurma (başvurusu bulunan tekrar başvuramamalı)
     public void Basvur() {
 
     }

@@ -6,12 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import uygulama.Main;
 
-/**
- * Paket:           uygulama
- * Oluşturan:       Nuri UZUNOĞLU
- * Oluşturma:       09.05.2016 | 13:05
- */
-
 public class SirketKontrolcusu {
     private Parent arayuz;
 

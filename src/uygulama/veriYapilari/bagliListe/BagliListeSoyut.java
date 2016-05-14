@@ -1,8 +1,5 @@
 package uygulama.veriYapilari.bagliListe;
 
-/**
- * Created by Sefa on 9.05.2016.
- */
 public abstract class BagliListeSoyut {
     public Dugum Bas;
     public int Boyut = 0;

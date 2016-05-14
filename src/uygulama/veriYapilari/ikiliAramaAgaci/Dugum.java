@@ -3,10 +3,6 @@ package uygulama.veriYapilari.ikiliAramaAgaci;
 import uygulama.eleman.Kisi;
 import uygulama.veriYapilari.bagliListe.BagliListe;
 
-/**
- * Created by Sefa on 10.05.2016.
- */
-
 public class Dugum {
     public Kisi kisi;
     public BagliListe Deneyimler;

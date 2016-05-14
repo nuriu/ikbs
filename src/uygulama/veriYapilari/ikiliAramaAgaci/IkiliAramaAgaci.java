@@ -4,10 +4,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import uygulama.eleman.Kisi;
 
-/**
- * Created by Sefa on 10.05.2016.
- */
-
 public class IkiliAramaAgaci {
     public ObservableList<String> dugumler;
     private Dugum kok;

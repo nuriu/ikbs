@@ -1,9 +1,5 @@
 package uygulama.veriYapilari.bagliListe;
 
-/**
- * Created by Sefa on 9.05.2016.
- */
-
 public class BagliListe extends BagliListeSoyut {
     @Override
     public void basaEkle(Object deger) {
