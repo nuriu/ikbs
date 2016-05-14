@@ -18,7 +18,7 @@ public class Main extends Application {
         pencere = primaryStage;
 
         Parent arayuz;
-        arayuz = FXMLLoader.load(getClass().getResource("karsilamaEkrani.fxml"));
+        arayuz = FXMLLoader.load(getClass().getResource("ekranlar/karsilamaEkrani.fxml"));
 
         pencere.setTitle("İnsan Kaynakları Bilgi Sistemi");
         pencere.setScene(new Scene(arayuz, 1280, 700));

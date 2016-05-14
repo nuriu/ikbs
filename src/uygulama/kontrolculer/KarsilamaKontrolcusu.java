@@ -1,4 +1,4 @@
-package uygulama;
+package uygulama.kontrolculer;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
+import uygulama.Main;
 import uygulama.eleman.Kisi;
 import uygulama.veriYapilari.ikiliAramaAgaci.Dugum;
 import uygulama.veriYapilari.ikiliAramaAgaci.IkiliAramaAgaci;
@@ -23,16 +24,6 @@ public class KarsilamaKontrolcusu implements Initializable {
     @FXML
     private ListView<String> sirketListesi;
 
-    public void ElemanGirisi(ActionEvent actionEvent) throws Exception {
-        arayuz = FXMLLoader.load(getClass().getResource("elemanEkrani.fxml"));
-        Main.pencere.setScene(new Scene(arayuz, 1280, 700));
-    }
-
-    public void SirketGirisi(ActionEvent actionEvent) throws Exception {
-        arayuz = FXMLLoader.load(getClass().getResource("sirketEkrani.fxml"));
-        Main.pencere.setScene(new Scene(arayuz, 1280, 700));
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
@@ -40,6 +31,24 @@ public class KarsilamaKontrolcusu implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void ElemanGirisi(ActionEvent actionEvent) throws Exception {
+        arayuz = FXMLLoader.load(getClass().getResource("../ekranlar/elemanEkrani.fxml"));
+        Main.pencere.setScene(new Scene(arayuz, 1280, 700));
+        System.out.println("Eleman Ekranına Geçildi.");
+    }
+
+    public void SirketGirisi(ActionEvent actionEvent) throws Exception {
+        arayuz = FXMLLoader.load(getClass().getResource("../ekranlar/sirketEkrani.fxml"));
+        Main.pencere.setScene(new Scene(arayuz, 1280, 700));
+        System.out.println("Şirket Ekranına Geçildi.");
+    }
+
+    public void ElemanKaydi(ActionEvent actionEvent) {
+    }
+
+    public void SirketKaydi(ActionEvent actionEvent) {
     }
 
     private void kisiAgaciniOlustur() throws IOException {

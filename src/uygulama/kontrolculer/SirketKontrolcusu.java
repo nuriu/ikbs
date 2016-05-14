@@ -1,4 +1,4 @@
-package uygulama;
+package uygulama.kontrolculer;
 
 /**
  * Paket:           uygulama
