@@ -11,7 +11,9 @@ import uygulama.eleman.Kisi;
 import uygulama.veriYapilari.ikiliAramaAgaci.Dugum;
 import uygulama.veriYapilari.ikiliAramaAgaci.IkiliAramaAgaci;
 
+import java.io.*;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.ResourceBundle;
 
 public class KarsilamaKontrolcusu implements Initializable {
@@ -33,13 +35,34 @@ public class KarsilamaKontrolcusu implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        try {
+            kisiAgaciniOlustur();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void kisiAgaciniOlustur() throws IOException {
+        String satir = null;
+        Kisi eklenecekKisi = null;
         Dugum d = new Dugum();
-        d.kisi = new Kisi("Nuri");
-        Kisi k1 = new Kisi("Deneme");
-        Kisi k2 = new Kisi("Ahmet");
-        IkiliAramaAgaci agac = new IkiliAramaAgaci(d);
-        agac.kisiEkle(k1);
-        agac.kisiEkle(k2);
-        kisiListesi.setItems(agac.soldanSagaDolas());
+        IkiliAramaAgaci kisiAgaci = null;
+
+        InputStream elemanDosyasi = new FileInputStream("eleman.txt");
+        InputStreamReader eOkuyucu = new InputStreamReader(elemanDosyasi, Charset.forName("UTF-8"));
+        BufferedReader okuyucu = new BufferedReader(eOkuyucu);
+
+        int i = 0;
+        while ((satir = okuyucu.readLine()) != null) {
+            eklenecekKisi = new Kisi(satir);
+            if (i == 0) {
+                d.kisi = eklenecekKisi;
+                kisiAgaci = new IkiliAramaAgaci(d);
+            } else {
+                kisiAgaci.kisiEkle(eklenecekKisi);
+            }
+            i++;
+        }
+        kisiListesi.setItems(kisiAgaci.soldanSagaDolas());
     }
 }
