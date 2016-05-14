@@ -45,10 +45,16 @@ public class KarsilamaKontrolcusu implements Initializable {
         System.out.println("Şirket Ekranına Geçildi.");
     }
 
-    public void ElemanKaydi(ActionEvent actionEvent) {
+    public void ElemanKaydi(ActionEvent actionEvent) throws Exception {
+        arayuz = FXMLLoader.load(getClass().getResource("../ekranlar/elemanKayitEkrani.fxml"));
+        Main.pencere.setScene(new Scene(arayuz, 1280, 700));
+        System.out.println("Eleman Kayıt Ekranına Geçildi.");
     }
 
-    public void SirketKaydi(ActionEvent actionEvent) {
+    public void SirketKaydi(ActionEvent actionEvent) throws Exception {
+        arayuz = FXMLLoader.load(getClass().getResource("../ekranlar/sirketKayitEkrani.fxml"));
+        Main.pencere.setScene(new Scene(arayuz, 1280, 700));
+        System.out.println("Şirket Kayıt Ekranına Geçildi.");
     }
 
     private void kisiAgaciniOlustur() throws IOException {
