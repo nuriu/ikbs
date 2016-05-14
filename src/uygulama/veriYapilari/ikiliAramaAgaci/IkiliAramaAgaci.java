@@ -1,5 +1,7 @@
 package uygulama.veriYapilari.ikiliAramaAgaci;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import uygulama.eleman.Kisi;
 
 /**
@@ -7,8 +9,8 @@ import uygulama.eleman.Kisi;
  */
 
 public class IkiliAramaAgaci {
+    public ObservableList<String> dugumler;
     private Dugum kok;
-    private String dugumler;
 
     public IkiliAramaAgaci() {
     }
@@ -46,12 +48,17 @@ public class IkiliAramaAgaci {
         return sayac;
     }
 
-    public String dugumleriYazdir() {
+    public ObservableList<String> dugumListesi() {
         return dugumler;
     }
 
     private void ziyaret(Dugum dugum) {
-        dugumler += dugum.kisi.Ad + " ";
+        if (dugumler == null) {
+            dugumler = FXCollections.observableArrayList(dugum.kisi.Ad);
+        } else {
+            if (dugum.kisi != null)
+                dugumler.add(dugum.kisi.Ad);
+        }
     }
 
     public void kisiEkle(Kisi kisi) {
@@ -81,8 +88,8 @@ public class IkiliAramaAgaci {
         }
     }
 
-    public String koktenSagaDolas() {
-        dugumler = "";
+    public ObservableList<String> koktenSagaDolas() {
+        dugumler = null;
         koktenSaga(kok);
         return this.dugumler;
     }
@@ -95,8 +102,8 @@ public class IkiliAramaAgaci {
         koktenSaga(dugum.sag);
     }
 
-    public String soldanSagaDolas() {
-        dugumler = "";
+    public ObservableList<String> soldanSagaDolas() {
+        dugumler = null;
         soldanSaga(kok);
         return this.dugumler;
     }
@@ -109,8 +116,8 @@ public class IkiliAramaAgaci {
         soldanSaga(dugum.sag);
     }
 
-    public String soldanKokeDolas() {
-        dugumler = "";
+    public ObservableList<String> soldanKokeDolas() {
+        dugumler = null;
         soldanKoke(kok);
         return this.dugumler;
     }

@@ -22,6 +22,10 @@ public class Kisi {
     public String IlgiAlanlari;
     public List<Kisi> Referanslar;
 
+    public Kisi(String ad) {
+        Ad = ad;
+    }
+
     // TODO: Sisteme kayıt (kendi kişisel bilgilerini girme)
     public void Kayit() {
 
