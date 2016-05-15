@@ -35,7 +35,7 @@
             <Insets left="10.0" top="10.0"/>
          </GridPane.margin>
       </Button>
-      <TextField GridPane.columnIndex="1" GridPane.rowIndex="3">
+      <TextField fx:id="ad" GridPane.columnIndex="1" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets left="10.0" right="10.0"/>
          </GridPane.margin>
@@ -51,12 +51,12 @@
       <Label text="Yabancı Dil : " GridPane.halignment="RIGHT" GridPane.rowIndex="11" GridPane.valignment="CENTER"/>
       <Label text="Ilgi Alanlari : " GridPane.halignment="RIGHT" GridPane.rowIndex="12" GridPane.valignment="CENTER"/>
       <Label text="Referanslar : " GridPane.halignment="RIGHT" GridPane.rowIndex="13" GridPane.valignment="CENTER"/>
-      <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+      <TextArea fx:id="adres" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
          <GridPane.margin>
             <Insets left="10.0" right="10.0"/>
          </GridPane.margin>
       </TextArea>
-      <TextField GridPane.columnIndex="1" GridPane.rowIndex="5">
+      <TextField fx:id="telefon" GridPane.columnIndex="1" GridPane.rowIndex="5">
          <opaqueInsets>
             <Insets/>
          </opaqueInsets>
@@ -64,87 +64,89 @@
             <Insets left="10.0" right="10.0"/>
          </GridPane.margin>
       </TextField>
-      <TextField GridPane.columnIndex="1" GridPane.rowIndex="6">
+      <TextField fx:id="eposta" GridPane.columnIndex="1" GridPane.rowIndex="6">
          <GridPane.margin>
             <Insets left="10.0" right="10.0"/>
          </GridPane.margin>
       </TextField>
-      <TextField GridPane.columnIndex="1" GridPane.rowIndex="7">
+      <TextField fx:id="uyruk" GridPane.columnIndex="1" GridPane.rowIndex="7">
          <GridPane.margin>
             <Insets left="10.0" right="10.0"/>
          </GridPane.margin>
       </TextField>
-      <TextField GridPane.columnIndex="1" GridPane.rowIndex="8">
+      <TextField fx:id="dogumYeri" GridPane.columnIndex="1" GridPane.rowIndex="8">
          <GridPane.margin>
             <Insets left="10.0" right="10.0"/>
          </GridPane.margin>
       </TextField>
-      <DatePicker GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="9"
+      <DatePicker fx:id="dogumTarihi" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="9"
                   GridPane.valignment="CENTER">
          <GridPane.margin>
             <Insets left="10.0" right="10.0"/>
          </GridPane.margin>
       </DatePicker>
-      <ComboBox prefWidth="189.0" GridPane.columnIndex="1" GridPane.rowIndex="10">
+      <ComboBox fx:id="medeniDurum" prefWidth="189.0" GridPane.columnIndex="1" GridPane.rowIndex="10">
          <GridPane.margin>
             <Insets left="10.0" right="10.0"/>
          </GridPane.margin>
       </ComboBox>
-      <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="12">
+      <TextArea fx:id="ilgiAlanlari" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1"
+                GridPane.rowIndex="12">
          <GridPane.margin>
             <Insets left="10.0" right="10.0"/>
          </GridPane.margin>
       </TextArea>
-      <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="13">
+      <TextArea fx:id="referanslar" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1"
+                GridPane.rowIndex="13">
          <GridPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
          </GridPane.margin>
       </TextArea>
-      <TextField GridPane.columnIndex="1" GridPane.rowIndex="11">
+      <TextField fx:id="yabanciDil" GridPane.columnIndex="1" GridPane.rowIndex="11">
          <GridPane.margin>
             <Insets left="10.0" right="10.0"/>
          </GridPane.margin>
       </TextField>
       <Label text="KİŞİSEL BİLGİLER" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2"
              GridPane.valignment="CENTER"/>
-      <ListView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3"
-                GridPane.rowSpan="11">
+      <ListView fx:id="deneyimListesi" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2"
+                GridPane.rowIndex="3" GridPane.rowSpan="11">
          <GridPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
          </GridPane.margin>
       </ListView>
       <Label text="DENEYİMLER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2"
              GridPane.valignment="CENTER"/>
-      <Button mnemonicParsing="false" text="Deneyim Ekle" GridPane.columnIndex="2" GridPane.halignment="LEFT"
-              GridPane.rowIndex="14" GridPane.valignment="CENTER" onAction="#DeneyimEkle">
+      <Button mnemonicParsing="false" onAction="#DeneyimEkle" text="Deneyim Ekle" GridPane.columnIndex="2"
+              GridPane.halignment="LEFT" GridPane.rowIndex="14" GridPane.valignment="CENTER">
          <GridPane.margin>
             <Insets left="10.0"/>
          </GridPane.margin>
       </Button>
-      <Button mnemonicParsing="false" text="Deneyim Sil" GridPane.columnIndex="2" GridPane.halignment="RIGHT"
-              GridPane.rowIndex="14" GridPane.valignment="CENTER" onAction="#DeneyimSil">
+      <Button mnemonicParsing="false" onAction="#DeneyimSil" text="Deneyim Sil" GridPane.columnIndex="2"
+              GridPane.halignment="RIGHT" GridPane.rowIndex="14" GridPane.valignment="CENTER">
          <GridPane.margin>
             <Insets left="10.0" right="10.0"/>
          </GridPane.margin>
       </Button>
-      <Button mnemonicParsing="false" text="Kaydet" GridPane.columnIndex="1" GridPane.halignment="CENTER"
-              GridPane.rowIndex="14" GridPane.valignment="CENTER" onAction="#SistemeKaydet"/>
-      <ListView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3"
-                GridPane.rowSpan="11">
+      <Button mnemonicParsing="false" onAction="#SistemeKaydet" text="Kaydet" GridPane.columnIndex="1"
+              GridPane.halignment="CENTER" GridPane.rowIndex="14" GridPane.valignment="CENTER"/>
+      <ListView fx:id="egitimListesi" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3"
+                GridPane.rowIndex="3" GridPane.rowSpan="11">
          <GridPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
          </GridPane.margin>
       </ListView>
       <Label text="EĞİTİM GEÇMİŞİ" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2"
              GridPane.valignment="CENTER"/>
-      <Button mnemonicParsing="false" text="Eğitim Bilgisi Ekle" GridPane.columnIndex="3" GridPane.halignment="LEFT"
-              GridPane.rowIndex="14" GridPane.valignment="CENTER" onAction="#EgitimBilgisiEkle">
+      <Button mnemonicParsing="false" onAction="#EgitimBilgisiEkle" text="Eğitim Bilgisi Ekle" GridPane.columnIndex="3"
+              GridPane.halignment="LEFT" GridPane.rowIndex="14" GridPane.valignment="CENTER">
          <GridPane.margin>
             <Insets left="10.0" right="10.0"/>
          </GridPane.margin>
       </Button>
-      <Button mnemonicParsing="false" text="Eğitim Bilgisini Sil" GridPane.columnIndex="3" GridPane.halignment="RIGHT"
-              GridPane.rowIndex="14" GridPane.valignment="CENTER" onAction="#EgitimBilgisiniSil">
+      <Button mnemonicParsing="false" onAction="#EgitimBilgisiniSil" text="Eğitim Bilgisini Sil"
+              GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="14" GridPane.valignment="CENTER">
          <GridPane.margin>
             <Insets left="10.0" right="10.0"/>
          </GridPane.margin>

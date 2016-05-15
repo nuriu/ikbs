@@ -3,6 +3,7 @@ package uygulama.veriYapilari.ikiliAramaAgaci;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import uygulama.eleman.Kisi;
+import uygulama.veriYapilari.bagliListe.BagliListe;
 
 public class IkiliAramaAgaci {
     public ObservableList<String> dugumler;
@@ -15,6 +16,13 @@ public class IkiliAramaAgaci {
         this.kok = kok;
     }
 
+    public IkiliAramaAgaci(Dugum dugum, BagliListe deneyim, BagliListe egitim) {
+        this.kok = dugum;
+        this.kok.Deneyimler = deneyim;
+        this.kok.EgitimDurumu = egitim;
+    }
+
+    // TODO: eleman sayısını test et
     public int dugumSayisi() {
         return dugumSayisi(kok);
     }
@@ -29,6 +37,7 @@ public class IkiliAramaAgaci {
         return sayac;
     }
 
+    // TODO: yaprak düğümlerin sayısına gerek yok ise sil
     public int yaprakSayisi() {
         return yaprakSayisi(kok);
     }
@@ -44,6 +53,42 @@ public class IkiliAramaAgaci {
         return sayac;
     }
 
+    public void kisiEkle(Kisi kisi, BagliListe deneyimler, BagliListe egitimDurumu) {
+        Dugum ebeveyn = new Dugum();
+        Dugum arama = kok;
+
+        while (arama != null) {
+            ebeveyn = arama;
+            // kişinin adı zaten varsa ekleme
+            if (kisi.Ad.compareTo(arama.kisi.Ad) == 0)
+                return;
+                // kişinin adı alfabetik olarak önce geliyorsa
+            else if (kisi.Ad.compareTo(arama.kisi.Ad) < 0)
+                arama = arama.sol;
+                // kişinin adı alfabetik olarak sonra geliyorsa
+            else
+                arama = arama.sag;
+        }
+
+        if (kok.kisi == null) {
+            if (kok == null)
+                kok = new Dugum();
+            kok.kisi = kisi;
+            kok.Deneyimler = deneyimler;
+            kok.EgitimDurumu = egitimDurumu;
+        } else if (kisi.Ad.compareTo(ebeveyn.kisi.Ad) < 0) {
+            ebeveyn.sol = new Dugum();
+            ebeveyn.sol.kisi = kisi;
+            ebeveyn.sol.Deneyimler = deneyimler;
+            ebeveyn.sol.EgitimDurumu = egitimDurumu;
+        } else {
+            ebeveyn.sag = new Dugum();
+            ebeveyn.sag.kisi = kisi;
+            ebeveyn.sag.Deneyimler = deneyimler;
+            ebeveyn.sag.EgitimDurumu = egitimDurumu;
+        }
+    }
+
     public ObservableList<String> dugumListesi() {
         return dugumler;
     }
@@ -54,33 +99,6 @@ public class IkiliAramaAgaci {
         } else {
             if (dugum.kisi != null)
                 dugumler.add(dugum.kisi.Ad);
-        }
-    }
-
-    public void kisiEkle(Kisi kisi) {
-        Dugum ebeveyn = new Dugum();
-        Dugum arama = kok;
-
-        while (arama != null) {
-            ebeveyn = arama;
-            if (kisi.Ad.compareTo(arama.kisi.Ad) == 0)
-                return;
-            else if (kisi.Ad.compareTo(arama.kisi.Ad) < 0)
-                arama = arama.sol;
-            else
-                arama = arama.sag;
-        }
-
-        if (kok.kisi == null) {
-            if (kok == null)
-                kok = new Dugum();
-            kok.kisi = kisi;
-        } else if (kisi.Ad.compareTo(ebeveyn.kisi.Ad) < 0) {
-            ebeveyn.sol = new Dugum();
-            ebeveyn.sol.kisi = kisi;
-        } else {
-            ebeveyn.sag = new Dugum();
-            ebeveyn.sag.kisi = kisi;
         }
     }
 
@@ -165,6 +183,7 @@ public class IkiliAramaAgaci {
 
         while (simdiki.kisi != kisi) {
             ebeveyn = simdiki;
+            // kişi adı alfabetik olarak küçükse
             if (kisi.Ad.compareTo(simdiki.kisi.Ad) < 0) {
                 solMu = true;
                 simdiki = simdiki.sol;
@@ -176,6 +195,7 @@ public class IkiliAramaAgaci {
                 return false;
         }
 
+        // yaprak düğüm ise
         if (simdiki.sol == null && simdiki.sag == null) {
             if (simdiki == kok)
                 kok = null;
@@ -183,21 +203,21 @@ public class IkiliAramaAgaci {
                 ebeveyn.sol = null;
             else
                 ebeveyn.sag = null;
-        } else if (simdiki.sag == null) {
+        } else if (simdiki.sag == null) {   // sağı boş ise
             if (simdiki == kok)
                 kok = simdiki.sol;
             else if (solMu)
                 ebeveyn.sol = simdiki.sol;
             else
                 ebeveyn.sag = simdiki.sol;
-        } else if (simdiki.sol == null) {
+        } else if (simdiki.sol == null) {   // solu boş işse
             if (simdiki == kok)
                 kok = simdiki.sag;
             else if (solMu)
                 ebeveyn.sol = simdiki.sag;
             else
                 ebeveyn.sag = simdiki.sag;
-        } else {
+        } else {                            // iki çocuğuda dolu ise
             Dugum successor = successor(simdiki);
             if (simdiki == kok)
                 kok = successor;

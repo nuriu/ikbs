@@ -5,8 +5,10 @@ import uygulama.veriYapilari.bagliListe.BagliListe;
 
 public class Dugum {
     public Kisi kisi;
+
     public BagliListe Deneyimler;
     public BagliListe EgitimDurumu;
+
     public Dugum sol;
     public Dugum sag;
 
@@ -14,6 +16,7 @@ public class Dugum {
     public Dugum() {
     }
 
+    // sadece kişi bilgisini içeren düğüm
     public Dugum(Kisi kisi) {
         this.kisi = kisi;
         this.Deneyimler = null;
@@ -22,6 +25,7 @@ public class Dugum {
         this.sag = null;
     }
 
+    // tüm bilgileri içeren düğüm
     public Dugum(Kisi kisi, BagliListe deneyimler, BagliListe egitimDurumu) {
         this.kisi = kisi;
         this.Deneyimler = deneyimler;
