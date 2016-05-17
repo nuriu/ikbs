@@ -83,6 +83,7 @@ public class KarsilamaKontrolcusu implements Initializable {
 
         int i = 0;
         while ((satir = okuyucu.readLine()) != null) {
+            // TODO: deneyim ve eğitim bilgileri de dosyadan alınabilir
             eklenecekKisi = new Kisi(satir);
             if (i == 0) {                   // ilk satırsa ağacı ve kökü oluştur
                 d.kisi = eklenecekKisi;
