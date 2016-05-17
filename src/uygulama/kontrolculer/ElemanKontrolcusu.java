@@ -3,7 +3,6 @@ package uygulama.kontrolculer;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -28,7 +27,6 @@ import java.util.ResourceBundle;
 public class ElemanKontrolcusu implements Initializable {
     // sistem genelinde kullanılacak olan kişi listesi
     public static IkiliAramaAgaci Kisiler;
-    public static ObservableList<String> kListesi = null;
     private Parent arayuz;
     // karşılama ekranında seçilen kişi
     private iAADugum SistemdekiKisi;
@@ -77,19 +75,19 @@ public class ElemanKontrolcusu implements Initializable {
         egitimListesi.setItems(lEgitim);
     }
 
-    public void KarsilamaEkraninaDon(ActionEvent actionEvent) throws Exception {
-        // karşılama ekranını geri yükler ve geçiş yapar
+    public void KarsilamaEkraninaDon() throws Exception {
+        // karşılama ekranını geri yükle ve geçiş yap
         arayuz = FXMLLoader.load(getClass().getResource("../ekranlar/karsilamaEkrani.fxml"));
         Main.pencere.setTitle("İnsan Kaynakları Bilgi Sistemi");
         Main.pencere.setScene(new Scene(arayuz, 1280, 700));
         System.out.println("Karşılama Ekranına Geri Dönüldü.");
     }
 
-    public void EgitimBilgisiniSil(ActionEvent actionEvent) {
+    public void EgitimBilgisiniSil() {
 
     }
 
-    public void EgitimBilgisiEkle(ActionEvent actionEvent) {
+    public void EgitimBilgisiEkle() {
         // pencereyi oluştur
         Dialog<Egitim> dialog = new Dialog<>();
         dialog.setTitle("Eğitim Bilgisi Ekle");
@@ -165,11 +163,11 @@ public class ElemanKontrolcusu implements Initializable {
         });
     }
 
-    public void DeneyimSil(ActionEvent actionEvent) {
+    public void DeneyimSil() {
 
     }
 
-    public void DeneyimEkle(ActionEvent actionEvent) {
+    public void DeneyimEkle() {
         // pencereyi oluştur
         Dialog<Deneyim> dialog = new Dialog<>();
         dialog.setTitle("Deneyim Ekle");
@@ -237,7 +235,7 @@ public class ElemanKontrolcusu implements Initializable {
         });
     }
 
-    public void SistemeKaydet(ActionEvent actionEvent) {
+    public void SistemeKaydet() throws Exception {
         // kaydedilecek kişinin bilgilerini al
         kaydedilecekKisi = new Kisi(ad.getText(), adres.getText(),
                 telefon.getText(), eposta.getText(), uyruk.getText(),
@@ -246,13 +244,13 @@ public class ElemanKontrolcusu implements Initializable {
                 ilgiAlanlari.getText(), referanslar.getText());
 
         // kişiyi sisteme kaydet
-        if (Kisiler == null || Kisiler.dugumSayisi() == 0) {
+        if (ElemanKontrolcusu.Kisiler == null || ElemanKontrolcusu.Kisiler.dugumSayisi() == 0) {
             // ağaç boş ise
             iAADugum d = new iAADugum(kaydedilecekKisi);
-            Kisiler = new IkiliAramaAgaci(d, kkDeneyimler, kkEgitim);
+            ElemanKontrolcusu.Kisiler = new IkiliAramaAgaci(d, kkDeneyimler, kkEgitim);
         } else {
-            Kisiler.kisiEkle(kaydedilecekKisi, kkDeneyimler, kkEgitim);
+            ElemanKontrolcusu.Kisiler.kisiEkle(kaydedilecekKisi, kkDeneyimler, kkEgitim);
         }
-        kListesi.add(kaydedilecekKisi.Ad);
+        KarsilamaEkraninaDon();
     }
 }

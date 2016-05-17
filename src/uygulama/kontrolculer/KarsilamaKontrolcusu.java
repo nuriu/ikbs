@@ -1,6 +1,5 @@
 package uygulama.kontrolculer;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -35,36 +34,35 @@ public class KarsilamaKontrolcusu implements Initializable {
             e.printStackTrace();
         }
         // penceredeki kişi listesine alfabetik sırayla yazdır
-        ElemanKontrolcusu.kListesi = ElemanKontrolcusu.Kisiler.soldanSagaDolas();
-        kisiListesi.setItems(ElemanKontrolcusu.kListesi);
+        kisiListesi.setItems(ElemanKontrolcusu.Kisiler.soldanSagaDolas());
     }
 
-    public void ElemanGirisi(ActionEvent actionEvent) throws Exception {
-        // eleman ekranını yükler ve geçiş yapar
+    public void ElemanGirisi() throws Exception {
+        // eleman ekranını yükle ve geçiş yap
         arayuz = FXMLLoader.load(getClass().getResource("../ekranlar/elemanEkrani.fxml"));
         Main.pencere.setTitle("İnsan Kaynakları Bilgi Sistemi - Eleman Ekranı");
         Main.pencere.setScene(new Scene(arayuz, 1280, 700));
         System.out.println("Eleman Ekranına Geçildi.");
     }
 
-    public void SirketGirisi(ActionEvent actionEvent) throws Exception {
-        // şirket ekranını yükler ve geçiş yapar
+    public void SirketGirisi() throws Exception {
+        // şirket ekranını yükle ve geçiş yap
         arayuz = FXMLLoader.load(getClass().getResource("../ekranlar/sirketEkrani.fxml"));
         Main.pencere.setTitle("İnsan Kaynakları Bilgi Sistemi - Şirket Ekranı");
         Main.pencere.setScene(new Scene(arayuz, 1280, 700));
         System.out.println("Şirket Ekranına Geçildi.");
     }
 
-    public void ElemanKaydi(ActionEvent actionEvent) throws Exception {
-        // eleman kayıt ekranını yükler ve geçiş yapar
+    public void ElemanKaydi() throws Exception {
+        // eleman kayıt ekranını yükle ve geçiş yap
         arayuz = FXMLLoader.load(getClass().getResource("../ekranlar/elemanKayitEkrani.fxml"));
         Main.pencere.setTitle("İnsan Kaynakları Bilgi Sistemi - Eleman Kayıt Ekranı");
         Main.pencere.setScene(new Scene(arayuz, 1280, 700));
         System.out.println("Eleman Kayıt Ekranına Geçildi.");
     }
 
-    public void SirketKaydi(ActionEvent actionEvent) throws Exception {
-        // şirket kayıt ekranını yükler ve geçiş yapar
+    public void SirketKaydi() throws Exception {
+        // şirket kayıt ekranını yükle ve geçiş yap
         arayuz = FXMLLoader.load(getClass().getResource("../ekranlar/sirketKayitEkrani.fxml"));
         Main.pencere.setTitle("İnsan Kaynakları Bilgi Sistemi - Şirket Kayıt Ekranı");
         Main.pencere.setScene(new Scene(arayuz, 1280, 700));
@@ -72,27 +70,29 @@ public class KarsilamaKontrolcusu implements Initializable {
     }
 
     private void kisiAgaciniOlustur() throws IOException {
-        // açılışta dosyadan kişileri çekip sistemdeki ağaca kaydeder
-        String satir = null;                // dosyadaki satır
-        Kisi eklenecekKisi = null;          // sisteme eklenecek kişi
-        iAADugum d = new iAADugum();              // ağaç için kök düğüm
-        ElemanKontrolcusu.Kisiler = null;   // sistemdeki ağacımız
-        // dosyayı yükle
-        InputStream elemanDosyasi = new FileInputStream("eleman.txt");
-        InputStreamReader eOkuyucu = new InputStreamReader(elemanDosyasi, Charset.forName("UTF-8"));
-        BufferedReader okuyucu = new BufferedReader(eOkuyucu);
+        if (ElemanKontrolcusu.Kisiler == null || ElemanKontrolcusu.Kisiler.dugumSayisi() == 0) {
+            // açılışta dosyadan kişileri çekip sistemdeki ağaca kaydet
+            String satir = null;                // dosyadaki satır
+            Kisi eklenecekKisi = null;          // sisteme eklenecek kişi
+            iAADugum d = new iAADugum();        // ağaç için kök düğüm
+            ElemanKontrolcusu.Kisiler = null;   // sistemdeki ağacımız
+            // dosyayı yükle
+            InputStream elemanDosyasi = new FileInputStream("eleman.txt");
+            InputStreamReader eOkuyucu = new InputStreamReader(elemanDosyasi, Charset.forName("UTF-8"));
+            BufferedReader okuyucu = new BufferedReader(eOkuyucu);
 
-        int i = 0;
-        while ((satir = okuyucu.readLine()) != null) {
-            // TODO: deneyim ve eğitim bilgileri de dosyadan alınabilir
-            eklenecekKisi = new Kisi(satir);
-            if (i == 0) {                   // ilk satırsa ağacı ve kökü oluştur
-                d.kisi = eklenecekKisi;
-                ElemanKontrolcusu.Kisiler = new IkiliAramaAgaci(d, null, null);
-            } else {                        // ilk satır değilse ağaca ekle
-                ElemanKontrolcusu.Kisiler.kisiEkle(eklenecekKisi, null, null);
+            int i = 0;
+            while ((satir = okuyucu.readLine()) != null) {
+                // TODO: deneyim ve eğitim bilgileri de dosyadan alınabilir
+                eklenecekKisi = new Kisi(satir);
+                if (i == 0) {                   // ilk satırsa ağacı ve kökü oluştur
+                    d.kisi = eklenecekKisi;
+                    ElemanKontrolcusu.Kisiler = new IkiliAramaAgaci(d, null, null);
+                } else {                        // ilk satır değilse ağaca ekle
+                    ElemanKontrolcusu.Kisiler.kisiEkle(eklenecekKisi, null, null);
+                }
+                i++;
             }
-            i++;
         }
     }
 }

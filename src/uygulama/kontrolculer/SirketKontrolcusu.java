@@ -1,6 +1,5 @@
 package uygulama.kontrolculer;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -9,7 +8,7 @@ import uygulama.Main;
 public class SirketKontrolcusu {
     private Parent arayuz;
 
-    public void KarsilamaEkraninaDon(ActionEvent actionEvent) throws Exception {
+    public void KarsilamaEkraninaDon() throws Exception {
         // karşılama ekranını geri yükler ve geçiş yapar
         arayuz = FXMLLoader.load(getClass().getResource("../ekranlar/karsilamaEkrani.fxml"));
         Main.pencere.setTitle("İnsan Kaynakları Bilgi Sistemi");
