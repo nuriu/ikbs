@@ -176,15 +176,15 @@ public class IkiliAramaAgaci {
         return successor;
     }
 
-    public boolean kisiSil(Kisi kisi) {
+    public boolean kisiSil(String kisiAdi) {
         iAADugum simdiki = kok;
         iAADugum ebeveyn = kok;
         boolean solMu = true;
 
-        while (simdiki.kisi != kisi) {
+        while (simdiki.kisi.Ad != kisiAdi) {
             ebeveyn = simdiki;
             // kişi adı alfabetik olarak küçükse
-            if (kisi.Ad.compareTo(simdiki.kisi.Ad) < 0) {
+            if (kisiAdi.compareTo(simdiki.kisi.Ad) < 0) {
                 solMu = true;
                 simdiki = simdiki.sol;
             } else {

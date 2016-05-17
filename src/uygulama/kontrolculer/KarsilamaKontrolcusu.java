@@ -95,4 +95,9 @@ public class KarsilamaKontrolcusu implements Initializable {
             }
         }
     }
+
+    public void elemaniSil() {
+        ElemanKontrolcusu.Kisiler.kisiSil(kisiListesi.getSelectionModel().getSelectedItem());
+        kisiListesi.setItems(ElemanKontrolcusu.Kisiler.soldanSagaDolas());
+    }
 }
