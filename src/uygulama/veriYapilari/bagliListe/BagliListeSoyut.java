@@ -1,7 +1,7 @@
 package uygulama.veriYapilari.bagliListe;
 
 public abstract class BagliListeSoyut {
-    public Dugum Bas;
+    public bLDugum Bas;
     public int Boyut = 0;
 
     public abstract void basaEkle(Object deger);
@@ -12,6 +12,6 @@ public abstract class BagliListeSoyut {
     public abstract void basiSil();
     public abstract void sonuSil();
     public abstract void pozisyonuSil(int pozisyon);
-    public abstract Dugum elemanGetir(int pozisyon);
-    public abstract String elemanlariListele();
+
+    public abstract bLDugum elemanGetir(int pozisyon);
 }

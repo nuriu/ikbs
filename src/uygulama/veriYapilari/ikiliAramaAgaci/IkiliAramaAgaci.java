@@ -7,17 +7,17 @@ import uygulama.veriYapilari.bagliListe.BagliListe;
 
 public class IkiliAramaAgaci {
     public ObservableList<String> dugumler;
-    private Dugum kok;
+    private iAADugum kok;
 
     public IkiliAramaAgaci() {
     }
 
-    public IkiliAramaAgaci(Dugum kok) {
+    public IkiliAramaAgaci(iAADugum kok) {
         this.kok = kok;
     }
 
-    public IkiliAramaAgaci(Dugum dugum, BagliListe deneyim, BagliListe egitim) {
-        this.kok = dugum;
+    public IkiliAramaAgaci(iAADugum iAADugum, BagliListe deneyim, BagliListe egitim) {
+        this.kok = iAADugum;
         this.kok.Deneyimler = deneyim;
         this.kok.EgitimDurumu = egitim;
     }
@@ -27,12 +27,12 @@ public class IkiliAramaAgaci {
         return dugumSayisi(kok);
     }
 
-    private int dugumSayisi(Dugum dugum) {
+    private int dugumSayisi(iAADugum iAADugum) {
         int sayac = 0;
-        if (dugum != null) {
+        if (iAADugum != null) {
             sayac = 1;
-            sayac += dugumSayisi(dugum.sol);
-            sayac += dugumSayisi(dugum.sag);
+            sayac += dugumSayisi(iAADugum.sol);
+            sayac += dugumSayisi(iAADugum.sag);
         }
         return sayac;
     }
@@ -42,20 +42,20 @@ public class IkiliAramaAgaci {
         return yaprakSayisi(kok);
     }
 
-    private int yaprakSayisi(Dugum dugum) {
+    private int yaprakSayisi(iAADugum iAADugum) {
         int sayac = 0;
-        if (dugum != null) {
-            if ((dugum.sol == null) && (dugum.sag == null))
+        if (iAADugum != null) {
+            if ((iAADugum.sol == null) && (iAADugum.sag == null))
                 sayac = 1;
             else
-                sayac = sayac + yaprakSayisi(dugum.sol) + yaprakSayisi(dugum.sag);
+                sayac = sayac + yaprakSayisi(iAADugum.sol) + yaprakSayisi(iAADugum.sag);
         }
         return sayac;
     }
 
     public void kisiEkle(Kisi kisi, BagliListe deneyimler, BagliListe egitimDurumu) {
-        Dugum ebeveyn = new Dugum();
-        Dugum arama = kok;
+        iAADugum ebeveyn = new iAADugum();
+        iAADugum arama = kok;
 
         while (arama != null) {
             ebeveyn = arama;
@@ -72,17 +72,17 @@ public class IkiliAramaAgaci {
 
         if (kok.kisi == null) {
             if (kok == null)
-                kok = new Dugum();
+                kok = new iAADugum();
             kok.kisi = kisi;
             kok.Deneyimler = deneyimler;
             kok.EgitimDurumu = egitimDurumu;
         } else if (kisi.Ad.compareTo(ebeveyn.kisi.Ad) < 0) {
-            ebeveyn.sol = new Dugum();
+            ebeveyn.sol = new iAADugum();
             ebeveyn.sol.kisi = kisi;
             ebeveyn.sol.Deneyimler = deneyimler;
             ebeveyn.sol.EgitimDurumu = egitimDurumu;
         } else {
-            ebeveyn.sag = new Dugum();
+            ebeveyn.sag = new iAADugum();
             ebeveyn.sag.kisi = kisi;
             ebeveyn.sag.Deneyimler = deneyimler;
             ebeveyn.sag.EgitimDurumu = egitimDurumu;
@@ -93,12 +93,12 @@ public class IkiliAramaAgaci {
         return dugumler;
     }
 
-    private void ziyaret(Dugum dugum) {
+    private void ziyaret(iAADugum iAADugum) {
         if (dugumler == null) {
-            dugumler = FXCollections.observableArrayList(dugum.kisi.Ad);
+            dugumler = FXCollections.observableArrayList(iAADugum.kisi.Ad);
         } else {
-            if (dugum.kisi != null)
-                dugumler.add(dugum.kisi.Ad);
+            if (iAADugum.kisi != null)
+                dugumler.add(iAADugum.kisi.Ad);
         }
     }
 
@@ -108,12 +108,12 @@ public class IkiliAramaAgaci {
         return this.dugumler;
     }
 
-    private void koktenSaga(Dugum dugum) {
-        if (dugum == null)
+    private void koktenSaga(iAADugum iAADugum) {
+        if (iAADugum == null)
             return;
-        ziyaret(dugum);
-        koktenSaga(dugum.sol);
-        koktenSaga(dugum.sag);
+        ziyaret(iAADugum);
+        koktenSaga(iAADugum.sol);
+        koktenSaga(iAADugum.sag);
     }
 
     public ObservableList<String> soldanSagaDolas() {
@@ -122,12 +122,12 @@ public class IkiliAramaAgaci {
         return this.dugumler;
     }
 
-    private void soldanSaga(Dugum dugum) {
-        if (dugum == null)
+    private void soldanSaga(iAADugum iAADugum) {
+        if (iAADugum == null)
             return;
-        soldanSaga(dugum.sol);
-        ziyaret(dugum);
-        soldanSaga(dugum.sag);
+        soldanSaga(iAADugum.sol);
+        ziyaret(iAADugum);
+        soldanSaga(iAADugum.sag);
     }
 
     public ObservableList<String> soldanKokeDolas() {
@@ -136,49 +136,49 @@ public class IkiliAramaAgaci {
         return this.dugumler;
     }
 
-    private void soldanKoke(Dugum dugum) {
-        if (dugum == null)
+    private void soldanKoke(iAADugum iAADugum) {
+        if (iAADugum == null)
             return;
-        soldanKoke(dugum.sol);
-        soldanKoke(dugum.sag);
-        ziyaret(dugum);
+        soldanKoke(iAADugum.sol);
+        soldanKoke(iAADugum.sag);
+        ziyaret(iAADugum);
     }
 
     public Kisi kisiAra(Kisi kisi) {
         return aramaYap(kok, kisi);
     }
 
-    private Kisi aramaYap(Dugum dugum, Kisi kisi) {
-        if (dugum == null)
+    private Kisi aramaYap(iAADugum iAADugum, Kisi kisi) {
+        if (iAADugum == null)
             return null;
-        else if (dugum.kisi == kisi)
-            return dugum.kisi;
-        else if (kisi.Ad.compareTo(dugum.kisi.Ad) < 0)
-            return aramaYap(dugum.sol, kisi);
+        else if (iAADugum.kisi == kisi)
+            return iAADugum.kisi;
+        else if (kisi.Ad.compareTo(iAADugum.kisi.Ad) < 0)
+            return aramaYap(iAADugum.sol, kisi);
         else
-            return aramaYap(dugum.sag, kisi);
+            return aramaYap(iAADugum.sag, kisi);
     }
 
-    private Dugum successor(Dugum dugum) {
-        Dugum ebeveyn = dugum;
-        Dugum successor = dugum;
-        Dugum simdiki = dugum.sag;
+    private iAADugum successor(iAADugum iAADugum) {
+        iAADugum ebeveyn = iAADugum;
+        iAADugum successor = iAADugum;
+        iAADugum simdiki = iAADugum.sag;
 
         while (simdiki != null) {
             ebeveyn = successor;
             successor = simdiki;
             simdiki = simdiki.sol;
         }
-        if (successor != dugum.sag) {
+        if (successor != iAADugum.sag) {
             ebeveyn.sol = successor.sag;
-            successor.sag = dugum.sag;
+            successor.sag = iAADugum.sag;
         }
         return successor;
     }
 
     public boolean kisiSil(Kisi kisi) {
-        Dugum simdiki = kok;
-        Dugum ebeveyn = kok;
+        iAADugum simdiki = kok;
+        iAADugum ebeveyn = kok;
         boolean solMu = true;
 
         while (simdiki.kisi != kisi) {
@@ -218,7 +218,7 @@ public class IkiliAramaAgaci {
             else
                 ebeveyn.sag = simdiki.sag;
         } else {                            // iki çocuğuda dolu ise
-            Dugum successor = successor(simdiki);
+            iAADugum successor = successor(simdiki);
             if (simdiki == kok)
                 kok = successor;
             else if (solMu)

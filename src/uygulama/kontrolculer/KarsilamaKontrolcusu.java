@@ -9,8 +9,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import uygulama.Main;
 import uygulama.eleman.Kisi;
-import uygulama.veriYapilari.ikiliAramaAgaci.Dugum;
 import uygulama.veriYapilari.ikiliAramaAgaci.IkiliAramaAgaci;
+import uygulama.veriYapilari.ikiliAramaAgaci.iAADugum;
 
 import java.io.*;
 import java.net.URL;
@@ -35,7 +35,8 @@ public class KarsilamaKontrolcusu implements Initializable {
             e.printStackTrace();
         }
         // penceredeki kişi listesine alfabetik sırayla yazdır
-        kisiListesi.setItems(ElemanKontrolcusu.Kisiler.soldanSagaDolas());
+        ElemanKontrolcusu.kListesi = ElemanKontrolcusu.Kisiler.soldanSagaDolas();
+        kisiListesi.setItems(ElemanKontrolcusu.kListesi);
     }
 
     public void ElemanGirisi(ActionEvent actionEvent) throws Exception {
@@ -74,7 +75,7 @@ public class KarsilamaKontrolcusu implements Initializable {
         // açılışta dosyadan kişileri çekip sistemdeki ağaca kaydeder
         String satir = null;                // dosyadaki satır
         Kisi eklenecekKisi = null;          // sisteme eklenecek kişi
-        Dugum d = new Dugum();              // ağaç için kök düğüm
+        iAADugum d = new iAADugum();              // ağaç için kök düğüm
         ElemanKontrolcusu.Kisiler = null;   // sistemdeki ağacımız
         // dosyayı yükle
         InputStream elemanDosyasi = new FileInputStream("eleman.txt");

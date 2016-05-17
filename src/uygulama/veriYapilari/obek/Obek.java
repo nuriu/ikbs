@@ -3,21 +3,21 @@ package uygulama.veriYapilari.obek;
 public class Obek {
     private int boyut;
     private int maksimumBoyut;
-    private Dugum[] obekDizisi;
+    private oDugum[] obekDizisi;
 
     public boolean ekle(int veri) {
         if (boyut == maksimumBoyut)
             return false;
 
-        Dugum eklenecekDugum = new Dugum(veri);
-        obekDizisi[boyut] = eklenecekDugum;
+        oDugum eklenecekODugum = new oDugum(veri);
+        obekDizisi[boyut] = eklenecekODugum;
         yukariTasi(boyut++);
         return true;
     }
 
     public void yukariTasi(int indis) {
         int ebeveyn = (indis - 1) / 2;
-        Dugum alt = obekDizisi[indis];
+        oDugum alt = obekDizisi[indis];
 
         while (indis > 0 && obekDizisi[ebeveyn].veri < alt.veri) {
             obekDizisi[indis] = obekDizisi[ebeveyn];
@@ -28,8 +28,8 @@ public class Obek {
         obekDizisi[indis] = alt;
     }
 
-    public Dugum enBuyuguSil() {
-        Dugum kok = obekDizisi[0];
+    public oDugum enBuyuguSil() {
+        oDugum kok = obekDizisi[0];
         obekDizisi[0] = obekDizisi[--boyut];
         asagiTasi(0);
         return kok;
@@ -37,7 +37,7 @@ public class Obek {
 
     public void asagiTasi(int indis) {
         int buyukCocuk;
-        Dugum ust = obekDizisi[indis];
+        oDugum ust = obekDizisi[indis];
 
         while (indis < boyut / 2) {
             int solCocuk = 2 * indis + 1;

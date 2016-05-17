@@ -3,21 +3,21 @@ package uygulama.veriYapilari.ikiliAramaAgaci;
 import uygulama.eleman.Kisi;
 import uygulama.veriYapilari.bagliListe.BagliListe;
 
-public class Dugum {
+public class iAADugum {
     public Kisi kisi;
 
     public BagliListe Deneyimler;
     public BagliListe EgitimDurumu;
 
-    public Dugum sol;
-    public Dugum sag;
+    public iAADugum sol;
+    public iAADugum sag;
 
 
-    public Dugum() {
+    public iAADugum() {
     }
 
     // sadece kişi bilgisini içeren düğüm
-    public Dugum(Kisi kisi) {
+    public iAADugum(Kisi kisi) {
         this.kisi = kisi;
         this.Deneyimler = null;
         this.EgitimDurumu = null;
@@ -26,7 +26,7 @@ public class Dugum {
     }
 
     // tüm bilgileri içeren düğüm
-    public Dugum(Kisi kisi, BagliListe deneyimler, BagliListe egitimDurumu) {
+    public iAADugum(Kisi kisi, BagliListe deneyimler, BagliListe egitimDurumu) {
         this.kisi = kisi;
         this.Deneyimler = deneyimler;
         this.EgitimDurumu = egitimDurumu;

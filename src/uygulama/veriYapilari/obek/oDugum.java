@@ -1,9 +1,9 @@
 package uygulama.veriYapilari.obek;
 
-public class Dugum {
+public class oDugum {
     public int veri;
 
-    public Dugum(int veri) {
+    public oDugum(int veri) {
         this.veri = veri;
     }
 

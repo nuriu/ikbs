@@ -1,9 +1,11 @@
 package uygulama.veriYapilari.bagliListe;
 
+// TODO: silme işlemi için arama fonksiyonu gerekli.
+
 public class BagliListe extends BagliListeSoyut {
     @Override
     public void basaEkle(Object deger) {
-        Dugum gecici = new Dugum(deger);
+        bLDugum gecici = new bLDugum(deger);
 
         if(Bas == null)
             Bas = gecici;
@@ -16,12 +18,12 @@ public class BagliListe extends BagliListeSoyut {
 
     @Override
     public void sonaEkle(Object deger) {
-        Dugum gecici = new Dugum(deger);
+        bLDugum gecici = new bLDugum(deger);
 
         if(Bas == null)
             Bas = gecici;
         else {
-            Dugum sayac = Bas;
+            bLDugum sayac = Bas;
             while(sayac.Sonraki != null)
                 sayac = sayac.Sonraki;
             sayac.Sonraki = gecici;
@@ -31,7 +33,7 @@ public class BagliListe extends BagliListeSoyut {
 
     @Override
     public void pozisyonaEkle(int pozisyon, Object deger) {
-        Dugum gecici = new Dugum(deger);
+        bLDugum gecici = new bLDugum(deger);
 
         if (pozisyon > Boyut || pozisyon < 0) {
             throw new IndexOutOfBoundsException("Hatalı Pozisyon!");
@@ -39,7 +41,7 @@ public class BagliListe extends BagliListeSoyut {
         else if (pozisyon == 1)
             basaEkle(deger);
         else {
-            Dugum sayac = Bas;
+            bLDugum sayac = Bas;
             for (int i = 1; i < pozisyon - 1; i++) {
                 if (sayac.Sonraki != null)
                     sayac = sayac.Sonraki;
@@ -53,7 +55,7 @@ public class BagliListe extends BagliListeSoyut {
     @Override
     public void basiSil() {
         if (Bas != null) {
-            Dugum BasSonraki = Bas.Sonraki;
+            bLDugum BasSonraki = Bas.Sonraki;
             if(BasSonraki == null)
                 Bas = null;
             else
@@ -64,7 +66,7 @@ public class BagliListe extends BagliListeSoyut {
 
     @Override
     public void sonuSil() {
-        Dugum sayac = Bas;
+        bLDugum sayac = Bas;
         while (sayac != null) {
             if (sayac.Sonraki.Sonraki == null) {
                 sayac.Sonraki = null;
@@ -84,8 +86,8 @@ public class BagliListe extends BagliListeSoyut {
         else if (pozisyon == 1)
             basiSil();
         else {
-            Dugum sayac = Bas;
-            Dugum gecici = new Dugum();
+            bLDugum sayac = Bas;
+            bLDugum gecici = new bLDugum();
             for (int i = 1; i < pozisyon - 1; i++){
                 if (sayac.Sonraki != null)
                     sayac = sayac.Sonraki;
@@ -99,8 +101,8 @@ public class BagliListe extends BagliListeSoyut {
     }
 
     @Override
-    public Dugum elemanGetir(int pozisyon) {
-        Dugum sayac = Bas;
+    public bLDugum elemanGetir(int pozisyon) {
+        bLDugum sayac = Bas;
         if (pozisyon > Boyut || pozisyon < 0) {
             throw new IndexOutOfBoundsException("Hatalı Pozisyon!");
         } else {
@@ -109,17 +111,6 @@ public class BagliListe extends BagliListeSoyut {
                     sayac = sayac.Sonraki;
             }
         }
-        return  sayac;
-    }
-
-    @Override
-    public String elemanlariListele() {
-        String gecici = "";
-        Dugum eleman = Bas;
-        while (eleman != null) {
-            gecici += "-" + eleman.Veri;
-            eleman = eleman.Sonraki;
-        }
-        return  gecici;
+        return sayac;
     }
 }
