@@ -84,7 +84,9 @@ public class ElemanKontrolcusu implements Initializable {
     }
 
     public void EgitimBilgisiniSil() {
-
+        int secili = egitimListesi.getSelectionModel().getSelectedIndex();
+        kkEgitim.pozisyonuSil(secili + 1);
+        lEgitim.remove(secili);
     }
 
     public void EgitimBilgisiEkle() {
@@ -164,7 +166,9 @@ public class ElemanKontrolcusu implements Initializable {
     }
 
     public void DeneyimSil() {
-
+        int secili = deneyimListesi.getSelectionModel().getSelectedIndex();
+        kkDeneyimler.pozisyonuSil(secili + 1);
+        lDeneyimler.remove(secili);
     }
 
     public void DeneyimEkle() {
