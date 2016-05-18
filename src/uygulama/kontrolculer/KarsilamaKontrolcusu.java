@@ -21,6 +21,7 @@ public class KarsilamaKontrolcusu implements Initializable {
     public ListView<String> kisiListesi;
     @FXML
     public ListView<String> sirketListesi;
+
     private Parent arayuz;
 
     public KarsilamaKontrolcusu() {
@@ -38,11 +39,18 @@ public class KarsilamaKontrolcusu implements Initializable {
     }
 
     public void ElemanGirisi() throws Exception {
-        // eleman ekranını yükle ve geçiş yap
-        arayuz = FXMLLoader.load(getClass().getResource("../ekranlar/elemanEkrani.fxml"));
-        Main.pencere.setTitle("İnsan Kaynakları Bilgi Sistemi - Eleman Ekranı");
-        Main.pencere.setScene(new Scene(arayuz, 1280, 700));
-        System.out.println("Eleman Ekranına Geçildi.");
+
+        // TODO: Kişi seçilmedi uyarısı yap
+        if (kisiListesi.getSelectionModel().getSelectedItem() != null) {
+            String[] sistemdekiKisininBilgileri = kisiListesi.getSelectionModel().getSelectedItem().split(" \\| ");
+            ElemanKontrolcusu.SistemdekiKisi = ElemanKontrolcusu.Kisiler.kisiAra(sistemdekiKisininBilgileri[0]);
+
+            // eleman ekranını yükle ve geçiş yap
+            arayuz = FXMLLoader.load(getClass().getResource("../ekranlar/elemanEkrani.fxml"));
+            Main.pencere.setTitle("İnsan Kaynakları Bilgi Sistemi - Eleman Ekranı");
+            Main.pencere.setScene(new Scene(arayuz, 1280, 700));
+            System.out.println("Eleman Ekranına Geçildi.");
+        }
     }
 
     public void SirketGirisi() throws Exception {
@@ -103,8 +111,12 @@ public class KarsilamaKontrolcusu implements Initializable {
     }
 
     public void elemaniSil() {
-        String[] silinecekKisininBilgileri = kisiListesi.getSelectionModel().getSelectedItem().split(" \\| ");
-        ElemanKontrolcusu.Kisiler.kisiSil(silinecekKisininBilgileri[0]);
-        kisiListesi.setItems(ElemanKontrolcusu.Kisiler.soldanSagaDolas());
+        if (kisiListesi.getSelectionModel().getSelectedItem() != null) {
+            String[] silinecekKisininBilgileri = kisiListesi.getSelectionModel().getSelectedItem().split(" \\| ");
+            ElemanKontrolcusu.Kisiler.kisiSil(silinecekKisininBilgileri[0]);
+            kisiListesi.setItems(ElemanKontrolcusu.Kisiler.soldanSagaDolas());
+        } else {
+            // TODO: kişi seçilmedi uyarısı yap
+        }
     }
 }

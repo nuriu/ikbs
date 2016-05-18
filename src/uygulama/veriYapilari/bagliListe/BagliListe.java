@@ -1,7 +1,5 @@
 package uygulama.veriYapilari.bagliListe;
 
-// TODO: silme işlemi için arama fonksiyonu gerekli.
-
 public class BagliListe extends BagliListeSoyut {
     @Override
     public void basaEkle(Object deger) {

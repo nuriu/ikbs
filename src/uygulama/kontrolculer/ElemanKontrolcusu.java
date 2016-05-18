@@ -27,9 +27,10 @@ import java.util.ResourceBundle;
 public class ElemanKontrolcusu implements Initializable {
     // sistem genelinde kullanılacak olan kişi listesi
     public static IkiliAramaAgaci Kisiler;
-    private Parent arayuz;
     // karşılama ekranında seçilen kişi
-    private iAADugum SistemdekiKisi;
+    public static iAADugum SistemdekiKisi;
+
+    private Parent arayuz;
 
     //--------------------------------------------------------------------------
     // ELEMAN KAYIT EKRANI ÜYELERİ
@@ -69,10 +70,13 @@ public class ElemanKontrolcusu implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ObservableList<String> md = FXCollections.observableArrayList("Evli", "Bekar");
-        medeniDurum.setItems(md);
-        deneyimListesi.setItems(lDeneyimler);
-        egitimListesi.setItems(lEgitim);
+        // sistemde kişi yoksa yani kişi kaydı yapılıyorsa
+        if (SistemdekiKisi == null) {
+            ObservableList<String> md = FXCollections.observableArrayList("Evli", "Bekar");
+            medeniDurum.setItems(md);
+            deneyimListesi.setItems(lDeneyimler);
+            egitimListesi.setItems(lEgitim);
+        }
     }
 
     public void KarsilamaEkraninaDon() throws Exception {
@@ -240,21 +244,37 @@ public class ElemanKontrolcusu implements Initializable {
     }
 
     public void SistemeKaydet() throws Exception {
-        // kaydedilecek kişinin bilgilerini al
-        kaydedilecekKisi = new Kisi(ad.getText(), adres.getText(),
-                telefon.getText(), eposta.getText(), uyruk.getText(),
-                dogumYeri.getText(), dogumTarihi.getValue().toString(),
-                medeniDurum.getValue(), yabanciDil.getText(),
-                ilgiAlanlari.getText(), referanslar.getText());
+        // tüm kişisel bilgiler girildiyse kaydı yap
+        if (ad.getText().isEmpty() != true &&
+                adres.getText().isEmpty() != true &&
+                telefon.getText().isEmpty() != true &&
+                eposta.getText().isEmpty() != true &&
+                uyruk.getText().isEmpty() != true &&
+                dogumYeri.getText().isEmpty() != true &&
+                dogumTarihi.getValue().toString().isEmpty() != true &&
+                medeniDurum.getValue().toString().isEmpty() != true &&
+                yabanciDil.getText().isEmpty() != true &&
+                ilgiAlanlari.getText().isEmpty() != true &&
+                referanslar.getText().isEmpty() != true) {
 
-        // kişiyi sisteme kaydet
-        if (ElemanKontrolcusu.Kisiler == null || ElemanKontrolcusu.Kisiler.dugumSayisi() == 0) {
-            // ağaç boş ise
-            iAADugum d = new iAADugum(kaydedilecekKisi);
-            ElemanKontrolcusu.Kisiler = new IkiliAramaAgaci(d, kkDeneyimler, kkEgitim);
+            // kaydedilecek kişinin bilgilerini al
+            kaydedilecekKisi = new Kisi(ad.getText(), adres.getText(),
+                    telefon.getText(), eposta.getText(), uyruk.getText(),
+                    dogumYeri.getText(), dogumTarihi.getValue().toString(),
+                    medeniDurum.getValue(), yabanciDil.getText(),
+                    ilgiAlanlari.getText(), referanslar.getText());
+
+            // kişiyi sisteme kaydet
+            if (ElemanKontrolcusu.Kisiler == null || ElemanKontrolcusu.Kisiler.dugumSayisi() == 0) {
+                // ağaç boş ise
+                iAADugum d = new iAADugum(kaydedilecekKisi);
+                ElemanKontrolcusu.Kisiler = new IkiliAramaAgaci(d, kkDeneyimler, kkEgitim);
+            } else {
+                ElemanKontrolcusu.Kisiler.kisiEkle(kaydedilecekKisi, kkDeneyimler, kkEgitim);
+            }
+            KarsilamaEkraninaDon();
         } else {
-            ElemanKontrolcusu.Kisiler.kisiEkle(kaydedilecekKisi, kkDeneyimler, kkEgitim);
+            // TODO: Kişi bilgilerinin tam girilmemesi halinde kayıt yapma ve uyarı ver
         }
-        KarsilamaEkraninaDon();
     }
 }

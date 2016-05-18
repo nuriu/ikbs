@@ -144,15 +144,15 @@ public class IkiliAramaAgaci {
         ziyaret(iAADugum);
     }
 
-    public String kisiAra(String kisininIsmi) {
+    public iAADugum kisiAra(String kisininIsmi) {
         return aramaYap(kok, kisininIsmi);
     }
 
-    private String aramaYap(iAADugum iAADugum, String kisininIsmi) {
+    private iAADugum aramaYap(iAADugum iAADugum, String kisininIsmi) {
         if (iAADugum == null)
             return null;
         else if (kisininIsmi.compareTo(iAADugum.kisi.Ad) == 0)
-            return (iAADugum.kisi.bilgileriGetir());
+            return iAADugum;
         else if (kisininIsmi.compareTo(iAADugum.kisi.Ad) < 0)
             return aramaYap(iAADugum.sol, kisininIsmi);
         else
