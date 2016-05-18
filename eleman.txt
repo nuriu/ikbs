@@ -1,5 +1,5 @@
-nuri
-ahmet
-mehmet
-kadir
-sefa
+nuri, nAdres, nTelefon, nEposta, nUyruk, nDogumYeri, nDogumTarihi, nMedeniDurum, nYabanciDil, nIlgiAlanlari, nReferanslar
+ahmet, aAdres, aTelefon, aEposta, aUyruk, aDogumYeri, aDogumTarihi, aMedeniDurum, aYabanciDil, aIlgiAlanlari, aReferanslar
+mehmet, mAdres, mTelefon, mEposta, mUyruk, mDogumYeri, mDogumTarihi, mMedeniDurum, mYabanciDil, mIlgiAlanlari, mReferanslar
+kadir, kAdres, kTelefon, kEposta, kUyruk, kDogumYeri, kDogumTarihi, kMedeniDurum, kYabanciDil, kIlgiAlanlari, kReferanslar
+sefa, sAdres, sTelefon, sEposta, sUyruk, sDogumYeri, sDogumTarihi, sMedeniDurum, sYabanciDil, sIlgiAlanlari, sReferanslar

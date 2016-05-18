@@ -21,7 +21,7 @@
         <Button mnemonicParsing="false" onAction="#ElemanGirisi" text="Eleman Girişi" GridPane.halignment="LEFT"
                 GridPane.rowIndex="2" GridPane.valignment="CENTER">
             <GridPane.margin>
-                <Insets left="10.0"/>
+                <Insets left="25.0"/>
             </GridPane.margin>
         </Button>
         <Button mnemonicParsing="false" onAction="#SirketGirisi" text="Şirket Girişi" GridPane.columnIndex="1"

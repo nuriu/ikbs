@@ -95,10 +95,10 @@ public class IkiliAramaAgaci {
 
     private void ziyaret(iAADugum iAADugum) {
         if (dugumler == null) {
-            dugumler = FXCollections.observableArrayList(iAADugum.kisi.Ad);
+            dugumler = FXCollections.observableArrayList(iAADugum.kisi.bilgileriGetir());
         } else {
             if (iAADugum.kisi != null)
-                dugumler.add(iAADugum.kisi.Ad);
+                dugumler.add(iAADugum.kisi.bilgileriGetir());
         }
     }
 
@@ -144,19 +144,19 @@ public class IkiliAramaAgaci {
         ziyaret(iAADugum);
     }
 
-    public Kisi kisiAra(Kisi kisi) {
-        return aramaYap(kok, kisi);
+    public String kisiAra(String kisininIsmi) {
+        return aramaYap(kok, kisininIsmi);
     }
 
-    private Kisi aramaYap(iAADugum iAADugum, Kisi kisi) {
+    private String aramaYap(iAADugum iAADugum, String kisininIsmi) {
         if (iAADugum == null)
             return null;
-        else if (iAADugum.kisi == kisi)
-            return iAADugum.kisi;
-        else if (kisi.Ad.compareTo(iAADugum.kisi.Ad) < 0)
-            return aramaYap(iAADugum.sol, kisi);
+        else if (kisininIsmi.compareTo(iAADugum.kisi.Ad) == 0)
+            return (iAADugum.kisi.bilgileriGetir());
+        else if (kisininIsmi.compareTo(iAADugum.kisi.Ad) < 0)
+            return aramaYap(iAADugum.sol, kisininIsmi);
         else
-            return aramaYap(iAADugum.sag, kisi);
+            return aramaYap(iAADugum.sag, kisininIsmi);
     }
 
     private iAADugum successor(iAADugum iAADugum) {
@@ -181,7 +181,7 @@ public class IkiliAramaAgaci {
         iAADugum ebeveyn = kok;
         boolean solMu = true;
 
-        while (simdiki.kisi.Ad != kisiAdi) {
+        while (kisiAdi.compareTo(simdiki.kisi.Ad) != 0) {
             ebeveyn = simdiki;
             // kişi adı alfabetik olarak küçükse
             if (kisiAdi.compareTo(simdiki.kisi.Ad) < 0) {

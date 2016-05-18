@@ -84,7 +84,13 @@ public class KarsilamaKontrolcusu implements Initializable {
             int i = 0;
             while ((satir = okuyucu.readLine()) != null) {
                 // TODO: deneyim ve eğitim bilgileri de dosyadan alınabilir
-                eklenecekKisi = new Kisi(satir);
+                String[] eklenecekKisininBilgileri = satir.split(", ");
+                eklenecekKisi = new Kisi(eklenecekKisininBilgileri[0],
+                        eklenecekKisininBilgileri[1], eklenecekKisininBilgileri[2],
+                        eklenecekKisininBilgileri[3], eklenecekKisininBilgileri[4],
+                        eklenecekKisininBilgileri[5], eklenecekKisininBilgileri[6],
+                        eklenecekKisininBilgileri[7], eklenecekKisininBilgileri[8],
+                        eklenecekKisininBilgileri[9], eklenecekKisininBilgileri[10]);
                 if (i == 0) {                   // ilk satırsa ağacı ve kökü oluştur
                     d.kisi = eklenecekKisi;
                     ElemanKontrolcusu.Kisiler = new IkiliAramaAgaci(d, null, null);
@@ -97,7 +103,8 @@ public class KarsilamaKontrolcusu implements Initializable {
     }
 
     public void elemaniSil() {
-        ElemanKontrolcusu.Kisiler.kisiSil(kisiListesi.getSelectionModel().getSelectedItem());
+        String[] silinecekKisininBilgileri = kisiListesi.getSelectionModel().getSelectedItem().split(" \\| ");
+        ElemanKontrolcusu.Kisiler.kisiSil(silinecekKisininBilgileri[0]);
         kisiListesi.setItems(ElemanKontrolcusu.Kisiler.soldanSagaDolas());
     }
 }

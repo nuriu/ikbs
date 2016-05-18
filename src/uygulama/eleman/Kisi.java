@@ -36,4 +36,10 @@ public class Kisi {
         this.IlgiAlanlari = ilgiAlanlari;
         this.Referanslar = referanslar;
     }
+
+    public String bilgileriGetir() {
+        return (Ad + " | " + Adres + " | " + Telefon + " | " + Eposta + " | " +
+                Uyruk + " | " + DogumYeri + " | " + DogumTarihi + " | " +
+                MedeniDurum + " | " + YabanciDil + " | " + IlgiAlanlari + " | " + Referanslar);
+    }
 }
