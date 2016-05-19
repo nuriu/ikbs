@@ -1,6 +1,6 @@
 package uygulama.eleman;
 
-public class Deneyim {
+public class Deneyim extends EkBilgi {
     public String Ad;
     public String Adres;
     public String Pozisyon;

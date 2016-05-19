@@ -1,8 +1,12 @@
 package uygulama.veriYapilari.bagliListe;
 
+import uygulama.eleman.Deneyim;
+import uygulama.eleman.Egitim;
+import uygulama.eleman.EkBilgi;
+
 public class BagliListe extends BagliListeSoyut {
     @Override
-    public void basaEkle(Object deger) {
+    public void basaEkle(EkBilgi deger) {
         bLDugum gecici = new bLDugum(deger);
 
         if(Bas == null)
@@ -15,7 +19,7 @@ public class BagliListe extends BagliListeSoyut {
     }
 
     @Override
-    public void sonaEkle(Object deger) {
+    public void sonaEkle(EkBilgi deger) {
         bLDugum gecici = new bLDugum(deger);
 
         if(Bas == null)
@@ -30,7 +34,7 @@ public class BagliListe extends BagliListeSoyut {
     }
 
     @Override
-    public void pozisyonaEkle(int pozisyon, Object deger) {
+    public void pozisyonaEkle(int pozisyon, EkBilgi deger) {
         bLDugum gecici = new bLDugum(deger);
 
         if (pozisyon > Boyut || pozisyon < 0) {
@@ -99,7 +103,7 @@ public class BagliListe extends BagliListeSoyut {
     }
 
     @Override
-    public bLDugum elemanGetir(int pozisyon) {
+    public String elemanGetir(int pozisyon) {
         bLDugum sayac = Bas;
         if (pozisyon > Boyut || pozisyon < 0) {
             throw new IndexOutOfBoundsException("Hatalı Pozisyon!");
@@ -109,6 +113,12 @@ public class BagliListe extends BagliListeSoyut {
                     sayac = sayac.Sonraki;
             }
         }
-        return sayac;
+
+        if (sayac.Veri instanceof Deneyim)
+            return ((Deneyim) sayac.Veri).Ad + " - " + ((Deneyim) sayac.Veri).Adres;
+        else if (sayac.Veri instanceof Egitim)
+            return ((Egitim) sayac.Veri).Bitis + " - " + ((Egitim) sayac.Veri).Ad + " - " + ((Egitim) sayac.Veri).Bolum + " - " + ((Egitim) sayac.Veri).NotOrtalamasi;
+
+        return null;
     }
 }

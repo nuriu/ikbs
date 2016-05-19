@@ -33,7 +33,7 @@ public class ElemanKontrolcusu implements Initializable {
     private Parent arayuz;
 
     //--------------------------------------------------------------------------
-    // ELEMAN KAYIT EKRANI ÜYELERİ
+    // ARAYÜZ ÜYELERİ
     //--------------------------------------------------------------------------
     private Kisi kaydedilecekKisi;
     private BagliListe kkDeneyimler = new BagliListe();
@@ -66,6 +66,10 @@ public class ElemanKontrolcusu implements Initializable {
     private ListView deneyimListesi;
     @FXML
     private ListView egitimListesi;
+    @FXML
+    private Label lblSistemdekiKisi;
+    @FXML
+    private TextField dTarihi;
     //--------------------------------------------------------------------------
 
     @Override
@@ -76,6 +80,41 @@ public class ElemanKontrolcusu implements Initializable {
             medeniDurum.setItems(md);
             deneyimListesi.setItems(lDeneyimler);
             egitimListesi.setItems(lEgitim);
+        } else {
+            // sistemde kişi varsa alanları kişinin bilgileri ile doldur
+            lblSistemdekiKisi.setText("Sistemdeki Kişi : " + SistemdekiKisi.kisi.bilgileriGetir());
+            ad.setText(SistemdekiKisi.kisi.Ad);
+            adres.setText(SistemdekiKisi.kisi.Adres);
+            telefon.setText(SistemdekiKisi.kisi.Telefon);
+            eposta.setText(SistemdekiKisi.kisi.Eposta);
+            uyruk.setText(SistemdekiKisi.kisi.Uyruk);
+            dogumYeri.setText(SistemdekiKisi.kisi.DogumYeri);
+            dTarihi.setText(SistemdekiKisi.kisi.DogumTarihi);
+            medeniDurum.setItems(FXCollections.observableArrayList("Evli", "Bekar"));
+            medeniDurum.setValue(SistemdekiKisi.kisi.MedeniDurum);
+            yabanciDil.setText(SistemdekiKisi.kisi.YabanciDil);
+            ilgiAlanlari.setText(SistemdekiKisi.kisi.IlgiAlanlari);
+            referanslar.setText(SistemdekiKisi.kisi.Referanslar);
+
+            // deneyimleri listele
+            for (int i = SistemdekiKisi.Deneyimler.Boyut; i > 0; i--) {
+                if (lDeneyimler != null)
+                    lDeneyimler.add(SistemdekiKisi.Deneyimler.elemanGetir(i));
+                else
+                    lDeneyimler = FXCollections.observableArrayList(SistemdekiKisi.Deneyimler.elemanGetir(i));
+            }
+
+            deneyimListesi.setItems(lDeneyimler);
+
+            // eğitim bilgilerini listele
+            for (int i = SistemdekiKisi.EgitimDurumu.Boyut; i > 0; i--) {
+                if (lEgitim != null)
+                    lEgitim.add(SistemdekiKisi.EgitimDurumu.elemanGetir(i));
+                else
+                    lEgitim = FXCollections.observableArrayList(SistemdekiKisi.EgitimDurumu.elemanGetir(i));
+            }
+
+            egitimListesi.setItems(lEgitim);
         }
     }
 
@@ -85,11 +124,23 @@ public class ElemanKontrolcusu implements Initializable {
         Main.pencere.setTitle("İnsan Kaynakları Bilgi Sistemi");
         Main.pencere.setScene(new Scene(arayuz, 1280, 700));
         System.out.println("Karşılama Ekranına Geri Dönüldü.");
+        // sistemde biri varsa sistemden çıkart
+        if (SistemdekiKisi != null) {
+            SistemdekiKisi = null;
+            lDeneyimler = null;
+            lEgitim = null;
+        }
     }
 
     public void EgitimBilgisiniSil() {
+        // TODO: seçim yapmadıysa uyarı ver
         int secili = egitimListesi.getSelectionModel().getSelectedIndex();
-        kkEgitim.pozisyonuSil(secili + 1);
+
+        if (SistemdekiKisi != null)
+            SistemdekiKisi.EgitimDurumu.pozisyonuSil(secili + 1);
+        else
+            kkEgitim.pozisyonuSil(secili + 1);
+
         lEgitim.remove(secili);
     }
 
@@ -154,10 +205,12 @@ public class ElemanKontrolcusu implements Initializable {
         });
 
         Optional<Egitim> sonuc = dialog.showAndWait();
-
         // sonuç geçerli veri içeriyorsa
         sonuc.ifPresent(e -> {
-            kkEgitim.sonaEkle(sonuc);
+            if (SistemdekiKisi != null)
+                SistemdekiKisi.EgitimDurumu.sonaEkle(e);
+            else
+                kkEgitim.sonaEkle(e);
 
             if (lEgitim != null)
                 lEgitim.add(e.Bitis + " : " + e.Ad + " - " + e.Bolum + " : " + e.NotOrtalamasi);
@@ -170,8 +223,14 @@ public class ElemanKontrolcusu implements Initializable {
     }
 
     public void DeneyimSil() {
+        // TODO: seçim yapmadıysa uyarı ver
         int secili = deneyimListesi.getSelectionModel().getSelectedIndex();
-        kkDeneyimler.pozisyonuSil(secili + 1);
+
+        if (SistemdekiKisi != null)
+            SistemdekiKisi.Deneyimler.pozisyonuSil(secili + 1);
+        else
+            kkDeneyimler.pozisyonuSil(secili + 1);
+
         lDeneyimler.remove(secili);
     }
 
@@ -232,7 +291,10 @@ public class ElemanKontrolcusu implements Initializable {
 
         // sonuç geçerli veri içeriyorsa
         sonuc.ifPresent(d -> {
-            kkDeneyimler.sonaEkle(sonuc);
+            if (SistemdekiKisi != null)
+                SistemdekiKisi.Deneyimler.sonaEkle(d);
+            else
+                kkDeneyimler.sonaEkle(d);
 
             if (lDeneyimler != null)
                 lDeneyimler.add(d.Ad + " - " + d.Pozisyon);

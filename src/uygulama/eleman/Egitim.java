@@ -1,6 +1,6 @@
 package uygulama.eleman;
 
-public class Egitim {
+public class Egitim extends EkBilgi {
     public String Ad;
     public String Bolum;
     public String Baslangic;

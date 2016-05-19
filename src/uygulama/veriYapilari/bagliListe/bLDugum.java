@@ -1,14 +1,16 @@
 package uygulama.veriYapilari.bagliListe;
 
+import uygulama.eleman.EkBilgi;
+
 public class bLDugum {
-    public Object Veri;
+    public EkBilgi Veri;
     public bLDugum Sonraki;
 
     public bLDugum() {
 
     }
 
-    public bLDugum(Object veri) {
+    public bLDugum(EkBilgi veri) {
         Veri = veri;
     }
 }
