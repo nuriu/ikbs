@@ -37,22 +37,6 @@ public class IkiliAramaAgaci {
         return sayac;
     }
 
-    // TODO: yaprak düğümlerin sayısına gerek yok ise sil
-    public int yaprakSayisi() {
-        return yaprakSayisi(kok);
-    }
-
-    private int yaprakSayisi(iAADugum iAADugum) {
-        int sayac = 0;
-        if (iAADugum != null) {
-            if ((iAADugum.sol == null) && (iAADugum.sag == null))
-                sayac = 1;
-            else
-                sayac = sayac + yaprakSayisi(iAADugum.sol) + yaprakSayisi(iAADugum.sag);
-        }
-        return sayac;
-    }
-
     public void kisiEkle(Kisi kisi, BagliListe deneyimler, BagliListe egitimDurumu) {
         iAADugum ebeveyn = new iAADugum();
         iAADugum arama = kok;

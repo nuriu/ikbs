@@ -274,7 +274,11 @@ public class ElemanKontrolcusu implements Initializable {
             }
             KarsilamaEkraninaDon();
         } else {
-            // TODO: Kişi bilgilerinin tam girilmemesi halinde kayıt yapma ve uyarı ver
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("HATA");
+            alert.setHeaderText("Kayıt Hatası!");
+            alert.setContentText("Kayıt için kişisel bilgilerin tamamını doldurmalısınız!");
+            alert.showAndWait();
         }
     }
 }

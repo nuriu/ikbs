@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import uygulama.Main;
 import uygulama.eleman.Kisi;
@@ -39,8 +40,6 @@ public class KarsilamaKontrolcusu implements Initializable {
     }
 
     public void ElemanGirisi() throws Exception {
-
-        // TODO: Kişi seçilmedi uyarısı yap
         if (kisiListesi.getSelectionModel().getSelectedItem() != null) {
             String[] sistemdekiKisininBilgileri = kisiListesi.getSelectionModel().getSelectedItem().split(" \\| ");
             ElemanKontrolcusu.SistemdekiKisi = ElemanKontrolcusu.Kisiler.kisiAra(sistemdekiKisininBilgileri[0]);
@@ -50,6 +49,12 @@ public class KarsilamaKontrolcusu implements Initializable {
             Main.pencere.setTitle("İnsan Kaynakları Bilgi Sistemi - Eleman Ekranı");
             Main.pencere.setScene(new Scene(arayuz, 1280, 700));
             System.out.println("Eleman Ekranına Geçildi.");
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("HATA");
+            alert.setHeaderText("Giriş Hatası!");
+            alert.setContentText("Öncelikle giriş yapılacak elemanı seçmelisiniz!");
+            alert.showAndWait();
         }
     }
 
@@ -116,7 +121,11 @@ public class KarsilamaKontrolcusu implements Initializable {
             ElemanKontrolcusu.Kisiler.kisiSil(silinecekKisininBilgileri[0]);
             kisiListesi.setItems(ElemanKontrolcusu.Kisiler.soldanSagaDolas());
         } else {
-            // TODO: kişi seçilmedi uyarısı yap
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("HATA");
+            alert.setHeaderText("Silme Hatası!");
+            alert.setContentText("Öncelikle silinecek elemanı seçmelisiniz!");
+            alert.showAndWait();
         }
     }
 }
