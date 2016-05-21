@@ -97,24 +97,28 @@ public class ElemanKontrolcusu implements Initializable {
             referanslar.setText(SistemdekiKisi.kisi.Referanslar);
 
             // deneyimleri listele
-            for (int i = SistemdekiKisi.Deneyimler.Boyut; i > 0; i--) {
-                if (lDeneyimler != null)
-                    lDeneyimler.add(SistemdekiKisi.Deneyimler.elemanGetir(i));
-                else
-                    lDeneyimler = FXCollections.observableArrayList(SistemdekiKisi.Deneyimler.elemanGetir(i));
-            }
+            if (SistemdekiKisi.Deneyimler != null) {
+                for (int i = SistemdekiKisi.Deneyimler.Boyut; i > 0; i--) {
+                    if (lDeneyimler != null)
+                        lDeneyimler.add(SistemdekiKisi.Deneyimler.elemanGetir(i));
+                    else
+                        lDeneyimler = FXCollections.observableArrayList(SistemdekiKisi.Deneyimler.elemanGetir(i));
+                }
 
-            deneyimListesi.setItems(lDeneyimler);
+                deneyimListesi.setItems(lDeneyimler);
+            }
 
             // eğitim bilgilerini listele
-            for (int i = SistemdekiKisi.EgitimDurumu.Boyut; i > 0; i--) {
-                if (lEgitim != null)
-                    lEgitim.add(SistemdekiKisi.EgitimDurumu.elemanGetir(i));
-                else
-                    lEgitim = FXCollections.observableArrayList(SistemdekiKisi.EgitimDurumu.elemanGetir(i));
-            }
+            if (SistemdekiKisi.EgitimDurumu != null) {
+                for (int i = SistemdekiKisi.EgitimDurumu.Boyut; i > 0; i--) {
+                    if (lEgitim != null)
+                        lEgitim.add(SistemdekiKisi.EgitimDurumu.elemanGetir(i));
+                    else
+                        lEgitim = FXCollections.observableArrayList(SistemdekiKisi.EgitimDurumu.elemanGetir(i));
+                }
 
-            egitimListesi.setItems(lEgitim);
+                egitimListesi.setItems(lEgitim);
+            }
         }
     }
 
@@ -133,15 +137,22 @@ public class ElemanKontrolcusu implements Initializable {
     }
 
     public void EgitimBilgisiniSil() {
-        // TODO: seçim yapmadıysa uyarı ver
-        int secili = egitimListesi.getSelectionModel().getSelectedIndex();
+        if (egitimListesi.getSelectionModel().getSelectedIndex() != -1) {
+            int secili = egitimListesi.getSelectionModel().getSelectedIndex();
 
-        if (SistemdekiKisi != null)
-            SistemdekiKisi.EgitimDurumu.pozisyonuSil(secili + 1);
-        else
-            kkEgitim.pozisyonuSil(secili + 1);
+            if (SistemdekiKisi != null)
+                SistemdekiKisi.EgitimDurumu.pozisyonuSil(secili + 1);
+            else
+                kkEgitim.pozisyonuSil(secili + 1);
 
-        lEgitim.remove(secili);
+            lEgitim.remove(secili);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("HATA");
+            alert.setHeaderText("Silme Hatası!");
+            alert.setContentText("Eğitim bilgisini silmek için seçim yapmalısınız!");
+            alert.showAndWait();
+        }
     }
 
     public void EgitimBilgisiEkle() {
@@ -207,10 +218,13 @@ public class ElemanKontrolcusu implements Initializable {
         Optional<Egitim> sonuc = dialog.showAndWait();
         // sonuç geçerli veri içeriyorsa
         sonuc.ifPresent(e -> {
-            if (SistemdekiKisi != null)
+            if (SistemdekiKisi != null) {
+                if (SistemdekiKisi.EgitimDurumu == null)
+                    SistemdekiKisi.EgitimDurumu = new BagliListe();
                 SistemdekiKisi.EgitimDurumu.sonaEkle(e);
-            else
+            } else {
                 kkEgitim.sonaEkle(e);
+            }
 
             if (lEgitim != null)
                 lEgitim.add(e.Bitis + " : " + e.Ad + " - " + e.Bolum + " : " + e.NotOrtalamasi);
@@ -223,15 +237,23 @@ public class ElemanKontrolcusu implements Initializable {
     }
 
     public void DeneyimSil() {
-        // TODO: seçim yapmadıysa uyarı ver
-        int secili = deneyimListesi.getSelectionModel().getSelectedIndex();
+        if (deneyimListesi.getSelectionModel().getSelectedIndex() != -1) {
+            int secili = deneyimListesi.getSelectionModel().getSelectedIndex();
 
-        if (SistemdekiKisi != null)
-            SistemdekiKisi.Deneyimler.pozisyonuSil(secili + 1);
-        else
-            kkDeneyimler.pozisyonuSil(secili + 1);
+            if (SistemdekiKisi != null)
+                SistemdekiKisi.Deneyimler.pozisyonuSil(secili + 1);
+            else
+                kkDeneyimler.pozisyonuSil(secili + 1);
 
-        lDeneyimler.remove(secili);
+            lDeneyimler.remove(secili);
+
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("HATA");
+            alert.setHeaderText("Silme Hatası!");
+            alert.setContentText("Deneyimi silmek için seçim yapmalısınız!");
+            alert.showAndWait();
+        }
     }
 
     public void DeneyimEkle() {
@@ -291,10 +313,14 @@ public class ElemanKontrolcusu implements Initializable {
 
         // sonuç geçerli veri içeriyorsa
         sonuc.ifPresent(d -> {
-            if (SistemdekiKisi != null)
+            if (SistemdekiKisi != null) {
+                if (SistemdekiKisi.Deneyimler == null)
+                    SistemdekiKisi.Deneyimler = new BagliListe();
+
                 SistemdekiKisi.Deneyimler.sonaEkle(d);
-            else
+            } else {
                 kkDeneyimler.sonaEkle(d);
+            }
 
             if (lDeneyimler != null)
                 lDeneyimler.add(d.Ad + " - " + d.Pozisyon);
