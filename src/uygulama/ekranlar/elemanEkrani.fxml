@@ -152,11 +152,6 @@
                 <Insets left="150.0" right="10.0" top="255.0"/>
             </GridPane.margin>
         </TextField>
-        <TextField fx:id="dTarihi" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
-            <GridPane.margin>
-                <Insets left="150.0" right="10.0" top="290.0"/>
-            </GridPane.margin>
-        </TextField>
         <ComboBox fx:id="medeniDurum" prefWidth="150.0" GridPane.halignment="LEFT" GridPane.rowIndex="2"
                   GridPane.valignment="TOP">
             <GridPane.margin>
@@ -222,11 +217,16 @@
                 <Insets right="25.0"/>
             </GridPane.margin>
         </Button>
-        <Button mnemonicParsing="false" text="Tüm Bilgileri Güncelle" GridPane.halignment="RIGHT" GridPane.rowIndex="2"
-                GridPane.valignment="TOP">
+        <Button mnemonicParsing="false" onAction="#SistemeKaydet" text="Tüm Bilgileri Güncelle"
+                GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
             <GridPane.margin>
                 <Insets right="10.0" top="565.0"/>
             </GridPane.margin>
         </Button>
+        <DatePicker fx:id="dogumTarihi" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+            <GridPane.margin>
+                <Insets left="150.0" top="290.0"/>
+            </GridPane.margin>
+        </DatePicker>
     </children>
 </GridPane>

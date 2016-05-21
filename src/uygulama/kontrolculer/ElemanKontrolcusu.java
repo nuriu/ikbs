@@ -21,6 +21,8 @@ import uygulama.veriYapilari.ikiliAramaAgaci.IkiliAramaAgaci;
 import uygulama.veriYapilari.ikiliAramaAgaci.iAADugum;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -68,8 +70,6 @@ public class ElemanKontrolcusu implements Initializable {
     private ListView egitimListesi;
     @FXML
     private Label lblSistemdekiKisi;
-    @FXML
-    private TextField dTarihi;
     //--------------------------------------------------------------------------
 
     @Override
@@ -82,6 +82,8 @@ public class ElemanKontrolcusu implements Initializable {
             egitimListesi.setItems(lEgitim);
         } else {
             // sistemde kişi varsa alanları kişinin bilgileri ile doldur
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate tarih = LocalDate.parse(SistemdekiKisi.kisi.DogumTarihi, format);
             lblSistemdekiKisi.setText("Sistemdeki Kişi : " + SistemdekiKisi.kisi.bilgileriGetir());
             ad.setText(SistemdekiKisi.kisi.Ad);
             adres.setText(SistemdekiKisi.kisi.Adres);
@@ -89,7 +91,7 @@ public class ElemanKontrolcusu implements Initializable {
             eposta.setText(SistemdekiKisi.kisi.Eposta);
             uyruk.setText(SistemdekiKisi.kisi.Uyruk);
             dogumYeri.setText(SistemdekiKisi.kisi.DogumYeri);
-            dTarihi.setText(SistemdekiKisi.kisi.DogumTarihi);
+            dogumTarihi.setValue(tarih);
             medeniDurum.setItems(FXCollections.observableArrayList("Evli", "Bekar"));
             medeniDurum.setValue(SistemdekiKisi.kisi.MedeniDurum);
             yabanciDil.setText(SistemdekiKisi.kisi.YabanciDil);
@@ -345,27 +347,44 @@ public class ElemanKontrolcusu implements Initializable {
                 ilgiAlanlari.getText().isEmpty() != true &&
                 referanslar.getText().isEmpty() != true) {
 
-            // kaydedilecek kişinin bilgilerini al
-            kaydedilecekKisi = new Kisi(ad.getText(), adres.getText(),
-                    telefon.getText(), eposta.getText(), uyruk.getText(),
-                    dogumYeri.getText(), dogumTarihi.getValue().toString(),
-                    medeniDurum.getValue(), yabanciDil.getText(),
-                    ilgiAlanlari.getText(), referanslar.getText());
+            // sistemde birisi varsa bilgilerini güncelle
+            if (SistemdekiKisi != null) {
+                SistemdekiKisi.kisi = null;
+                SistemdekiKisi.kisi = new Kisi(ad.getText(), adres.getText(),
+                        telefon.getText(), eposta.getText(), uyruk.getText(),
+                        dogumYeri.getText(), dogumTarihi.getValue().toString(),
+                        medeniDurum.getValue(), yabanciDil.getText(),
+                        ilgiAlanlari.getText(), referanslar.getText());
 
-            // kişiyi sisteme kaydet
-            if (ElemanKontrolcusu.Kisiler == null || ElemanKontrolcusu.Kisiler.dugumSayisi() == 0) {
-                // ağaç boş ise
-                iAADugum d = new iAADugum(kaydedilecekKisi);
-                ElemanKontrolcusu.Kisiler = new IkiliAramaAgaci(d, kkDeneyimler, kkEgitim);
-            } else {
-                ElemanKontrolcusu.Kisiler.kisiEkle(kaydedilecekKisi, kkDeneyimler, kkEgitim);
+                iAADugum d = new iAADugum(SistemdekiKisi.kisi, SistemdekiKisi.Deneyimler, SistemdekiKisi.EgitimDurumu);
+                Kisiler.kisiGuncelle(SistemdekiKisi.kisi.Ad, d);
+            } else {    // kişiyi sisteme kaydet
+                // kaydedilecek kişinin bilgilerini al
+                kaydedilecekKisi = new Kisi(ad.getText(), adres.getText(),
+                        telefon.getText(), eposta.getText(), uyruk.getText(),
+                        dogumYeri.getText(), dogumTarihi.getValue().toString(),
+                        medeniDurum.getValue(), yabanciDil.getText(),
+                        ilgiAlanlari.getText(), referanslar.getText());
+
+                // ağaç boş ise oluştur
+                if (Kisiler == null || Kisiler.dugumSayisi() == 0) {
+                    iAADugum d = new iAADugum(kaydedilecekKisi);
+                    Kisiler = new IkiliAramaAgaci(d, kkDeneyimler, kkEgitim);
+                } else {
+                    Kisiler.kisiEkle(kaydedilecekKisi, kkDeneyimler, kkEgitim);
+                }
             }
             KarsilamaEkraninaDon();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("HATA");
-            alert.setHeaderText("Kayıt Hatası!");
-            alert.setContentText("Kayıt için kişisel bilgilerin tamamını doldurmalısınız!");
+            if (SistemdekiKisi == null) {
+                alert.setHeaderText("Kayıt Hatası!");
+                alert.setContentText("Kayıt için kişisel bilgilerin tamamını doldurmalısınız!");
+            } else {
+                alert.setHeaderText("Güncelleme Hatası!");
+                alert.setContentText("Güncelleme için kişisel bilgileri doldurmalısınız!");
+            }
             alert.showAndWait();
         }
     }

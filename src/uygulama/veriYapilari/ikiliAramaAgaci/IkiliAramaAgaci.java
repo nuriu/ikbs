@@ -128,6 +128,21 @@ public class IkiliAramaAgaci {
         ziyaret(iAADugum);
     }
 
+    public void kisiGuncelle(String kisininIsmi, iAADugum yeniBilgiler) {
+        guncelle(kok, kisininIsmi, yeniBilgiler);
+    }
+
+    private void guncelle(iAADugum iAADugum, String kisininIsmi, iAADugum yeniBilgiler) {
+        if (iAADugum == null)
+            return;
+        else if (kisininIsmi.compareTo(iAADugum.kisi.Ad) == 0)
+            iAADugum = yeniBilgiler;
+        else if (kisininIsmi.compareTo(iAADugum.kisi.Ad) < 0)
+            guncelle(iAADugum.sol, kisininIsmi, yeniBilgiler);
+        else
+            guncelle(iAADugum.sag, kisininIsmi, yeniBilgiler);
+    }
+
     public iAADugum kisiAra(String kisininIsmi) {
         return aramaYap(kok, kisininIsmi);
     }
