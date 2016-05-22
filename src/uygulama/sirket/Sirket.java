@@ -7,6 +7,18 @@ public class Sirket {
     public long Faks;
     public String Eposta;
 
+    public  Sirket(){
+
+    }
+
+    public Sirket(String ad, String adres, long telefon, long faks, String eposta){
+        this.Ad = ad;
+        this.Adres = adres;
+        this.Telefon = telefon;
+        this.Faks = faks;
+        this.Eposta = eposta;
+    }
+
     // TODO: Sisteme kayıt (işyeri bilgilerini ekleme)
     public void Kayit() {
 
