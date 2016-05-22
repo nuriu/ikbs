@@ -11,6 +11,10 @@ public class Sirket {
 
     }
 
+    public Sirket(String ad){
+        this.Ad = ad;
+    }
+
     public Sirket(String ad, String adres, long telefon, long faks, String eposta){
         this.Ad = ad;
         this.Adres = adres;

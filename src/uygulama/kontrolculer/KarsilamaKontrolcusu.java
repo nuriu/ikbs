@@ -1,5 +1,7 @@
 package uygulama.kontrolculer;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -11,6 +13,8 @@ import uygulama.Main;
 import uygulama.eleman.Kisi;
 import uygulama.veriYapilari.ikiliAramaAgaci.IkiliAramaAgaci;
 import uygulama.veriYapilari.ikiliAramaAgaci.iAADugum;
+import uygulama.sirket.Sirket;
+import java.util.Hashtable;
 
 import java.io.*;
 import java.net.URL;
@@ -23,6 +27,7 @@ public class KarsilamaKontrolcusu implements Initializable {
     @FXML
     public ListView<String> sirketListesi;
 
+    public ObservableList<String> sirketL = FXCollections.observableArrayList();
     private Parent arayuz;
 
     public KarsilamaKontrolcusu() {
@@ -32,11 +37,14 @@ public class KarsilamaKontrolcusu implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         try {
             kisiAgaciniOlustur();
+            sirketHashTablosuOlustur();
         } catch (IOException e) {
             e.printStackTrace();
         }
         // penceredeki kişi listesine alfabetik sırayla yazdır
         kisiListesi.setItems(ElemanKontrolcusu.Kisiler.soldanSagaDolas());
+        sirketListesi.setItems(sirketL);
+
     }
 
     public void ElemanGirisi() throws Exception {
@@ -126,6 +134,32 @@ public class KarsilamaKontrolcusu implements Initializable {
             alert.setHeaderText("Silme Hatası!");
             alert.setContentText("Öncelikle silinecek elemanı seçmelisiniz!");
             alert.showAndWait();
+        }
+    }
+
+    private void sirketHashTablosuOlustur() throws IOException {
+        if(SirketKontrolcusu.Sirketler == null){
+            String satir = null;
+            Sirket eklenecekSirket = null;
+            SirketKontrolcusu.Sirketler = null;
+
+            InputStream sirketDosyasi = new FileInputStream("sirket.txt");
+            InputStreamReader eOkuyucu = new InputStreamReader(sirketDosyasi, Charset.forName("UTF-8"));
+            BufferedReader okuyucu = new BufferedReader(eOkuyucu);
+
+            int i = 0;
+            while ((satir = okuyucu.readLine()) != null) {
+                String[] eklenecekSirketinBilgileri = satir.split(", ");
+                eklenecekSirket = new Sirket(eklenecekSirketinBilgileri[0]);
+                sirketL.add(eklenecekSirket.Ad);
+                if (i == 0) {
+                    SirketKontrolcusu.Sirketler = new Hashtable();
+                    SirketKontrolcusu.Sirketler.put(eklenecekSirket.Ad,eklenecekSirket);
+                } else {
+                    SirketKontrolcusu.Sirketler.put(eklenecekSirket.Ad,eklenecekSirket);
+                }
+                i++;
+            }
         }
     }
 }

@@ -2,6 +2,7 @@ package uygulama.kontrolculer;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
@@ -9,8 +10,14 @@ import javafx.scene.control.TextField;
 import uygulama.Main;
 import uygulama.sirket.Sirket;
 
+import java.net.URL;
+import java.util.Hashtable;
+import java.util.ResourceBundle;
 
-public class SirketKontrolcusu {
+
+public class SirketKontrolcusu implements Initializable {
+    public static Hashtable Sirketler;
+
     private Parent arayuz;
     private Sirket kaydedilecekSirket;
 
@@ -25,6 +32,11 @@ public class SirketKontrolcusu {
     @FXML
     private TextField ePosta;
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+    }
+
     public void KarsilamaEkraninaDon() throws Exception {
         // karşılama ekranını geri yükler ve geçiş yapar
         arayuz = FXMLLoader.load(getClass().getResource("../ekranlar/karsilamaEkrani.fxml"));
@@ -34,6 +46,10 @@ public class SirketKontrolcusu {
     }
 
     public void SistemeKaydet() throws Exception {
-        kaydedilecekSirket = new Sirket(isYeriAdi.getText(), tamAdres.getText(), Long.valueOf(telefon.getText()), Long.valueOf(faks.getText()), ePosta.getText());
+
+
+
     }
+
+
 }
