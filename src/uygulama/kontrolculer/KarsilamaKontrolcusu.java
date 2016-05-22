@@ -27,7 +27,7 @@ public class KarsilamaKontrolcusu implements Initializable {
     @FXML
     public ListView<String> sirketListesi;
 
-    public ObservableList<String> sirketL = FXCollections.observableArrayList();
+    private ObservableList<String> sirketL = FXCollections.observableArrayList();
     private Parent arayuz;
 
     public KarsilamaKontrolcusu() {
@@ -44,7 +44,6 @@ public class KarsilamaKontrolcusu implements Initializable {
         // penceredeki kişi listesine alfabetik sırayla yazdır
         kisiListesi.setItems(ElemanKontrolcusu.Kisiler.soldanSagaDolas());
         sirketListesi.setItems(sirketL);
-
     }
 
     public void ElemanGirisi() throws Exception {
@@ -90,6 +89,20 @@ public class KarsilamaKontrolcusu implements Initializable {
         System.out.println("Şirket Kayıt Ekranına Geçildi.");
     }
 
+    public void elemaniSil() {
+        if (kisiListesi.getSelectionModel().getSelectedItem() != null) {
+            String[] silinecekKisininBilgileri = kisiListesi.getSelectionModel().getSelectedItem().split(" \\| ");
+            ElemanKontrolcusu.Kisiler.kisiSil(silinecekKisininBilgileri[0]);
+            kisiListesi.setItems(ElemanKontrolcusu.Kisiler.soldanSagaDolas());
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("HATA");
+            alert.setHeaderText("Silme Hatası!");
+            alert.setContentText("Öncelikle silinecek elemanı seçmelisiniz!");
+            alert.showAndWait();
+        }
+    }
+
     private void kisiAgaciniOlustur() throws IOException {
         if (ElemanKontrolcusu.Kisiler == null || ElemanKontrolcusu.Kisiler.dugumSayisi() == 0) {
             // açılışta dosyadan kişileri çekip sistemdeki ağaca kaydet
@@ -123,26 +136,11 @@ public class KarsilamaKontrolcusu implements Initializable {
         }
     }
 
-    public void elemaniSil() {
-        if (kisiListesi.getSelectionModel().getSelectedItem() != null) {
-            String[] silinecekKisininBilgileri = kisiListesi.getSelectionModel().getSelectedItem().split(" \\| ");
-            ElemanKontrolcusu.Kisiler.kisiSil(silinecekKisininBilgileri[0]);
-            kisiListesi.setItems(ElemanKontrolcusu.Kisiler.soldanSagaDolas());
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("HATA");
-            alert.setHeaderText("Silme Hatası!");
-            alert.setContentText("Öncelikle silinecek elemanı seçmelisiniz!");
-            alert.showAndWait();
-        }
-    }
-
     private void sirketHashTablosuOlustur() throws IOException {
-        if(SirketKontrolcusu.Sirketler == null){
+        if(SirketKontrolcusu.Sirketler == null) {
             String satir = null;
             Sirket eklenecekSirket = null;
             SirketKontrolcusu.Sirketler = null;
-
             InputStream sirketDosyasi = new FileInputStream("sirket.txt");
             InputStreamReader eOkuyucu = new InputStreamReader(sirketDosyasi, Charset.forName("UTF-8"));
             BufferedReader okuyucu = new BufferedReader(eOkuyucu);

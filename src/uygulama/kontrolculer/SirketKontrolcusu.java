@@ -47,9 +47,5 @@ public class SirketKontrolcusu implements Initializable {
 
     public void SistemeKaydet() throws Exception {
 
-
-
     }
-
-
 }

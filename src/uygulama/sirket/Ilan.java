@@ -8,7 +8,6 @@ public class Ilan {
     public Sirket Sirket;
     public int IlanNo;
 
-
     public Ilan(){
 
     }
