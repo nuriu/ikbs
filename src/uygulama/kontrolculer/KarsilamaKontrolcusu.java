@@ -14,6 +14,8 @@ import uygulama.eleman.Kisi;
 import uygulama.veriYapilari.ikiliAramaAgaci.IkiliAramaAgaci;
 import uygulama.veriYapilari.ikiliAramaAgaci.iAADugum;
 import uygulama.sirket.Sirket;
+
+import java.util.Enumeration;
 import java.util.Hashtable;
 
 import java.io.*;
@@ -43,6 +45,12 @@ public class KarsilamaKontrolcusu implements Initializable {
         }
         // penceredeki kişi listesine alfabetik sırayla yazdır
         kisiListesi.setItems(ElemanKontrolcusu.Kisiler.soldanSagaDolas());
+
+        Enumeration e = SirketKontrolcusu.Sirketler.elements();
+        while(e.hasMoreElements()){
+            Sirket s = (Sirket) e.nextElement();
+            sirketL.add(s.Ad);
+        }
         sirketListesi.setItems(sirketL);
     }
 
@@ -66,11 +74,22 @@ public class KarsilamaKontrolcusu implements Initializable {
     }
 
     public void SirketGirisi() throws Exception {
-        // şirket ekranını yükle ve geçiş yap
-        arayuz = FXMLLoader.load(getClass().getResource("../ekranlar/sirketEkrani.fxml"));
-        Main.pencere.setTitle("İnsan Kaynakları Bilgi Sistemi - Şirket Ekranı");
-        Main.pencere.setScene(new Scene(arayuz, 1280, 700));
-        System.out.println("Şirket Ekranına Geçildi.");
+        if(sirketListesi.getSelectionModel().getSelectedItem() != null){
+            String anahtar = sirketListesi.getSelectionModel().getSelectedItem();
+            SirketKontrolcusu.sistemdekiSirket = (Sirket) SirketKontrolcusu.Sirketler.get(anahtar);
+            // şirket ekranını yükle ve geçiş yap
+            arayuz = FXMLLoader.load(getClass().getResource("../ekranlar/sirketEkrani.fxml"));
+            Main.pencere.setTitle("İnsan Kaynakları Bilgi Sistemi - Şirket Ekranı");
+            Main.pencere.setScene(new Scene(arayuz, 1280, 700));
+            System.out.println("Şirket Ekranına Geçildi.");
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("HATA");
+            alert.setHeaderText("Giriş Hatası!");
+            alert.setContentText("Öncelikle giriş yapılacak şirketi seçmelisiniz!");
+            alert.showAndWait();
+        }
     }
 
     public void ElemanKaydi() throws Exception {
@@ -149,7 +168,6 @@ public class KarsilamaKontrolcusu implements Initializable {
             while ((satir = okuyucu.readLine()) != null) {
                 String[] eklenecekSirketinBilgileri = satir.split(", ");
                 eklenecekSirket = new Sirket(eklenecekSirketinBilgileri[0]);
-                sirketL.add(eklenecekSirket.Ad);
                 if (i == 0) {
                     SirketKontrolcusu.Sirketler = new Hashtable();
                     SirketKontrolcusu.Sirketler.put(eklenecekSirket.Ad,eklenecekSirket);

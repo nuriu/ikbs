@@ -30,15 +30,15 @@
             </GridPane.margin>
         </Button>
       <Label text="İş Yeri Adı: " GridPane.rowIndex="1" />
-      <TextField prefHeight="25.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <TextField fx:id="isYeriAdi" prefHeight="25.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <Label text="Tam Adresi: " GridPane.rowIndex="2" />
-      <TextArea prefHeight="59.0" prefWidth="196.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <TextField prefHeight="25.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <TextArea fx:id="tamAdres" prefHeight="59.0" prefWidth="196.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <TextField fx:id="telefon" prefHeight="25.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
       <Label text="Telefon: " GridPane.rowIndex="3" />
       <Label prefHeight="0.0" prefWidth="46.0" text="Fax: " GridPane.rowIndex="4" />
-      <TextField prefHeight="25.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <TextField fx:id="faks" prefHeight="25.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
       <Label prefHeight="0.0" prefWidth="46.0" text="E-Posta" GridPane.rowIndex="5" />
-      <TextField prefHeight="25.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+      <TextField fx:id="ePosta" prefHeight="25.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
       <Button mnemonicParsing="false" onAction="#SistemeKaydet" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="6" />
     </children>
 </GridPane>
