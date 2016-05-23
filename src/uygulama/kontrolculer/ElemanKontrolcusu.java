@@ -384,4 +384,20 @@ public class ElemanKontrolcusu implements Initializable {
             alert.showAndWait();
         }
     }
+
+    public void BasvuruYap(){
+        if (listIsIlanlari.getSelectionModel().getSelectedItem() != null) {
+            String[] ilanBilgileri = listIsIlanlari.getSelectionModel().getSelectedItem().toString().split(" \\| ");
+            Ilan ilan = (Ilan) SirketKontrolcusu.Ilanlar.get(ilanBilgileri[0]);
+            System.out.println(ilanBilgileri[0] + " - " + ilanBilgileri[1]);
+            System.out.println(ilan.IlanNo + " - " + ilan.Sirket.Ad);//Boş değer dönüyor
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("HATA");
+            alert.setHeaderText("Başvuru Hatası!");
+            alert.setContentText("Başvuru yapılacak ilanı seçin!");
+            alert.showAndWait();
+        }
+    }
 }
