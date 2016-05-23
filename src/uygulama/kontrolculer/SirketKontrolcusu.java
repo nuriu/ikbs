@@ -122,12 +122,14 @@ public class SirketKontrolcusu implements Initializable {
         IlanListele();
     }
 
-    private void IlanListele(){
+    public void IlanListele(){
         ObservableList<String> ilan = FXCollections.observableArrayList();
         Enumeration e = Ilanlar.elements();
         while(e.hasMoreElements()){
             Ilan i = (Ilan) e.nextElement();
-            ilan.add(i.IlanNo + " | " + i.Sirket.Ad + " | " + i.IsTanimi + " | " + i.ArananOzellikler);
+            if (i.Sirket.Ad == sistemdekiSirket.Ad){
+                ilan.add(i.IlanNo + " | " + i.Sirket.Ad + " | " + i.IsTanimi + " | " + i.ArananOzellikler);
+            }
         }
         listIlanlar.setItems(ilan);
     }
