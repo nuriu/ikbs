@@ -11,16 +11,15 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import uygulama.Main;
 import uygulama.eleman.Kisi;
+import uygulama.sirket.Sirket;
 import uygulama.veriYapilari.ikiliAramaAgaci.IkiliAramaAgaci;
 import uygulama.veriYapilari.ikiliAramaAgaci.iAADugum;
-import uygulama.sirket.Sirket;
-
-import java.util.Enumeration;
-import java.util.Hashtable;
 
 import java.io.*;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.Enumeration;
+import java.util.Hashtable;
 import java.util.ResourceBundle;
 
 public class KarsilamaKontrolcusu implements Initializable {
@@ -167,7 +166,9 @@ public class KarsilamaKontrolcusu implements Initializable {
             int i = 0;
             while ((satir = okuyucu.readLine()) != null) {
                 String[] eklenecekSirketinBilgileri = satir.split(", ");
-                eklenecekSirket = new Sirket(eklenecekSirketinBilgileri[0]);
+                eklenecekSirket = new Sirket(eklenecekSirketinBilgileri[0],
+                        eklenecekSirketinBilgileri[1], eklenecekSirketinBilgileri[2],
+                        eklenecekSirketinBilgileri[3], eklenecekSirketinBilgileri[4]);
                 if (i == 0) {
                     SirketKontrolcusu.Sirketler = new Hashtable();
                     SirketKontrolcusu.Sirketler.put(eklenecekSirket.Ad,eklenecekSirket);

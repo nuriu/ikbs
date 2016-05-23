@@ -1,4 +1,4 @@
-Toshiba
-Asus
-Lenovo
-MSI
+Toshiba, toshibaAdres, toshibaTelefon, toshibaFaks, toshibaEposta
+Asus, AsusAdres, AsusTelefon, AsusFaks, AsusEposta
+Lenovo, LenovoAdres, LenovoTelefon, LenovoFaks, LenovoEposta
+MSI, MSIAdres, MSITelefon, MSIFaks, MSIEposta

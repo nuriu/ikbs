@@ -1,22 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.Pane?>
-
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<GridPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+          minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8"
+          fx:controller="uygulama.kontrolculer.SirketKontrolcusu">
   <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="330.0" minWidth="10.0" prefWidth="330.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="193.0" minWidth="10.0" prefWidth="70.0" />
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
   <rowConstraints>
-    <RowConstraints maxHeight="194.0" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="372.0" minHeight="10.0" prefHeight="357.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="395.0" minHeight="10.0" prefHeight="368.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Button mnemonicParsing="false" text="Geri Dön" GridPane.columnIndex="2" />
+      <Label text="İş Yeri Adı: " GridPane.halignment="LEFT" GridPane.valignment="TOP">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <GridPane.margin>
+            <Insets left="10.0" top="50.0" />
+         </GridPane.margin>
+      </Label>
+      <Label text="Tam Adresi: " GridPane.halignment="LEFT" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets left="10.0" top="95.0" />
+         </GridPane.margin>
+      </Label>
+      <Label text="Telefon: " GridPane.halignment="LEFT" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets left="10.0" top="138.0" />
+         </GridPane.margin>
+      </Label>
+      <Label text="Faks: " GridPane.halignment="LEFT" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets left="10.0" top="170.0" />
+         </GridPane.margin>
+      </Label>
+      <Label text="E-Posta: " GridPane.halignment="LEFT" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets left="10.0" top="203.0" />
+         </GridPane.margin>
+      </Label>
+      <TextField fx:id="isYeriAdi" prefHeight="25.0" prefWidth="270.0" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets left="100.0" right="10.0" top="47.0" />
+         </GridPane.margin>
+      </TextField>
+      <TextArea fx:id="tamAdres" prefHeight="200.0" prefWidth="200.0" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets bottom="270.0" left="100.0" right="10.0" top="80.0" />
+         </GridPane.margin>
+      </TextArea>
+      <TextField fx:id="telefon" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets left="100.0" right="10.0" top="135.0" />
+         </GridPane.margin>
+      </TextField>
+      <TextField fx:id="faks" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets left="100.0" right="10.0" top="167.0" />
+         </GridPane.margin>
+      </TextField>
+      <TextField fx:id="ePosta" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets left="100.0" right="10.0" top="200.0" />
+         </GridPane.margin>
+      </TextField>
+      <Button mnemonicParsing="false" text="Güncelle" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets right="10.0" top="230.0" />
+         </GridPane.margin>
+      </Button>
+      <Button mnemonicParsing="false" onAction="#KarsilamaEkraninaDon" text="Geri Dön" GridPane.columnIndex="2"
+              GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets right="10.0" top="10.0" />
+         </GridPane.margin>
+      </Button>
+      <Label fx:id="lblSistemdekiSirket" text="Sistemdeki Şirket: " GridPane.columnSpan="2" GridPane.halignment="LEFT"
+             GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets left="10.0" top="10.0" />
+         </GridPane.margin>
+      </Label>
    </children>
 </GridPane>

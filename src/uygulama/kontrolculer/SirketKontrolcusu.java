@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import uygulama.Main;
@@ -24,6 +25,16 @@ public class SirketKontrolcusu implements Initializable {
     private Parent arayuz;
     private Sirket kaydedilecekSirket;
 
+    /*@FXML
+    private TextField isYeriAdi;
+    @FXML
+    private TextArea tamAdres;
+    @FXML
+    private TextField telefon;
+    @FXML
+    private TextField faks;
+    @FXML
+    private TextField ePosta;*/
     @FXML
     private TextField isYeriAdi;
     @FXML
@@ -34,16 +45,23 @@ public class SirketKontrolcusu implements Initializable {
     private TextField faks;
     @FXML
     private TextField ePosta;
+    @FXML
+    private Label lblSistemdekiSirket;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if (sistemdekiSirket != null) {
-            // sistemde kişi varsa alanları kişinin bilgileri ile doldur
             isYeriAdi.setText(sistemdekiSirket.Ad);
             tamAdres.setText(sistemdekiSirket.Adres);
             telefon.setText(sistemdekiSirket.Telefon);
             faks.setText(sistemdekiSirket.Faks);
             ePosta.setText(sistemdekiSirket.Eposta);
+            lblSistemdekiSirket.setText("Sistemdeki Şirket: " +
+                    sistemdekiSirket.Ad + " | " +
+                    sistemdekiSirket.Adres + " | " +
+                    sistemdekiSirket.Telefon + " | " +
+                    sistemdekiSirket.Faks + " | " +
+                    sistemdekiSirket.Eposta);
         }
     }
 
@@ -53,6 +71,9 @@ public class SirketKontrolcusu implements Initializable {
         Main.pencere.setTitle("İnsan Kaynakları Bilgi Sistemi");
         Main.pencere.setScene(new Scene(arayuz, 1280, 700));
         System.out.println("Karşılama Ekranına Geri Dönüldü.");
+        if (sistemdekiSirket != null) {
+            sistemdekiSirket = null;
+        }
     }
 
     public void SistemeKaydet() throws Exception {
