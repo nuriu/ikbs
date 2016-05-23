@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<GridPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-          minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8"
-          fx:controller="uygulama.kontrolculer.SirketKontrolcusu">
+
+<GridPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uygulama.kontrolculer.SirketKontrolcusu">
   <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="330.0" minWidth="10.0" prefWidth="330.0" />
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="193.0" minWidth="10.0" prefWidth="70.0" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="502.0" minWidth="10.0" prefWidth="413.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="533.0" minWidth="10.0" prefWidth="481.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="391.0" minWidth="0.0" prefWidth="367.0" />
   </columnConstraints>
   <rowConstraints>
+      <RowConstraints maxHeight="395.0" minHeight="10.0" prefHeight="368.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="395.0" minHeight="10.0" prefHeight="368.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
@@ -68,22 +69,51 @@
             <Insets left="100.0" right="10.0" top="200.0" />
          </GridPane.margin>
       </TextField>
-      <Button mnemonicParsing="false" text="Güncelle" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+      <Button mnemonicParsing="false" onAction="#SistemeKaydet" text="Güncelle" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
          <GridPane.margin>
             <Insets right="10.0" top="230.0" />
          </GridPane.margin>
       </Button>
-      <Button mnemonicParsing="false" onAction="#KarsilamaEkraninaDon" text="Geri Dön" GridPane.columnIndex="2"
-              GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+      <Button mnemonicParsing="false" onAction="#KarsilamaEkraninaDon" text="Geri Dön" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
          <GridPane.margin>
             <Insets right="10.0" top="10.0" />
          </GridPane.margin>
       </Button>
-      <Label fx:id="lblSistemdekiSirket" text="Sistemdeki Şirket: " GridPane.columnSpan="2" GridPane.halignment="LEFT"
-             GridPane.valignment="TOP">
+      <Label fx:id="lblSistemdekiSirket" text="Sistemdeki Şirket: " GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.valignment="TOP">
          <GridPane.margin>
             <Insets left="10.0" top="10.0" />
          </GridPane.margin>
       </Label>
+      <Label text="İlan Ekle" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets top="50.0" />
+         </GridPane.margin>
+      </Label>
+      <Label text="İş Tanımı: " GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets left="10.0" top="95.0" />
+         </GridPane.margin>
+      </Label>
+      <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets bottom="270.0" left="110.0" right="10.0" top="77.0" />
+         </GridPane.margin>
+      </TextArea>
+      <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets bottom="200.0" left="110.0" right="10.0" top="137.0" />
+         </GridPane.margin>
+      </TextArea>
+      <Label text="Aranan Özellikler: " GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets left="10.0" top="155.0" />
+         </GridPane.margin>
+      </Label>
+      <Button mnemonicParsing="false" onAction="#IlanEkle" text="İlan Ekle" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets right="10.0" top="200.0" />
+         </GridPane.margin>
+      </Button>
+      <Label text="Label" GridPane.columnIndex="2" />
    </children>
 </GridPane>

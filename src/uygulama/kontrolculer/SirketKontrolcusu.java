@@ -25,16 +25,6 @@ public class SirketKontrolcusu implements Initializable {
     private Parent arayuz;
     private Sirket kaydedilecekSirket;
 
-    /*@FXML
-    private TextField isYeriAdi;
-    @FXML
-    private TextArea tamAdres;
-    @FXML
-    private TextField telefon;
-    @FXML
-    private TextField faks;
-    @FXML
-    private TextField ePosta;*/
     @FXML
     private TextField isYeriAdi;
     @FXML
@@ -83,7 +73,7 @@ public class SirketKontrolcusu implements Initializable {
                 sistemdekiSirket = null;
                 sistemdekiSirket = new Sirket(isYeriAdi.getText(),tamAdres.getText(), telefon.getText(),
                         faks.getText(), ePosta.getText());
-                Sirketler.remove(sistemdekiSirket.Ad);
+                //Sirketler.remove(sistemdekiSirket.Ad);
                 Sirketler.put(sistemdekiSirket.Ad, sistemdekiSirket);
             }
             else{
@@ -110,5 +100,9 @@ public class SirketKontrolcusu implements Initializable {
             }
             alert.showAndWait();
         }
+    }
+
+    public void IlanEkle(){
+
     }
 }
