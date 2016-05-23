@@ -1,13 +1,17 @@
 package uygulama.veriYapilari.obek;
 
+import uygulama.eleman.Kisi;
+
+import java.util.Random;
+
 public class oDugum {
-    public int veri;
+    public Kisi Kisi;
+    public double Uygunluk;
 
-    public oDugum(int veri) {
-        this.veri = veri;
-    }
-
-    public void heapDugumu() {
-
+    private Random r;
+    public oDugum(Kisi kisi) {
+        r = new Random();
+        this.Kisi = kisi;
+        Uygunluk = r.nextDouble();
     }
 }

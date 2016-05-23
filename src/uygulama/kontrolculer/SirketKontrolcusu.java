@@ -1,25 +1,26 @@
 package uygulama.kontrolculer;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import uygulama.Main;
+import uygulama.sirket.Ilan;
 import uygulama.sirket.Sirket;
 
 import java.net.URL;
+import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.ResourceBundle;
 
 
 public class SirketKontrolcusu implements Initializable {
     public static Hashtable Sirketler;
-
+    public static Hashtable Ilanlar;
     public static Sirket sistemdekiSirket;
 
     private Parent arayuz;
@@ -37,6 +38,13 @@ public class SirketKontrolcusu implements Initializable {
     private TextField ePosta;
     @FXML
     private Label lblSistemdekiSirket;
+
+    @FXML
+    private TextArea txtIsTanimi;
+    @FXML
+    private TextArea txtAtananOzellikler;
+    @FXML
+    private ListView listIlanlar;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -103,6 +111,24 @@ public class SirketKontrolcusu implements Initializable {
     }
 
     public void IlanEkle(){
+        Ilan ilan = new Ilan(txtIsTanimi.getText(), txtAtananOzellikler.getText(),sistemdekiSirket);
+        if (Ilanlar == null){
+            Ilanlar = new Hashtable();
+            Ilanlar.put(ilan.IlanNo, ilan);
+        }
+        else {
+            Ilanlar.put(ilan.IlanNo, ilan);
+        }
+        IlanListele();
+    }
 
+    private void IlanListele(){
+        ObservableList<String> ilan = FXCollections.observableArrayList();
+        Enumeration e = Ilanlar.elements();
+        while(e.hasMoreElements()){
+            Ilan i = (Ilan) e.nextElement();
+            ilan.add(i.IlanNo + " | " + i.Sirket.Ad + " | " + i.IsTanimi + " | " + i.ArananOzellikler);
+        }
+        listIlanlar.setItems(ilan);
     }
 }

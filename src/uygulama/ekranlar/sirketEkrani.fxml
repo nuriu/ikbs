@@ -5,10 +5,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uygulama.kontrolculer.SirketKontrolcusu">
+<GridPane prefHeight="736.0" prefWidth="907.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uygulama.kontrolculer.SirketKontrolcusu">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="502.0" minWidth="10.0" prefWidth="413.0" />
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="533.0" minWidth="10.0" prefWidth="481.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="391.0" minWidth="0.0" prefWidth="367.0" />
   </columnConstraints>
   <rowConstraints>
@@ -21,60 +20,60 @@
             <Insets />
          </opaqueInsets>
          <GridPane.margin>
-            <Insets left="10.0" top="50.0" />
+            <Insets left="10.0" top="80.0" />
          </GridPane.margin>
       </Label>
       <Label text="Tam Adresi: " GridPane.halignment="LEFT" GridPane.valignment="TOP">
          <GridPane.margin>
-            <Insets left="10.0" top="95.0" />
+            <Insets left="10.0" top="125.0" />
          </GridPane.margin>
       </Label>
       <Label text="Telefon: " GridPane.halignment="LEFT" GridPane.valignment="TOP">
          <GridPane.margin>
-            <Insets left="10.0" top="138.0" />
+            <Insets left="10.0" top="168.0" />
          </GridPane.margin>
       </Label>
       <Label text="Faks: " GridPane.halignment="LEFT" GridPane.valignment="TOP">
          <GridPane.margin>
-            <Insets left="10.0" top="170.0" />
+            <Insets left="10.0" top="200.0" />
          </GridPane.margin>
       </Label>
       <Label text="E-Posta: " GridPane.halignment="LEFT" GridPane.valignment="TOP">
          <GridPane.margin>
-            <Insets left="10.0" top="203.0" />
+            <Insets left="10.0" top="233.0" />
          </GridPane.margin>
       </Label>
       <TextField fx:id="isYeriAdi" prefHeight="25.0" prefWidth="270.0" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
          <GridPane.margin>
-            <Insets left="100.0" right="10.0" top="47.0" />
+            <Insets left="100.0" right="10.0" top="80.0" />
          </GridPane.margin>
       </TextField>
       <TextArea fx:id="tamAdres" prefHeight="200.0" prefWidth="200.0" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
          <GridPane.margin>
-            <Insets bottom="270.0" left="100.0" right="10.0" top="80.0" />
+            <Insets bottom="210.0" left="100.0" right="10.0" top="110.0" />
          </GridPane.margin>
       </TextArea>
       <TextField fx:id="telefon" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
          <GridPane.margin>
-            <Insets left="100.0" right="10.0" top="135.0" />
+            <Insets left="100.0" right="10.0" top="165.0" />
          </GridPane.margin>
       </TextField>
       <TextField fx:id="faks" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
          <GridPane.margin>
-            <Insets left="100.0" right="10.0" top="167.0" />
+            <Insets left="100.0" right="10.0" top="197.0" />
          </GridPane.margin>
       </TextField>
       <TextField fx:id="ePosta" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
          <GridPane.margin>
-            <Insets left="100.0" right="10.0" top="200.0" />
+            <Insets left="100.0" right="10.0" top="230.0" />
          </GridPane.margin>
       </TextField>
       <Button mnemonicParsing="false" onAction="#SistemeKaydet" text="Güncelle" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
          <GridPane.margin>
-            <Insets right="10.0" top="230.0" />
+            <Insets right="10.0" top="260.0" />
          </GridPane.margin>
       </Button>
-      <Button mnemonicParsing="false" onAction="#KarsilamaEkraninaDon" text="Geri Dön" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+      <Button mnemonicParsing="false" onAction="#KarsilamaEkraninaDon" text="Geri Dön" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
          <GridPane.margin>
             <Insets right="10.0" top="10.0" />
          </GridPane.margin>
@@ -84,36 +83,74 @@
             <Insets left="10.0" top="10.0" />
          </GridPane.margin>
       </Label>
-      <Label text="İlan Ekle" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+      <TextArea fx:id="txtAtananOzellikler" prefHeight="200.0" prefWidth="200.0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP">
          <GridPane.margin>
-            <Insets top="50.0" />
-         </GridPane.margin>
-      </Label>
-      <Label text="İş Tanımı: " GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="TOP">
-         <GridPane.margin>
-            <Insets left="10.0" top="95.0" />
-         </GridPane.margin>
-      </Label>
-      <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
-         <GridPane.margin>
-            <Insets bottom="270.0" left="110.0" right="10.0" top="77.0" />
+            <Insets bottom="150.0" left="110.0" right="10.0" top="137.0" />
          </GridPane.margin>
       </TextArea>
-      <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+      <Label text="Aranan Özellikler: " GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP">
          <GridPane.margin>
-            <Insets bottom="200.0" left="110.0" right="10.0" top="137.0" />
-         </GridPane.margin>
-      </TextArea>
-      <Label text="Aranan Özellikler: " GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="TOP">
-         <GridPane.margin>
-            <Insets left="10.0" top="155.0" />
+            <Insets left="10.0" top="165.0" />
          </GridPane.margin>
       </Label>
-      <Button mnemonicParsing="false" onAction="#IlanEkle" text="İlan Ekle" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+      <Button id="btnIlanEkle" mnemonicParsing="false" onAction="#IlanEkle" text="İlan Ekle" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP">
          <GridPane.margin>
-            <Insets right="10.0" top="200.0" />
+            <Insets right="10.0" top="225.0" />
          </GridPane.margin>
       </Button>
-      <Label text="Label" GridPane.columnIndex="2" />
+      <Label text="Şirkete Ait İlanlar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets top="50.0" />
+         </GridPane.margin></Label>
+      <ListView fx:id="listIlanlar" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets bottom="50.0" left="20.0" right="20.0" top="80.0" />
+         </GridPane.margin>
+      </ListView>
+      <Button id="btnBasvuruListele" mnemonicParsing="false" text="Başvuruları Listele" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets left="20.0" top="325.0" />
+         </GridPane.margin>
+      </Button>
+      <Button id="btnIlanKaldir" mnemonicParsing="false" text="İlanı Kaldır" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets right="20.0" top="325.0" />
+         </GridPane.margin>
+      </Button>
+      <Label prefHeight="0.0" prefWidth="44.0" text="İlan Ekle" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets top="20.0" />
+         </GridPane.margin>
+      </Label>
+      <Label text="İş Tanımı: " GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets left="10.0" top="70.0" />
+         </GridPane.margin>
+      </Label>
+      <TextArea fx:id="txtIsTanimi" prefHeight="200.0" prefWidth="200.0" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets bottom="250.0" left="110.0" right="10.0" top="50.0" />
+         </GridPane.margin>
+      </TextArea>
+      <Label text="İlana Başvuranlar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets top="20.0" />
+         </GridPane.margin>
+      </Label>
+      <ListView id="listBasvurular" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets bottom="50.0" left="20.0" right="20.0" top="50.0" />
+         </GridPane.margin>
+      </ListView>
+      <Button mnemonicParsing="false" text="İşe Al" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets left="20.0" top="325.0" />
+         </GridPane.margin>
+      </Button>
+      <Button mnemonicParsing="false" text="Reddet" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets right="20.0" top="325.0" />
+         </GridPane.margin>
+      </Button>
    </children>
 </GridPane>
