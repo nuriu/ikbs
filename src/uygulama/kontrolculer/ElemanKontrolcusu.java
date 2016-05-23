@@ -74,14 +74,12 @@ public class ElemanKontrolcusu implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // sistemde kişi yoksa yani kişi kaydı yapılıyorsa
         if (SistemdekiKisi == null) {
             ObservableList<String> md = FXCollections.observableArrayList("Evli", "Bekar");
             medeniDurum.setItems(md);
             deneyimListesi.setItems(lDeneyimler);
             egitimListesi.setItems(lEgitim);
         } else {
-            // sistemde kişi varsa alanları kişinin bilgileri ile doldur
             DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate tarih = LocalDate.parse(SistemdekiKisi.kisi.DogumTarihi, format);
             lblSistemdekiKisi.setText("Sistemdeki Kişi : " + SistemdekiKisi.kisi.bilgileriGetir());
@@ -98,7 +96,6 @@ public class ElemanKontrolcusu implements Initializable {
             ilgiAlanlari.setText(SistemdekiKisi.kisi.IlgiAlanlari);
             referanslar.setText(SistemdekiKisi.kisi.Referanslar);
 
-            // deneyimleri listele
             if (SistemdekiKisi.Deneyimler != null) {
                 for (int i = SistemdekiKisi.Deneyimler.Boyut; i > 0; i--) {
                     if (lDeneyimler != null)
@@ -110,7 +107,6 @@ public class ElemanKontrolcusu implements Initializable {
                 deneyimListesi.setItems(lDeneyimler);
             }
 
-            // eğitim bilgilerini listele
             if (SistemdekiKisi.EgitimDurumu != null) {
                 for (int i = SistemdekiKisi.EgitimDurumu.Boyut; i > 0; i--) {
                     if (lEgitim != null)
@@ -125,12 +121,11 @@ public class ElemanKontrolcusu implements Initializable {
     }
 
     public void KarsilamaEkraninaDon() throws Exception {
-        // karşılama ekranını geri yükle ve geçiş yap
         arayuz = FXMLLoader.load(getClass().getResource("../ekranlar/karsilamaEkrani.fxml"));
         Main.pencere.setTitle("İnsan Kaynakları Bilgi Sistemi");
         Main.pencere.setScene(new Scene(arayuz, 1280, 700));
         System.out.println("Karşılama Ekranına Geri Dönüldü.");
-        // sistemde biri varsa sistemden çıkart
+
         if (SistemdekiKisi != null) {
             SistemdekiKisi = null;
             lDeneyimler = null;
@@ -158,17 +153,14 @@ public class ElemanKontrolcusu implements Initializable {
     }
 
     public void EgitimBilgisiEkle() {
-        // pencereyi oluştur
         Dialog<Egitim> dialog = new Dialog<>();
         dialog.setTitle("Eğitim Bilgisi Ekle");
         dialog.setHeaderText("Eğitim bilgilerinizi giriniz.");
 
-        // buttonları oluştur
         ButtonType ekle = new ButtonType("Ekle", ButtonBar.ButtonData.OK_DONE);
         ButtonType iptal = new ButtonType("İptal", ButtonBar.ButtonData.CANCEL_CLOSE);
         dialog.getDialogPane().getButtonTypes().addAll(ekle, iptal);
 
-        // alanları oluştur
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
@@ -194,7 +186,6 @@ public class ElemanKontrolcusu implements Initializable {
         grid.add(new Label("Not Ortalaması:"), 0, 4);
         grid.add(egitimNotOrtalamasi, 1, 4);
 
-        // bilgi girmeden eklemeyi önle
         Node ekleOnayi = dialog.getDialogPane().lookupButton(ekle);
         ekleOnayi.setDisable(true);
 
@@ -204,10 +195,8 @@ public class ElemanKontrolcusu implements Initializable {
 
         dialog.getDialogPane().setContent(grid);
 
-        // varsayılan odağı deneyimAdi alanına ayarla
         Platform.runLater(() -> egitimAdi.requestFocus());
 
-        // ekle butonu tıklandığında girilen verileri çek
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == ekle) {
                 return new Egitim(egitimAdi.getText(), egitimBolumu.getText(),
@@ -218,7 +207,7 @@ public class ElemanKontrolcusu implements Initializable {
         });
 
         Optional<Egitim> sonuc = dialog.showAndWait();
-        // sonuç geçerli veri içeriyorsa
+
         sonuc.ifPresent(e -> {
             if (SistemdekiKisi != null) {
                 if (SistemdekiKisi.EgitimDurumu == null)
@@ -233,7 +222,6 @@ public class ElemanKontrolcusu implements Initializable {
             else
                 lEgitim = FXCollections.observableArrayList(e.Bitis + " : " + e.Ad + " - " + e.Bolum + " : " + e.NotOrtalamasi);
 
-            // eğitim listesini güncelle
             egitimListesi.setItems(lEgitim);
         });
     }
@@ -259,17 +247,14 @@ public class ElemanKontrolcusu implements Initializable {
     }
 
     public void DeneyimEkle() {
-        // pencereyi oluştur
         Dialog<Deneyim> dialog = new Dialog<>();
         dialog.setTitle("Deneyim Ekle");
         dialog.setHeaderText("Deneyim bilgilerinizi giriniz.");
 
-        // buttonları oluştur
         ButtonType ekle = new ButtonType("Ekle", ButtonBar.ButtonData.OK_DONE);
         ButtonType iptal = new ButtonType("İptal", ButtonBar.ButtonData.CANCEL_CLOSE);
         dialog.getDialogPane().getButtonTypes().addAll(ekle, iptal);
 
-        // alanları oluştur
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
@@ -290,7 +275,6 @@ public class ElemanKontrolcusu implements Initializable {
         grid.add(new Label("Pozisyon:"), 0, 2);
         grid.add(deneyimPozisyon, 1, 2);
 
-        // bilgi girmeden eklemeyi önle
         Node ekleOnayi = dialog.getDialogPane().lookupButton(ekle);
         ekleOnayi.setDisable(true);
 
@@ -300,10 +284,8 @@ public class ElemanKontrolcusu implements Initializable {
 
         dialog.getDialogPane().setContent(grid);
 
-        // varsayılan odağı deneyimAdi alanına ayarla
         Platform.runLater(() -> deneyimAdi.requestFocus());
 
-        // ekle butonu tıklandığında girilen verileri çek
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == ekle) {
                 return new Deneyim(deneyimAdi.getText(), deneyimAdresi.getText(), deneyimPozisyon.getText());
@@ -313,7 +295,6 @@ public class ElemanKontrolcusu implements Initializable {
 
         Optional<Deneyim> sonuc = dialog.showAndWait();
 
-        // sonuç geçerli veri içeriyorsa
         sonuc.ifPresent(d -> {
             if (SistemdekiKisi != null) {
                 if (SistemdekiKisi.Deneyimler == null)
@@ -328,13 +309,12 @@ public class ElemanKontrolcusu implements Initializable {
                 lDeneyimler.add(d.Ad + " - " + d.Pozisyon);
             else
                 lDeneyimler = FXCollections.observableArrayList(d.Ad + " - " + d.Pozisyon);
-            // deneyim listesini güncelle
+
             deneyimListesi.setItems(lDeneyimler);
         });
     }
 
     public void SistemeKaydet() throws Exception {
-        // tüm kişisel bilgiler girildiyse kaydı yap
         if (ad.getText().isEmpty() != true &&
                 adres.getText().isEmpty() != true &&
                 telefon.getText().isEmpty() != true &&
@@ -347,7 +327,6 @@ public class ElemanKontrolcusu implements Initializable {
                 ilgiAlanlari.getText().isEmpty() != true &&
                 referanslar.getText().isEmpty() != true) {
 
-            // sistemde birisi varsa bilgilerini güncelle
             if (SistemdekiKisi != null) {
                 SistemdekiKisi.kisi = null;
                 SistemdekiKisi.kisi = new Kisi(ad.getText(), adres.getText(),
@@ -358,15 +337,13 @@ public class ElemanKontrolcusu implements Initializable {
 
                 iAADugum d = new iAADugum(SistemdekiKisi.kisi, SistemdekiKisi.Deneyimler, SistemdekiKisi.EgitimDurumu);
                 Kisiler.kisiGuncelle(SistemdekiKisi.kisi.Ad, d);
-            } else {    // kişiyi sisteme kaydet
-                // kaydedilecek kişinin bilgilerini al
+            } else {
                 kaydedilecekKisi = new Kisi(ad.getText(), adres.getText(),
                         telefon.getText(), eposta.getText(), uyruk.getText(),
                         dogumYeri.getText(), dogumTarihi.getValue().toString(),
                         medeniDurum.getValue(), yabanciDil.getText(),
                         ilgiAlanlari.getText(), referanslar.getText());
 
-                // ağaç boş ise oluştur
                 if (Kisiler == null || Kisiler.dugumSayisi() == 0) {
                     iAADugum d = new iAADugum(kaydedilecekKisi);
                     Kisiler = new IkiliAramaAgaci(d, kkDeneyimler, kkEgitim);

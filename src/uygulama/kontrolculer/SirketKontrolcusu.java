@@ -38,7 +38,6 @@ public class SirketKontrolcusu implements Initializable {
     private TextField ePosta;
     @FXML
     private Label lblSistemdekiSirket;
-
     @FXML
     private TextArea txtIsTanimi;
     @FXML
@@ -60,11 +59,11 @@ public class SirketKontrolcusu implements Initializable {
                     sistemdekiSirket.Telefon + " | " +
                     sistemdekiSirket.Faks + " | " +
                     sistemdekiSirket.Eposta);
+            IlanListele();
         }
     }
 
     public void KarsilamaEkraninaDon() throws Exception {
-        // karşılama ekranını geri yükler ve geçiş yapar
         arayuz = FXMLLoader.load(getClass().getResource("../ekranlar/karsilamaEkrani.fxml"));
         Main.pencere.setTitle("İnsan Kaynakları Bilgi Sistemi");
         Main.pencere.setScene(new Scene(arayuz, 1280, 700));
@@ -124,13 +123,15 @@ public class SirketKontrolcusu implements Initializable {
 
     public void IlanListele(){
         ObservableList<String> ilan = FXCollections.observableArrayList();
-        Enumeration e = Ilanlar.elements();
-        while(e.hasMoreElements()){
-            Ilan i = (Ilan) e.nextElement();
-            if (i.Sirket.Ad == sistemdekiSirket.Ad){
-                ilan.add(i.IlanNo + " | " + i.Sirket.Ad + " | " + i.IsTanimi + " | " + i.ArananOzellikler);
+        if (Ilanlar != null) {
+            Enumeration e = Ilanlar.elements();
+            while (e.hasMoreElements()) {
+                Ilan i = (Ilan) e.nextElement();
+                if (i.Sirket.Ad == sistemdekiSirket.Ad) {
+                    ilan.add(i.IlanNo + " | " + i.Sirket.Ad + " | " + i.IsTanimi + " | " + i.ArananOzellikler);
+                }
             }
+            listIlanlar.setItems(ilan);
         }
-        listIlanlar.setItems(ilan);
     }
 }

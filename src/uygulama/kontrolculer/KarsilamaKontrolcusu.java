@@ -31,10 +31,7 @@ public class KarsilamaKontrolcusu implements Initializable {
     private ObservableList<String> sirketL = FXCollections.observableArrayList();
     private Parent arayuz;
 
-    public KarsilamaKontrolcusu() {
-    }
-
-    @Override   // başlangıçta çağrılan fonksiyon
+    @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
             kisiAgaciniOlustur();
@@ -42,7 +39,7 @@ public class KarsilamaKontrolcusu implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        // penceredeki kişi listesine alfabetik sırayla yazdır
+
         kisiListesi.setItems(ElemanKontrolcusu.Kisiler.soldanSagaDolas());
 
         Enumeration e = SirketKontrolcusu.Sirketler.elements();
@@ -58,7 +55,6 @@ public class KarsilamaKontrolcusu implements Initializable {
             String[] sistemdekiKisininBilgileri = kisiListesi.getSelectionModel().getSelectedItem().split(" \\| ");
             ElemanKontrolcusu.SistemdekiKisi = ElemanKontrolcusu.Kisiler.kisiAra(sistemdekiKisininBilgileri[0]);
 
-            // eleman ekranını yükle ve geçiş yap
             arayuz = FXMLLoader.load(getClass().getResource("../ekranlar/elemanEkrani.fxml"));
             Main.pencere.setTitle("İnsan Kaynakları Bilgi Sistemi - Eleman Ekranı");
             Main.pencere.setScene(new Scene(arayuz, 1280, 700));
@@ -76,7 +72,6 @@ public class KarsilamaKontrolcusu implements Initializable {
         if(sirketListesi.getSelectionModel().getSelectedItem() != null){
             String anahtar = sirketListesi.getSelectionModel().getSelectedItem();
             SirketKontrolcusu.sistemdekiSirket = (Sirket) SirketKontrolcusu.Sirketler.get(anahtar);
-            // şirket ekranını yükle ve geçiş yap
             arayuz = FXMLLoader.load(getClass().getResource("../ekranlar/sirketEkrani.fxml"));
             Main.pencere.setTitle("İnsan Kaynakları Bilgi Sistemi - Şirket Ekranı");
             Main.pencere.setScene(new Scene(arayuz, 1280, 700));
@@ -92,7 +87,6 @@ public class KarsilamaKontrolcusu implements Initializable {
     }
 
     public void ElemanKaydi() throws Exception {
-        // eleman kayıt ekranını yükle ve geçiş yap
         arayuz = FXMLLoader.load(getClass().getResource("../ekranlar/elemanKayitEkrani.fxml"));
         Main.pencere.setTitle("İnsan Kaynakları Bilgi Sistemi - Eleman Kayıt Ekranı");
         Main.pencere.setScene(new Scene(arayuz, 1280, 700));
@@ -100,7 +94,6 @@ public class KarsilamaKontrolcusu implements Initializable {
     }
 
     public void SirketKaydi() throws Exception {
-        // şirket kayıt ekranını yükle ve geçiş yap
         arayuz = FXMLLoader.load(getClass().getResource("../ekranlar/sirketKayitEkrani.fxml"));
         Main.pencere.setTitle("İnsan Kaynakları Bilgi Sistemi - Şirket Kayıt Ekranı");
         Main.pencere.setScene(new Scene(arayuz, 1280, 700));
@@ -123,12 +116,11 @@ public class KarsilamaKontrolcusu implements Initializable {
 
     private void kisiAgaciniOlustur() throws IOException {
         if (ElemanKontrolcusu.Kisiler == null || ElemanKontrolcusu.Kisiler.dugumSayisi() == 0) {
-            // açılışta dosyadan kişileri çekip sistemdeki ağaca kaydet
-            String satir = null;                // dosyadaki satır
-            Kisi eklenecekKisi = null;          // sisteme eklenecek kişi
-            iAADugum d = new iAADugum();        // ağaç için kök düğüm
-            ElemanKontrolcusu.Kisiler = null;   // sistemdeki ağacımız
-            // dosyayı yükle
+            String satir = null;
+            Kisi eklenecekKisi = null;
+            iAADugum d = new iAADugum();
+            ElemanKontrolcusu.Kisiler = null;
+
             InputStream elemanDosyasi = new FileInputStream("eleman.txt");
             InputStreamReader eOkuyucu = new InputStreamReader(elemanDosyasi, Charset.forName("UTF-8"));
             BufferedReader okuyucu = new BufferedReader(eOkuyucu);
@@ -143,10 +135,10 @@ public class KarsilamaKontrolcusu implements Initializable {
                         eklenecekKisininBilgileri[5], eklenecekKisininBilgileri[6],
                         eklenecekKisininBilgileri[7], eklenecekKisininBilgileri[8],
                         eklenecekKisininBilgileri[9], eklenecekKisininBilgileri[10]);
-                if (i == 0) {                   // ilk satırsa ağacı ve kökü oluştur
+                if (i == 0) {
                     d.kisi = eklenecekKisi;
                     ElemanKontrolcusu.Kisiler = new IkiliAramaAgaci(d, null, null);
-                } else {                        // ilk satır değilse ağaca ekle
+                } else {
                     ElemanKontrolcusu.Kisiler.kisiEkle(eklenecekKisi, null, null);
                 }
                 i++;
