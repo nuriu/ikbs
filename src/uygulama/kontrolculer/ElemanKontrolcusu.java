@@ -16,6 +16,7 @@ import uygulama.Main;
 import uygulama.eleman.Deneyim;
 import uygulama.eleman.Egitim;
 import uygulama.eleman.Kisi;
+import uygulama.sirket.Ilan;
 import uygulama.veriYapilari.bagliListe.BagliListe;
 import uygulama.veriYapilari.ikiliAramaAgaci.IkiliAramaAgaci;
 import uygulama.veriYapilari.ikiliAramaAgaci.iAADugum;
@@ -23,6 +24,7 @@ import uygulama.veriYapilari.ikiliAramaAgaci.iAADugum;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Enumeration;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -70,6 +72,8 @@ public class ElemanKontrolcusu implements Initializable {
     private ListView egitimListesi;
     @FXML
     private Label lblSistemdekiKisi;
+    @FXML
+    private ListView listIsIlanlari;
     //--------------------------------------------------------------------------
 
     @Override
@@ -117,6 +121,21 @@ public class ElemanKontrolcusu implements Initializable {
 
                 egitimListesi.setItems(lEgitim);
             }
+            if (SirketKontrolcusu.Ilanlar != null) {
+                IlanListele();
+            }
+        }
+    }
+
+    public void IlanListele(){
+        ObservableList<String> ilan = FXCollections.observableArrayList();
+        if (SirketKontrolcusu.Ilanlar != null) {
+            Enumeration e = SirketKontrolcusu.Ilanlar.elements();
+            while (e.hasMoreElements()) {
+                Ilan i = (Ilan) e.nextElement();
+                ilan.add(i.IlanNo + " | " + i.Sirket.Ad + " | " + i.IsTanimi + " | " + i.ArananOzellikler);
+            }
+            listIsIlanlari.setItems(ilan);
         }
     }
 

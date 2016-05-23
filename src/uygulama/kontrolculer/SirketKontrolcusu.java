@@ -80,7 +80,7 @@ public class SirketKontrolcusu implements Initializable {
                 sistemdekiSirket = null;
                 sistemdekiSirket = new Sirket(isYeriAdi.getText(),tamAdres.getText(), telefon.getText(),
                         faks.getText(), ePosta.getText());
-                //Sirketler.remove(sistemdekiSirket.Ad);
+                Sirketler.remove(sistemdekiSirket.Ad);
                 Sirketler.put(sistemdekiSirket.Ad, sistemdekiSirket);
             }
             else{
