@@ -150,4 +150,18 @@ public class SirketKontrolcusu implements Initializable {
             alert.showAndWait();
         }
     }
+
+    public void IlanSil(){
+        if (listIlanlar.getSelectionModel().getSelectedItem() != null) {
+            String[] ilanBilgileri = listIlanlar.getSelectionModel().getSelectedItem().toString().split(" \\| ");
+            Ilanlar.remove(Integer.valueOf(ilanBilgileri[0]));
+            IlanListele();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("HATA");
+            alert.setHeaderText("İlan Silme Hatası!");
+            alert.setContentText("Öncelikle silinecek ilanı seçmelisiniz!");
+            alert.showAndWait();
+        }
+    }
 }
