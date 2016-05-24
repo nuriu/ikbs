@@ -390,12 +390,9 @@ public class ElemanKontrolcusu implements Initializable {
             String[] ilanBilgileri = listIsIlanlari.getSelectionModel().getSelectedItem().toString().split(" \\| ");
             Ilan ilan = (Ilan) SirketKontrolcusu.Ilanlar.get(Integer.valueOf(ilanBilgileri[0]));
             boolean kisiAra =  ilan.Basvuranlar.KisiAra(SistemdekiKisi.kisi);
-            if (!kisiAra){
-                ((Ilan) SirketKontrolcusu.Ilanlar.get(Integer.valueOf(ilanBilgileri[0]))).Basvuranlar.ekle(SistemdekiKisi.kisi);
-                //ilan.Basvuranlar.ekle(SistemdekiKisi.kisi);
-                System.out.println(kisiAra + " - " +ilan.IlanNo + " - " + SistemdekiKisi.kisi.Ad);
-            }
-            else{
+            if (!kisiAra) {
+                ilan.Basvuranlar.ekle(SistemdekiKisi.kisi);
+            } else {
                 System.out.println(kisiAra + " - ");
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("HATA");
@@ -403,14 +400,11 @@ public class ElemanKontrolcusu implements Initializable {
                 alert.setContentText("Bu işe daha önce başvuru yaptınız!");
                 alert.showAndWait();
             }
-            System.out.println(ilanBilgileri[0] + " - " + ilanBilgileri[1]);
-            System.out.println(ilan.IlanNo + " - " + ilan.Sirket.Ad);
-        }
-        else {
+        } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("HATA");
             alert.setHeaderText("Başvuru Hatası!");
-            alert.setContentText("Başvuru yapılacak ilanı seçin!");
+            alert.setContentText("Başvuru yapılacak ilanı seçmelisiniz!");
             alert.showAndWait();
         }
     }

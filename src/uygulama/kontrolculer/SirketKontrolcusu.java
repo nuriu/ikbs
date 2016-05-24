@@ -141,8 +141,13 @@ public class SirketKontrolcusu implements Initializable {
         if (listIlanlar.getSelectionModel().getSelectedItem() != null) {
             String[] ilanBilgileri = listIlanlar.getSelectionModel().getSelectedItem().toString().split(" \\| ");
             Ilan ilan = (Ilan) Ilanlar.get(Integer.valueOf(ilanBilgileri[0]));
-            System.out.println(ilan.IlanNo + " - " + ilan.Sirket.Ad);
             listBasvurular.setItems(ilan.Basvuranlar.KisileriListele());
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("HATA");
+            alert.setHeaderText("Listeleme Hatası!");
+            alert.setContentText("Öncelikle başvuruları listelenecek ilanı seçmelisiniz!");
+            alert.showAndWait();
         }
     }
 }

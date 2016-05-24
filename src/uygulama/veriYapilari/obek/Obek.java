@@ -5,9 +5,18 @@ import javafx.collections.ObservableList;
 import uygulama.eleman.Kisi;
 
 public class Obek {
-    private int boyut;
-    private int maksimumBoyut;
+    private int boyut = 0;
+    private int maksimumBoyut = 100;
     private oDugum[] obekDizisi;
+
+    public Obek() {
+        obekDizisi = new oDugum[maksimumBoyut];
+    }
+
+    public Obek(int maksimumBoyut) {
+        this.maksimumBoyut = maksimumBoyut;
+        obekDizisi = new oDugum[maksimumBoyut];
+    }
 
     public boolean ekle(Kisi kisi) {
         if (boyut == maksimumBoyut)

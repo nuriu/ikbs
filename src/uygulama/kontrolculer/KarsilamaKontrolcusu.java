@@ -127,7 +127,6 @@ public class KarsilamaKontrolcusu implements Initializable {
 
             int i = 0;
             while ((satir = okuyucu.readLine()) != null) {
-                // TODO: deneyim ve eğitim bilgileri de dosyadan alınabilir
                 String[] eklenecekKisininBilgileri = satir.split(", ");
                 eklenecekKisi = new Kisi(eklenecekKisininBilgileri[0],
                         eklenecekKisininBilgileri[1], eklenecekKisininBilgileri[2],
