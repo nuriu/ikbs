@@ -392,6 +392,11 @@ public class ElemanKontrolcusu implements Initializable {
             boolean kisiAra =  ilan.Basvuranlar.KisiAra(SistemdekiKisi.kisi);
             if (!kisiAra) {
                 ilan.Basvuranlar.ekle(SistemdekiKisi.kisi);
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("BİLGİ");
+                alert.setHeaderText("Başvuru Bilgisi!");
+                alert.setContentText("Seçilen işe başarıyla başvuru yapılmıştır.");
+                alert.showAndWait();
             } else {
                 System.out.println(kisiAra + " - ");
                 Alert alert = new Alert(Alert.AlertType.ERROR);

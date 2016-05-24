@@ -11,6 +11,7 @@ import javafx.scene.control.*;
 import uygulama.Main;
 import uygulama.sirket.Ilan;
 import uygulama.sirket.Sirket;
+import uygulama.veriYapilari.obek.oDugum;
 
 import java.net.URL;
 import java.util.Enumeration;
@@ -25,6 +26,7 @@ public class SirketKontrolcusu implements Initializable {
 
     private Parent arayuz;
     private Sirket kaydedilecekSirket;
+    private Ilan ilan;
 
     @FXML
     private TextField isYeriAdi;
@@ -81,12 +83,13 @@ public class SirketKontrolcusu implements Initializable {
             if(sistemdekiSirket != null){
                 sistemdekiSirket = null;
                 sistemdekiSirket = new Sirket(isYeriAdi.getText(),tamAdres.getText(), telefon.getText(),
-                        faks.getText(), ePosta.getText());
+                                              faks.getText(), ePosta.getText());
                 Sirketler.remove(sistemdekiSirket.Ad);
                 Sirketler.put(sistemdekiSirket.Ad, sistemdekiSirket);
             }
             else{
-                kaydedilecekSirket = new Sirket(isYeriAdi.getText(),tamAdres.getText(), telefon.getText(), faks.getText(), ePosta.getText());
+                kaydedilecekSirket = new Sirket(isYeriAdi.getText(),tamAdres.getText(), telefon.getText(),
+                                                faks.getText(), ePosta.getText());
                 if(Sirketler == null){
                     Sirketler = new Hashtable();
                     Sirketler.put(kaydedilecekSirket.Ad, kaydedilecekSirket);
@@ -112,15 +115,24 @@ public class SirketKontrolcusu implements Initializable {
     }
 
     public void IlanEkle(){
-        Ilan ilan = new Ilan(txtIsTanimi.getText(), txtAtananOzellikler.getText(),sistemdekiSirket);
-        if (Ilanlar == null){
-            Ilanlar = new Hashtable();
-            Ilanlar.put(ilan.IlanNo, ilan);
+        if (!txtIsTanimi.getText().isEmpty() && !txtAtananOzellikler.getText().isEmpty()){
+            Ilan ilan = new Ilan(txtIsTanimi.getText(), txtAtananOzellikler.getText(),sistemdekiSirket);
+            if (Ilanlar == null){
+                Ilanlar = new Hashtable();
+                Ilanlar.put(ilan.IlanNo, ilan);
+            }
+            else {
+                Ilanlar.put(ilan.IlanNo, ilan);
+            }
+            IlanListele();
         }
         else {
-            Ilanlar.put(ilan.IlanNo, ilan);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("HATA");
+            alert.setHeaderText("İlan Eklenemedi!");
+            alert.setContentText("Lütfen boş alan bırakmayın!");
+            alert.showAndWait();
         }
-        IlanListele();
     }
 
     public void IlanListele(){
@@ -140,7 +152,7 @@ public class SirketKontrolcusu implements Initializable {
     public void BasvurulariListele(){
         if (listIlanlar.getSelectionModel().getSelectedItem() != null) {
             String[] ilanBilgileri = listIlanlar.getSelectionModel().getSelectedItem().toString().split(" \\| ");
-            Ilan ilan = (Ilan) Ilanlar.get(Integer.valueOf(ilanBilgileri[0]));
+            ilan = (Ilan) Ilanlar.get(Integer.valueOf(ilanBilgileri[0]));
             listBasvurular.setItems(ilan.Basvuranlar.KisileriListele());
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -163,5 +175,60 @@ public class SirketKontrolcusu implements Initializable {
             alert.setContentText("Öncelikle silinecek ilanı seçmelisiniz!");
             alert.showAndWait();
         }
+    }
+
+    public void UygunOlaniIseAl(){
+        if (ilan != null){
+            oDugum iseAlinan = ilan.Basvuranlar.enBuyuguSil();
+            Ilanlar.remove(ilan.IlanNo);
+            IlanListele();
+            ilan = null;
+            listBasvurular.setItems(null);
+            //deneyim bilgilerini gösterebilmek için
+            //iAADugum kisiTamBilgi =  (iAADugum) ElemanKontrolcusu.Kisiler.kisiAra(iseAlinan.Kisi.Ad);
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("BİLGİ");
+            alert.setHeaderText("İşe Alınan Kişinin Bilgileri!");
+            alert.setContentText("Uygunluk: " + iseAlinan.Uygunluk + "\n" + iseAlinan.Kisi.bilgileriGetir() +
+                                "\nişe alındı ve ilan kaldırıldı.");
+            alert.showAndWait();
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("HATA");
+            alert.setHeaderText("İlan Hatası!");
+            alert.setContentText("İlan seçilmemiş!");
+            alert.showAndWait();
+        }
+    }
+
+    public void secileniIseAl(){//KONTROL EDİLECEK BOŞ DEĞER GELİYOR
+        if (listBasvurular.getSelectionModel().getSelectedItem() != null){
+            String[] kisiBilgileri = listBasvurular.getSelectionModel().getSelectedItem().toString().split(" \\| ");
+            oDugum iseAlinan = ilan.Basvuranlar.KisiAraAdaGore(kisiBilgileri[1]);
+            Ilanlar.remove(ilan.IlanNo);
+            IlanListele();
+            ilan = null;
+            listBasvurular.setItems(null);
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("BİLGİ");
+            alert.setHeaderText("İşe Alınan Kişinin Bilgileri!");
+            alert.setContentText("Uygunluk: " + iseAlinan.Uygunluk + "\n"+
+                    "\nişe alındı ve ilan kaldırıldı.");
+            alert.showAndWait();
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("HATA");
+            alert.setHeaderText("Eleman Seçme Hatası!");
+            alert.setContentText("İşe almak istediğiniz elemanı seçmelisiniz!");
+            alert.showAndWait();
+        }
+    }
+
+    public void Reddet(){
+
     }
 }

@@ -81,6 +81,16 @@ public class Obek {
         return durum;
     }
 
+    public oDugum KisiAraAdaGore(String ad){
+        oDugum kisi = null;
+        for (int i = 0; i < boyut; i++){
+            if (obekDizisi[i].Kisi.Ad == ad){
+                kisi = obekDizisi[i];
+            }
+        }
+        return kisi;
+    }
+
     public ObservableList<String> KisileriListele(){
         ObservableList<String> basvuranlar = FXCollections.observableArrayList();
         for (int i = 0; i < boyut; i++){

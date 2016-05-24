@@ -14,4 +14,5 @@ public class oDugum {
         this.Kisi = kisi;
         Uygunluk = r.nextDouble();
     }
+    public  oDugum(){}
 }
