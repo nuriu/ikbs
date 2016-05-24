@@ -44,6 +44,8 @@ public class SirketKontrolcusu implements Initializable {
     private TextArea txtAtananOzellikler;
     @FXML
     private ListView listIlanlar;
+    @FXML
+    private ListView listBasvurular;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -132,6 +134,15 @@ public class SirketKontrolcusu implements Initializable {
                 }
             }
             listIlanlar.setItems(ilan);
+        }
+    }
+
+    public void BasvurulariListele(){
+        if (listIlanlar.getSelectionModel().getSelectedItem() != null) {
+            String[] ilanBilgileri = listIlanlar.getSelectionModel().getSelectedItem().toString().split(" \\| ");
+            Ilan ilan = (Ilan) Ilanlar.get(Integer.valueOf(ilanBilgileri[0]));
+            System.out.println(ilan.IlanNo + " - " + ilan.Sirket.Ad);
+            listBasvurular.setItems(ilan.Basvuranlar.KisileriListele());
         }
     }
 }

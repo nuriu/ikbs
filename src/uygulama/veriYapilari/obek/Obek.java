@@ -1,5 +1,7 @@
 package uygulama.veriYapilari.obek;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import uygulama.eleman.Kisi;
 
 public class Obek {
@@ -62,13 +64,21 @@ public class Obek {
     public boolean KisiAra(Kisi kisi){
         boolean durum = false;
         for (int i = 0; i < boyut; i++){
-            if (obekDizisi[i] != null){
-                if (obekDizisi[i].Kisi == kisi){
-                    durum = true;
-                    break;
-                }
+            if (obekDizisi[i].Kisi.Ad == kisi.Ad){
+                durum = true;
+                break;
             }
         }
         return durum;
+    }
+
+    public ObservableList<String> KisileriListele(){
+        ObservableList<String> basvuranlar = FXCollections.observableArrayList();
+        for (int i = 0; i < boyut; i++){
+            if (obekDizisi[i] != null){
+                basvuranlar.add(obekDizisi[i].Uygunluk + " | " + obekDizisi[i].Kisi.Ad);
+            }
+        }
+        return basvuranlar;
     }
 }
