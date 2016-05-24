@@ -121,4 +121,23 @@ public class BagliListe extends BagliListeSoyut {
 
         return null;
     }
+
+    public String listele(){
+        bLDugum sayac = Bas;
+        String deneyim = "";
+        String egitimDurumu = "";
+        while (sayac.Sonraki != null){
+            if (sayac.Veri instanceof Deneyim)
+                deneyim += ((Deneyim) sayac.Veri).Ad + " | " + ((Deneyim) sayac.Veri).Adres + " | " + ((Deneyim) sayac.Veri).Pozisyon + "\n";
+            else if (sayac.Veri instanceof Egitim)
+                egitimDurumu += ((Egitim) sayac.Veri).Ad + " | " + ((Egitim) sayac.Veri).Baslangic + " | " +
+                        ((Egitim) sayac.Veri).Bitis + " | " + ((Egitim) sayac.Veri).Bolum + " | " + ((Egitim) sayac.Veri).NotOrtalamasi + "\n";
+            sayac = sayac.Sonraki;
+        }
+        if(sayac.Veri instanceof Deneyim)
+            return deneyim;
+        else if (sayac.Veri instanceof Egitim)
+            return egitimDurumu;
+        return null;
+    }
 }

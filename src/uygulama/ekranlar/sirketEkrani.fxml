@@ -159,7 +159,7 @@
             <Insets bottom="10.0" left="20.0" />
          </GridPane.margin>
       </Button>
-      <Button mnemonicParsing="false" onAction="#Reddet" text="Reddet" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+      <Button id="btnAyrintilariGoster" mnemonicParsing="false" onAction="#AyrintilariGoster" text="Ayrıntıları Göster" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
          <GridPane.margin>
             <Insets bottom="10.0" left="325.0" right="20.0" />
          </GridPane.margin>

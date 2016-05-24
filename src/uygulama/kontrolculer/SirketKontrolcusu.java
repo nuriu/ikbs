@@ -11,6 +11,7 @@ import javafx.scene.control.*;
 import uygulama.Main;
 import uygulama.sirket.Ilan;
 import uygulama.sirket.Sirket;
+import uygulama.veriYapilari.ikiliAramaAgaci.iAADugum;
 import uygulama.veriYapilari.obek.oDugum;
 
 import java.net.URL;
@@ -209,7 +210,7 @@ public class SirketKontrolcusu implements Initializable {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("BİLGİ");
             alert.setHeaderText("İşe Alınan Kişinin Bilgileri!");
-            alert.setContentText("Uygunluk: " + iseAlinan.Uygunluk + "\n"+
+            alert.setContentText("Uygunluk: " + iseAlinan.Uygunluk + "\n" + iseAlinan.Kisi.bilgileriGetir() +
                     "\nKişi işe alındı ve ilan kaldırıldı.");
             alert.showAndWait();
         } else {
@@ -221,7 +222,21 @@ public class SirketKontrolcusu implements Initializable {
         }
     }
 
-    public void Reddet(){
-
+    public void AyrintilariGoster(){
+        if (listBasvurular.getSelectionModel().getSelectedItem() != null) {
+            String[] kisiBilgileri = listBasvurular.getSelectionModel().getSelectedItem().toString().split(" \\| ");
+            iAADugum secilen = ElemanKontrolcusu.Kisiler.kisiAra(kisiBilgileri[1]);
+            //Kontrol için eklendi
+            System.out.println(secilen.kisi.Ad);
+            System.out.println(secilen.Deneyimler.listele());
+            System.out.println(secilen.EgitimDurumu.listele());
+            //---
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("HATA");
+            alert.setHeaderText("Eleman Seçme Hatası!");
+            alert.setContentText("Ayrıntılarını görmek istediğiniz elemanı seçmelisiniz!");
+            alert.showAndWait();
+        }
     }
 }
