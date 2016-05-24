@@ -81,10 +81,10 @@ public class Obek {
         return durum;
     }
 
-    public oDugum KisiAraAdaGore(String ad){
+    public oDugum adaGoreKisiAra(String ad) {
         oDugum kisi = null;
         for (int i = 0; i < boyut; i++){
-            if (obekDizisi[i].Kisi.Ad == ad){
+            if (obekDizisi[i].Kisi.Ad.equals(ad)) {
                 kisi = obekDizisi[i];
             }
         }
