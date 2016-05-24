@@ -58,4 +58,17 @@ public class Obek {
         }
         obekDizisi[indis] = ust;
     }
+
+    public boolean KisiAra(Kisi kisi){
+        boolean durum = false;
+        for (int i = 0; i < boyut; i++){
+            if (obekDizisi[i] != null){
+                if (obekDizisi[i].Kisi == kisi){
+                    durum = true;
+                    break;
+                }
+            }
+        }
+        return durum;
+    }
 }

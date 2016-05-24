@@ -388,9 +388,21 @@ public class ElemanKontrolcusu implements Initializable {
     public void BasvuruYap(){
         if (listIsIlanlari.getSelectionModel().getSelectedItem() != null) {
             String[] ilanBilgileri = listIsIlanlari.getSelectionModel().getSelectedItem().toString().split(" \\| ");
-            Ilan ilan = (Ilan) SirketKontrolcusu.Ilanlar.get(ilanBilgileri[0]);
-            System.out.println(ilanBilgileri[0] + " - " + ilanBilgileri[1]);
-            System.out.println(ilan.IlanNo + " - " + ilan.Sirket.Ad);//Boş değer dönüyor
+            Ilan ilan = (Ilan) SirketKontrolcusu.Ilanlar.get(Integer.valueOf(ilanBilgileri[0]));
+            boolean kisiAra = ilan.Basvuranlar.KisiAra(SistemdekiKisi.kisi);
+            if (!kisiAra){
+                ilan.Basvuranlar.ekle(SistemdekiKisi.kisi);
+                //System.out.println(ilan.IlanNo + " - " + SistemdekiKisi.kisi.Ad);
+            }
+            else{
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("HATA");
+                alert.setHeaderText("Başvuru Hatası!");
+                alert.setContentText("Bu işe daha önce başvuru yaptınız!");
+                alert.showAndWait();
+            }
+            //System.out.println(ilanBilgileri[0] + " - " + ilanBilgileri[1]);
+            //System.out.println(ilan.IlanNo + " - " + ilan.Sirket.Ad);
         }
         else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
