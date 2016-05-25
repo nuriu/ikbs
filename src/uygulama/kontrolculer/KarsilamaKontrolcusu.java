@@ -190,4 +190,16 @@ public class KarsilamaKontrolcusu implements Initializable {
             alert.showAndWait();
         }
     }
+
+    public void koktenSaga(){
+        kisiListesi.setItems(ElemanKontrolcusu.Kisiler.koktenSagaDolas());
+    }
+
+    public void soldanSaga(){
+        kisiListesi.setItems(ElemanKontrolcusu.Kisiler.soldanSagaDolas());
+    }
+
+    public void soldanKoke(){
+        kisiListesi.setItems(ElemanKontrolcusu.Kisiler.soldanKokeDolas());
+    }
 }
