@@ -334,6 +334,34 @@ public class SirketKontrolcusu implements Initializable {
     }
 
     public void notaGoreListele() {
-        // TODO: notOrtalaması değişkeni 3.0'dan büyük olan kişileri listele
+        if (listIlanlar.getSelectionModel().getSelectedItem() != null) {
+            String[] ilanBilgileri = listIlanlar.getSelectionModel().getSelectedItem().toString().split(" \\| ");
+            ilan = (Ilan) Ilanlar.get(Integer.valueOf(ilanBilgileri[0]));
+            ObservableList<String> basvuranlar = ilan.Basvuranlar.KisileriListele();
+            ObservableList<String> notOrtalamasi = FXCollections.observableArrayList();
+            for (String kisi: basvuranlar) {
+                String[] kisiBilgileri = kisi.split(" \\| ");
+                iAADugum k = ElemanKontrolcusu.Kisiler.kisiAra(kisiBilgileri[1]);
+                if (k.EgitimDurumu != null){
+                    if (k.EgitimDurumu.notOrtalamasi())
+                        notOrtalamasi.add(kisi);
+                }
+            }
+            if (notOrtalamasi != null){
+                listOzel.setItems(notOrtalamasi);
+            } else{
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("HATA");
+                alert.setHeaderText("Listeleme Hatası!");
+                alert.setContentText("Not ortalaması 3.0'ın üzerinde kişi bulunamadı!");
+                alert.showAndWait();
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("HATA");
+            alert.setHeaderText("Listeleme Hatası!");
+            alert.setContentText("Öncelikle başvuruları listelenecek ilanı seçmelisiniz!");
+            alert.showAndWait();
+        }
     }
 }

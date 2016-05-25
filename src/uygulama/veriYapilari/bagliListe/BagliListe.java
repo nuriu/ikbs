@@ -131,4 +131,21 @@ public class BagliListe extends BagliListeSoyut {
         }
         return sonuc;
     }
+
+
+
+    public boolean notOrtalamasi(){
+        bLDugum sayac = Bas;
+        if (sayac != null) {
+            for (int i = Boyut; i > 0; i--) {
+                if (sayac.Veri instanceof Egitim){
+                    if (((Egitim) sayac.Veri).NotOrtalamasi >= 3.0){
+                        return true;
+                    } else return false;
+                }
+                sayac = sayac.Sonraki;
+            }
+        }
+        return false;
+    }
 }
