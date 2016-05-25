@@ -2,7 +2,6 @@ package uygulama.kontrolculer;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -50,6 +49,8 @@ public class SirketKontrolcusu implements Initializable {
     private ListView listIlanlar;
     @FXML
     private ListView listBasvurular;
+    @FXML
+    private ListView listOzel;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -310,7 +311,26 @@ public class SirketKontrolcusu implements Initializable {
     }
 
     public void ingilizceBilenleriListele() {
-        // TODO: yabanciDil değişkeni İngilizce, ingilizce içeren kişileri listele
+        if (listIlanlar.getSelectionModel().getSelectedItem() != null) {
+            String[] ilanBilgileri = listIlanlar.getSelectionModel().getSelectedItem().toString().split(" \\| ");
+            ilan = (Ilan) Ilanlar.get(Integer.valueOf(ilanBilgileri[0]));
+            ObservableList<String> ingilizceBilenler = ilan.Basvuranlar.ingilizceBilenler();
+            if (ingilizceBilenler != null){
+                listOzel.setItems(ingilizceBilenler);
+            } else{
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("HATA");
+                alert.setHeaderText("Listeleme Hatası!");
+                alert.setContentText("İngilizce bilen kişi bulunamadı!");
+                alert.showAndWait();
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("HATA");
+            alert.setHeaderText("Listeleme Hatası!");
+            alert.setContentText("Öncelikle başvuruları listelenecek ilanı seçmelisiniz!");
+            alert.showAndWait();
+        }
     }
 
     public void notaGoreListele() {

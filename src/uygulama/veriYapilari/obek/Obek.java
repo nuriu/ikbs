@@ -100,4 +100,16 @@ public class Obek {
         }
         return basvuranlar;
     }
+
+    public ObservableList<String> ingilizceBilenler(){
+        ObservableList<String> ingilizceBilenler = FXCollections.observableArrayList();
+        for (int i = 0; i < boyut; i++){
+            if (obekDizisi[i] != null){
+                if (obekDizisi[i].Kisi.YabanciDil.indexOf("ingilizce") != -1){
+                    ingilizceBilenler.add(obekDizisi[i].Uygunluk + " | " + obekDizisi[i].Kisi.Ad);
+                }
+            }
+        }
+        return ingilizceBilenler;
+    }
 }

@@ -2,4 +2,4 @@ nuri, nAdres, nTelefon, nEposta, nUyruk, nDogumYeri, 2016-01-21, nMedeniDurum, n
 ahmet, aAdres, aTelefon, aEposta, aUyruk, aDogumYeri, 2016-02-21, aMedeniDurum, aYabanciDil, aIlgiAlanlari, aReferanslar
 mehmet, mAdres, mTelefon, mEposta, mUyruk, mDogumYeri, 2016-03-21, mMedeniDurum, mYabanciDil, mIlgiAlanlari, mReferanslar
 kadir, kAdres, kTelefon, kEposta, kUyruk, kDogumYeri, 2016-04-21, kMedeniDurum, kYabanciDil, kIlgiAlanlari, kReferanslar
-sefa, sAdres, sTelefon, sEposta, sUyruk, sDogumYeri, 2016-05-21, sMedeniDurum, sYabanciDil, sIlgiAlanlari, sReferanslar
+sefa, sAdres, sTelefon, sEposta, sUyruk, sDogumYeri, 2016-05-21, sMedeniDurum, ingilizce, sIlgiAlanlari, sReferanslar
