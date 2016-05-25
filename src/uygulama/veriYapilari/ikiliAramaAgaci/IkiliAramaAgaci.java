@@ -36,6 +36,19 @@ public class IkiliAramaAgaci {
         }
         return sayac;
     }
+    // TODO: derinliği test et
+    public int derinlik(){ return  derinlik(kok);}
+
+    private int derinlik(iAADugum iAADugum){
+        if (iAADugum == null){
+            return -1;
+        }
+        int solDerinlik = derinlik(iAADugum.sol);
+        int sagDerinlik = derinlik(iAADugum.sag);
+        if(solDerinlik > sagDerinlik)
+            return solDerinlik + 1;
+        return sagDerinlik + 1;
+    }
 
     public void kisiEkle(Kisi kisi, BagliListe deneyimler, BagliListe egitimDurumu) {
         iAADugum ebeveyn = new iAADugum();

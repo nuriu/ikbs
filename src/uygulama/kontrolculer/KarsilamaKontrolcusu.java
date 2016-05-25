@@ -170,4 +170,24 @@ public class KarsilamaKontrolcusu implements Initializable {
             }
         }
     }
+
+    private void derinlikElemanSayisi(){
+        Integer elemanSayisi = 0;
+        Integer derinlik = 0;
+        if (ElemanKontrolcusu.Kisiler != null){
+            elemanSayisi = ElemanKontrolcusu.Kisiler.dugumSayisi();
+            derinlik = ElemanKontrolcusu.Kisiler.derinlik();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("BİLGİLENDİRME");
+            alert.setHeaderText("Kişiler Ağacı Hakkında!");
+            alert.setContentText("Kişiler ağacındaki eleman sayısı: " + elemanSayisi + "\nKişiler ağacındaki derinlik: " + derinlik);
+            alert.showAndWait();
+        } else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("HATA");
+            alert.setHeaderText("Sayma Haası!");
+            alert.setContentText("Kişiler ğacı boş!");
+            alert.showAndWait();
+        }
+    }
 }
