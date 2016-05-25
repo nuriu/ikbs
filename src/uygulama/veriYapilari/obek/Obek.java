@@ -91,6 +91,14 @@ public class Obek {
         return kisi;
     }
 
+    public void kisiGuncelle(String ad, Kisi kisi){
+        for (int i = 0; i < boyut; i++){
+            if (obekDizisi[i].Kisi.Ad.equals(ad)) {
+                obekDizisi[i].Kisi = kisi;
+            }
+        }
+    }
+
     public ObservableList<String> KisileriListele(){
         ObservableList<String> basvuranlar = FXCollections.observableArrayList();
         for (int i = 0; i < boyut; i++){

@@ -171,7 +171,7 @@ public class KarsilamaKontrolcusu implements Initializable {
         }
     }
 
-    private void derinlikElemanSayisi(){
+    public void derinlikElemanSayisi(){
         Integer elemanSayisi = 0;
         Integer derinlik = 0;
         if (ElemanKontrolcusu.Kisiler != null){

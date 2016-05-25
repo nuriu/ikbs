@@ -22,7 +22,6 @@ public class IkiliAramaAgaci {
         this.kok.EgitimDurumu = egitim;
     }
 
-    // TODO: eleman sayısını test et
     public int dugumSayisi() {
         return dugumSayisi(kok);
     }
@@ -36,7 +35,7 @@ public class IkiliAramaAgaci {
         }
         return sayac;
     }
-    // TODO: derinliği test et
+
     public int derinlik(){ return  derinlik(kok);}
 
     private int derinlik(iAADugum iAADugum){

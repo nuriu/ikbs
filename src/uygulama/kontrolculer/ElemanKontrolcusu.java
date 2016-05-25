@@ -335,8 +335,6 @@ public class ElemanKontrolcusu implements Initializable {
     }
 
     public void SistemeKaydet() throws Exception {
-        // TODO: kişi güncellendiğinde ilanlardaki bilgilerini de güncelle
-
         if (ad.getText().isEmpty() != true &&
                 adres.getText().isEmpty() != true &&
                 telefon.getText().isEmpty() != true &&
@@ -350,6 +348,8 @@ public class ElemanKontrolcusu implements Initializable {
                 referanslar.getText().isEmpty() != true) {
 
             if (SistemdekiKisi != null) {
+                Kisiler.kisiSil(SistemdekiKisi.kisi.Ad);
+                String kisiAd = SistemdekiKisi.kisi.Ad;
                 SistemdekiKisi.kisi = null;
                 SistemdekiKisi.kisi = new Kisi(ad.getText(), adres.getText(),
                         telefon.getText(), eposta.getText(), uyruk.getText(),
@@ -357,8 +357,8 @@ public class ElemanKontrolcusu implements Initializable {
                         medeniDurum.getValue(), yabanciDil.getText(),
                         ilgiAlanlari.getText(), referanslar.getText());
 
-                iAADugum d = new iAADugum(SistemdekiKisi.kisi, SistemdekiKisi.Deneyimler, SistemdekiKisi.EgitimDurumu);
-                Kisiler.kisiGuncelle(SistemdekiKisi.kisi.Ad, d);
+                Kisiler.kisiEkle(SistemdekiKisi.kisi,SistemdekiKisi.Deneyimler,SistemdekiKisi.EgitimDurumu);
+                IlandakiBilgileriGüncelle(kisiAd);
             } else {
                 kaydedilecekKisi = new Kisi(ad.getText(), adres.getText(),
                         telefon.getText(), eposta.getText(), uyruk.getText(),
@@ -413,6 +413,19 @@ public class ElemanKontrolcusu implements Initializable {
             alert.setHeaderText("Başvuru Hatası!");
             alert.setContentText("Başvuru yapılacak ilanı seçmelisiniz!");
             alert.showAndWait();
+        }
+    }
+
+    private void IlandakiBilgileriGüncelle(String ad){
+        ObservableList<String> ilan = FXCollections.observableArrayList();
+        if (SirketKontrolcusu.Ilanlar != null) {
+            Enumeration e = SirketKontrolcusu.Ilanlar.elements();
+            while (e.hasMoreElements()) {
+                Ilan i = (Ilan) e.nextElement();
+                if (i.Basvuranlar.adaGoreKisiAra(ad) != null){
+                    i.Basvuranlar.kisiGuncelle(ad, SistemdekiKisi.kisi);
+                }
+            }
         }
     }
 }
