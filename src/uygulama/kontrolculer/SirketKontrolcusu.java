@@ -2,6 +2,7 @@ package uygulama.kontrolculer;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -80,13 +81,23 @@ public class SirketKontrolcusu implements Initializable {
 
     public void SistemeKaydet() throws Exception {
         if(!isYeriAdi.getText().isEmpty() && !tamAdres.getText().isEmpty() && !telefon.getText().isEmpty() &&
-                !faks.getText().isEmpty() && !ePosta.getText().isEmpty()){
+                !faks.getText().isEmpty() && !ePosta.getText().isEmpty()) {
             if (sistemdekiSirket != null) {
-                sistemdekiSirket = null;
-                sistemdekiSirket = new Sirket(isYeriAdi.getText(),tamAdres.getText(), telefon.getText(),
-                                              faks.getText(), ePosta.getText());
+                kaydedilecekSirket = new Sirket(isYeriAdi.getText(), tamAdres.getText(), telefon.getText(),
+                        faks.getText(), ePosta.getText());
+
+                if (Ilanlar != null) {
+                    Enumeration e = Ilanlar.elements();
+                    while (e.hasMoreElements()) {
+                        Ilan i = (Ilan) e.nextElement();
+
+                        if (i.Sirket.Ad == sistemdekiSirket.Ad)
+                            i.Sirket = kaydedilecekSirket;
+                    }
+                }
+
                 Sirketler.remove(sistemdekiSirket.Ad);
-                Sirketler.put(sistemdekiSirket.Ad, sistemdekiSirket);
+                Sirketler.put(kaydedilecekSirket.Ad, kaydedilecekSirket);
             } else {
                 kaydedilecekSirket = new Sirket(isYeriAdi.getText(),tamAdres.getText(), telefon.getText(),
                                                 faks.getText(), ePosta.getText());
@@ -122,6 +133,15 @@ public class SirketKontrolcusu implements Initializable {
                 Ilanlar.put(ilan.IlanNo, ilan);
             }
             IlanListele();
+
+            txtIsTanimi.setText("");
+            txtAtananOzellikler.setText("");
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("İLAN EKLENDİ");
+            alert.setHeaderText("İlan eklemesi başarılı!");
+            alert.setContentText("İlan sisteme başarı ile eklendi!");
+            alert.showAndWait();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("HATA");
@@ -164,6 +184,12 @@ public class SirketKontrolcusu implements Initializable {
             String[] ilanBilgileri = listIlanlar.getSelectionModel().getSelectedItem().toString().split(" \\| ");
             Ilanlar.remove(Integer.valueOf(ilanBilgileri[0]));
             IlanListele();
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("İLAN SİLİNDİ");
+            alert.setHeaderText("İlan kaldırma başarılı!");
+            alert.setContentText("İlan sistemden başarı ile kaldırıldı!");
+            alert.showAndWait();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("HATA");
@@ -180,14 +206,25 @@ public class SirketKontrolcusu implements Initializable {
             IlanListele();
             ilan = null;
             listBasvurular.setItems(null);
-            //deneyim bilgilerini gösterebilmek için
-            //iAADugum kisiTamBilgi =  (iAADugum) ElemanKontrolcusu.Kisiler.kisiAra(iseAlinan.Kisi.Ad);
+
+            String ayrintilar = "";
+            ayrintilar += "Ad: \t\t\t\t" + iseAlinan.Kisi.Ad + "\n" +
+                    "Uygunluk: \t\t" + iseAlinan.Uygunluk + "\n" +
+                    "Adres:\t\t\t" + iseAlinan.Kisi.Adres + "\n" +
+                    "Telefon:\t\t\t" + iseAlinan.Kisi.Telefon + "\n" +
+                    "Eposta:\t\t\t" + iseAlinan.Kisi.Eposta + "\n" +
+                    "Uyruk:\t\t\t" + iseAlinan.Kisi.Uyruk + "\n" +
+                    "DogumYeri:\t\t" + iseAlinan.Kisi.DogumYeri + "\n" +
+                    "DogumTarihi:\t" + iseAlinan.Kisi.DogumTarihi + "\n" +
+                    "MedeniDurum:\t" + iseAlinan.Kisi.MedeniDurum + "\n" +
+                    "YabanciDil:\t\t" + iseAlinan.Kisi.YabanciDil + "\n" +
+                    "IlgiAlanlari:\t\t" + iseAlinan.Kisi.IlgiAlanlari + "\n" +
+                    "Referanslar:\t\t" + iseAlinan.Kisi.Referanslar + "\n";
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("BİLGİ");
             alert.setHeaderText("İşe Alınan Kişinin Bilgileri!");
-            alert.setContentText("Uygunluk: " + iseAlinan.Uygunluk + "\n" + iseAlinan.Kisi.bilgileriGetir() +
-                                "\nişe alındı ve ilan kaldırıldı.");
+            alert.setContentText(ayrintilar);
             alert.showAndWait();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -207,11 +244,24 @@ public class SirketKontrolcusu implements Initializable {
             ilan = null;
             listBasvurular.setItems(null);
 
+            String ayrintilar = "";
+            ayrintilar += "Ad: \t\t\t\t" + iseAlinan.Kisi.Ad + "\n" +
+                    "Uygunluk: \t\t" + iseAlinan.Uygunluk + "\n" +
+                    "Adres:\t\t\t" + iseAlinan.Kisi.Adres + "\n" +
+                    "Telefon:\t\t\t" + iseAlinan.Kisi.Telefon + "\n" +
+                    "Eposta:\t\t\t" + iseAlinan.Kisi.Eposta + "\n" +
+                    "Uyruk:\t\t\t" + iseAlinan.Kisi.Uyruk + "\n" +
+                    "DogumYeri:\t\t" + iseAlinan.Kisi.DogumYeri + "\n" +
+                    "DogumTarihi:\t" + iseAlinan.Kisi.DogumTarihi + "\n" +
+                    "MedeniDurum:\t" + iseAlinan.Kisi.MedeniDurum + "\n" +
+                    "YabanciDil:\t\t" + iseAlinan.Kisi.YabanciDil + "\n" +
+                    "IlgiAlanlari:\t\t" + iseAlinan.Kisi.IlgiAlanlari + "\n" +
+                    "Referanslar:\t\t" + iseAlinan.Kisi.Referanslar + "\n";
+
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("BİLGİ");
             alert.setHeaderText("İşe Alınan Kişinin Bilgileri!");
-            alert.setContentText("Uygunluk: " + iseAlinan.Uygunluk + "\n" + iseAlinan.Kisi.bilgileriGetir() +
-                    "\nKişi işe alındı ve ilan kaldırıldı.");
+            alert.setContentText(ayrintilar);
             alert.showAndWait();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -257,5 +307,13 @@ public class SirketKontrolcusu implements Initializable {
             alert.setContentText("Ayrıntılarını görmek istediğiniz elemanı seçmelisiniz!");
             alert.showAndWait();
         }
+    }
+
+    public void ingilizceBilenleriListele() {
+        // TODO: yabanciDil değişkeni İngilizce, ingilizce içeren kişileri listele
+    }
+
+    public void notaGoreListele() {
+        // TODO: notOrtalaması değişkeni 3.0'dan büyük olan kişileri listele
     }
 }

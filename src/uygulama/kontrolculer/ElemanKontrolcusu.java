@@ -121,6 +121,7 @@ public class ElemanKontrolcusu implements Initializable {
 
                 egitimListesi.setItems(lEgitim);
             }
+
             if (SirketKontrolcusu.Ilanlar != null) {
                 IlanListele();
             }
@@ -334,6 +335,8 @@ public class ElemanKontrolcusu implements Initializable {
     }
 
     public void SistemeKaydet() throws Exception {
+        // TODO: kişi güncellendiğinde ilanlardaki bilgilerini de güncelle
+
         if (ad.getText().isEmpty() != true &&
                 adres.getText().isEmpty() != true &&
                 telefon.getText().isEmpty() != true &&
@@ -398,7 +401,6 @@ public class ElemanKontrolcusu implements Initializable {
                 alert.setContentText("Seçilen işe başarıyla başvuru yapılmıştır.");
                 alert.showAndWait();
             } else {
-                System.out.println(kisiAra + " - ");
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("HATA");
                 alert.setHeaderText("Başvuru Hatası!");
