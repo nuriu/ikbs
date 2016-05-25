@@ -226,11 +226,30 @@ public class SirketKontrolcusu implements Initializable {
         if (listBasvurular.getSelectionModel().getSelectedItem() != null) {
             String[] kisiBilgileri = listBasvurular.getSelectionModel().getSelectedItem().toString().split(" \\| ");
             iAADugum secilen = ElemanKontrolcusu.Kisiler.kisiAra(kisiBilgileri[1]);
-            //Kontrol için eklendi
-            System.out.println(secilen.kisi.Ad);
-            System.out.println(secilen.Deneyimler.listele());
-            System.out.println(secilen.EgitimDurumu.listele());
-            //---
+
+            String ayrintilar = "";
+            ayrintilar += "Adres:\t\t\t" + secilen.kisi.Adres + "\n" +
+                    "Telefon:\t\t\t" + secilen.kisi.Telefon + "\n" +
+                    "Eposta:\t\t\t" + secilen.kisi.Eposta + "\n" +
+                    "Uyruk:\t\t\t" + secilen.kisi.Uyruk + "\n" +
+                    "DogumYeri:\t\t" + secilen.kisi.DogumYeri + "\n" +
+                    "DogumTarihi:\t" + secilen.kisi.DogumTarihi + "\n" +
+                    "MedeniDurum:\t" + secilen.kisi.MedeniDurum + "\n" +
+                    "YabanciDil:\t\t" + secilen.kisi.YabanciDil + "\n" +
+                    "IlgiAlanlari:\t\t" + secilen.kisi.IlgiAlanlari + "\n" +
+                    "Referanslar:\t\t" + secilen.kisi.Referanslar + "\n";
+
+
+            if (secilen.Deneyimler != null)
+                ayrintilar += "\nDeneyimler;\n\n" + secilen.Deneyimler.listele() + "\n";
+            if (secilen.EgitimDurumu != null)
+                ayrintilar += "\nEğitim Bilgileri;\n\n" + secilen.EgitimDurumu.listele() + "\n";
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Ayrıntılı Bilgiler");
+            alert.setHeaderText(secilen.kisi.Ad + " için Ayrıntılı Bilgiler\n");
+            alert.setContentText(ayrintilar);
+            alert.showAndWait();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("HATA");
