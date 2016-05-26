@@ -8,7 +8,7 @@ import uygulama.veriYapilari.bagliListe.BagliListe;
 public class IkiliAramaAgaci {
     public ObservableList<String> dugumler;
     private iAADugum kok;
-
+    private int duzey = 0;
     public IkiliAramaAgaci() {
     }
 
@@ -38,15 +38,37 @@ public class IkiliAramaAgaci {
 
     public int derinlik(){ return  derinlik(kok);}
 
-    private int derinlik(iAADugum iAADugum){
-        if (iAADugum == null){
+    private int derinlik(iAADugum iAADugum) {
+        if (iAADugum == null)
             return -1;
-        }
+
         int solDerinlik = derinlik(iAADugum.sol);
         int sagDerinlik = derinlik(iAADugum.sag);
+
         if(solDerinlik > sagDerinlik)
             return solDerinlik + 1;
+
         return sagDerinlik + 1;
+    }
+
+    private int seviyeBul(iAADugum iAADugum, String ad, int seviye) {
+        if (iAADugum == null)
+            return 0;
+
+        if (iAADugum.kisi.Ad.equals(ad))
+            return seviye;
+
+        int seviyeDus = seviyeBul(iAADugum.sol, ad, seviye + 1);
+
+        if (seviyeDus != 0)
+            return seviyeDus;
+
+        seviyeDus = seviyeBul(iAADugum.sag, ad, seviye + 1);
+        return seviyeDus;
+    }
+
+    public int seviyeyiGetir(iAADugum iAADugum, String ad) {
+        return seviyeBul(iAADugum, ad, 0);
     }
 
     public void kisiEkle(Kisi kisi, BagliListe deneyimler, BagliListe egitimDurumu) {
@@ -55,13 +77,10 @@ public class IkiliAramaAgaci {
 
         while (arama != null) {
             ebeveyn = arama;
-            // kişinin adı zaten varsa ekleme
             if (kisi.Ad.compareTo(arama.kisi.Ad) == 0)
                 return;
-                // kişinin adı alfabetik olarak önce geliyorsa
             else if (kisi.Ad.compareTo(arama.kisi.Ad) < 0)
                 arama = arama.sol;
-                // kişinin adı alfabetik olarak sonra geliyorsa
             else
                 arama = arama.sag;
         }
@@ -91,15 +110,16 @@ public class IkiliAramaAgaci {
 
     private void ziyaret(iAADugum iAADugum) {
         if (dugumler == null) {
-            dugumler = FXCollections.observableArrayList(iAADugum.kisi.bilgileriGetir());
+            dugumler = FXCollections.observableArrayList(iAADugum.kisi.bilgileriGetir() + " | Düzey: " + seviyeyiGetir(kok, iAADugum.kisi.Ad));
         } else {
             if (iAADugum.kisi != null)
-                dugumler.add(iAADugum.kisi.bilgileriGetir());
+                dugumler.add(iAADugum.kisi.bilgileriGetir() + " | Düzey: " + seviyeyiGetir(kok, iAADugum.kisi.Ad));
         }
     }
 
     public ObservableList<String> koktenSagaDolas() {
         dugumler = null;
+        duzey = 0;
         koktenSaga(kok);
         return this.dugumler;
     }
@@ -114,6 +134,7 @@ public class IkiliAramaAgaci {
 
     public ObservableList<String> soldanSagaDolas() {
         dugumler = null;
+        duzey = 0;
         soldanSaga(kok);
         return this.dugumler;
     }
@@ -123,11 +144,13 @@ public class IkiliAramaAgaci {
             return;
         soldanSaga(iAADugum.sol);
         ziyaret(iAADugum);
+        duzey++;
         soldanSaga(iAADugum.sag);
     }
 
     public ObservableList<String> soldanKokeDolas() {
         dugumler = null;
+        duzey = 0;
         soldanKoke(kok);
         return this.dugumler;
     }
@@ -138,6 +161,7 @@ public class IkiliAramaAgaci {
         soldanKoke(iAADugum.sol);
         soldanKoke(iAADugum.sag);
         ziyaret(iAADugum);
+        duzey++;
     }
 
     public void kisiGuncelle(String kisininIsmi, iAADugum yeniBilgiler) {
@@ -194,7 +218,6 @@ public class IkiliAramaAgaci {
 
         while (kisiAdi.compareTo(simdiki.kisi.Ad) != 0) {
             ebeveyn = simdiki;
-            // kişi adı alfabetik olarak küçükse
             if (kisiAdi.compareTo(simdiki.kisi.Ad) < 0) {
                 solMu = true;
                 simdiki = simdiki.sol;
@@ -206,7 +229,6 @@ public class IkiliAramaAgaci {
                 return false;
         }
 
-        // yaprak düğüm ise
         if (simdiki.sol == null && simdiki.sag == null) {
             if (simdiki == kok)
                 kok = null;
@@ -214,21 +236,21 @@ public class IkiliAramaAgaci {
                 ebeveyn.sol = null;
             else
                 ebeveyn.sag = null;
-        } else if (simdiki.sag == null) {   // sağı boş ise
+        } else if (simdiki.sag == null) {
             if (simdiki == kok)
                 kok = simdiki.sol;
             else if (solMu)
                 ebeveyn.sol = simdiki.sol;
             else
                 ebeveyn.sag = simdiki.sol;
-        } else if (simdiki.sol == null) {   // solu boş işse
+        } else if (simdiki.sol == null) {
             if (simdiki == kok)
                 kok = simdiki.sag;
             else if (solMu)
                 ebeveyn.sol = simdiki.sag;
             else
                 ebeveyn.sag = simdiki.sag;
-        } else {                            // iki çocuğuda dolu ise
+        } else {
             iAADugum successor = successor(simdiki);
             if (simdiki == kok)
                 kok = successor;
