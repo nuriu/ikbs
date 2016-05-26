@@ -16,7 +16,6 @@ public class iAADugum {
     public iAADugum() {
     }
 
-    // sadece kişi bilgisini içeren düğüm
     public iAADugum(Kisi kisi) {
         this.kisi = kisi;
         this.Deneyimler = null;
@@ -25,7 +24,6 @@ public class iAADugum {
         this.sag = null;
     }
 
-    // tüm bilgileri içeren düğüm
     public iAADugum(Kisi kisi, BagliListe deneyimler, BagliListe egitimDurumu) {
         this.kisi = kisi;
         this.Deneyimler = deneyimler;

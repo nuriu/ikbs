@@ -29,16 +29,10 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class ElemanKontrolcusu implements Initializable {
-    // sistem genelinde kullanılacak olan kişi listesi
     public static IkiliAramaAgaci Kisiler;
-    // karşılama ekranında seçilen kişi
     public static iAADugum SistemdekiKisi;
 
     private Parent arayuz;
-
-    //--------------------------------------------------------------------------
-    // ARAYÜZ ÜYELERİ
-    //--------------------------------------------------------------------------
     private Kisi kaydedilecekKisi;
     private BagliListe kkDeneyimler = new BagliListe();
     private ObservableList<String> lDeneyimler = null;
@@ -74,7 +68,6 @@ public class ElemanKontrolcusu implements Initializable {
     private Label lblSistemdekiKisi;
     @FXML
     private ListView listIsIlanlari;
-    //--------------------------------------------------------------------------
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -128,7 +121,7 @@ public class ElemanKontrolcusu implements Initializable {
         }
     }
 
-    public void IlanListele(){
+    public void IlanListele() {
         ObservableList<String> ilan = FXCollections.observableArrayList();
         if (SirketKontrolcusu.Ilanlar != null) {
             Enumeration e = SirketKontrolcusu.Ilanlar.elements();
@@ -220,8 +213,9 @@ public class ElemanKontrolcusu implements Initializable {
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == ekle) {
                 return new Egitim(egitimAdi.getText(), egitimBolumu.getText(),
-                        egitimBaslangic.getValue().getYear() + "", egitimBitis.getValue().getYear() + "",
-                        Double.parseDouble(egitimNotOrtalamasi.getText()));
+                            egitimBaslangic.getValue().getYear() + "",
+                            egitimBitis.getValue().getYear() + "",
+                            Double.parseDouble(egitimNotOrtalamasi.getText()));
             }
             return null;
         });
@@ -238,9 +232,11 @@ public class ElemanKontrolcusu implements Initializable {
             }
 
             if (lEgitim != null)
-                lEgitim.add(e.Bitis + " : " + e.Ad + " - " + e.Bolum + " : " + e.NotOrtalamasi);
+                lEgitim.add(e.Bitis + " : " + e.Ad + " - " + e.Bolum + " : " +
+                            e.NotOrtalamasi);
             else
-                lEgitim = FXCollections.observableArrayList(e.Bitis + " : " + e.Ad + " - " + e.Bolum + " : " + e.NotOrtalamasi);
+                lEgitim = FXCollections.observableArrayList(e.Bitis + " : " +
+                            e.Ad + " - " + e.Bolum + " : " + e.NotOrtalamasi);
 
             egitimListesi.setItems(lEgitim);
         });
