@@ -416,7 +416,7 @@ public class ElemanKontrolcusu implements Initializable {
         }
     }
 
-    private void IlandakiBilgileriGüncelle(String ad){
+    private void IlandakiBilgileriGüncelle(String ad) {
         ObservableList<String> ilan = FXCollections.observableArrayList();
         if (SirketKontrolcusu.Ilanlar != null) {
             Enumeration e = SirketKontrolcusu.Ilanlar.elements();

@@ -69,15 +69,14 @@ public class KarsilamaKontrolcusu implements Initializable {
     }
 
     public void SirketGirisi() throws Exception {
-        if(sirketListesi.getSelectionModel().getSelectedItem() != null){
+        if (sirketListesi.getSelectionModel().getSelectedItem() != null) {
             String anahtar = sirketListesi.getSelectionModel().getSelectedItem();
             SirketKontrolcusu.sistemdekiSirket = (Sirket) SirketKontrolcusu.Sirketler.get(anahtar);
             arayuz = FXMLLoader.load(getClass().getResource("../ekranlar/sirketEkrani.fxml"));
             Main.pencere.setTitle("İnsan Kaynakları Bilgi Sistemi - Şirket Ekranı");
             Main.pencere.setScene(new Scene(arayuz, 1280, 700));
             System.out.println("Şirket Ekranına Geçildi.");
-        }
-        else{
+        } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("HATA");
             alert.setHeaderText("Giriş Hatası!");
@@ -174,7 +173,7 @@ public class KarsilamaKontrolcusu implements Initializable {
     public void derinlikElemanSayisi(){
         Integer elemanSayisi = 0;
         Integer derinlik = 0;
-        if (ElemanKontrolcusu.Kisiler != null){
+        if (ElemanKontrolcusu.Kisiler != null) {
             elemanSayisi = ElemanKontrolcusu.Kisiler.dugumSayisi();
             derinlik = ElemanKontrolcusu.Kisiler.derinlik();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -182,7 +181,7 @@ public class KarsilamaKontrolcusu implements Initializable {
             alert.setHeaderText("Kişiler Ağacı Hakkında!");
             alert.setContentText("Kişiler ağacındaki eleman sayısı: " + elemanSayisi + "\nKişiler ağacındaki derinlik: " + derinlik);
             alert.showAndWait();
-        } else{
+        } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("HATA");
             alert.setHeaderText("Sayma Haası!");
@@ -191,15 +190,15 @@ public class KarsilamaKontrolcusu implements Initializable {
         }
     }
 
-    public void koktenSaga(){
+    public void koktenSaga() {
         kisiListesi.setItems(ElemanKontrolcusu.Kisiler.koktenSagaDolas());
     }
 
-    public void soldanSaga(){
+    public void soldanSaga() {
         kisiListesi.setItems(ElemanKontrolcusu.Kisiler.soldanSagaDolas());
     }
 
-    public void soldanKoke(){
+    public void soldanKoke() {
         kisiListesi.setItems(ElemanKontrolcusu.Kisiler.soldanKokeDolas());
     }
 }

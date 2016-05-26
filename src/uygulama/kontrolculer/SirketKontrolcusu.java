@@ -124,7 +124,7 @@ public class SirketKontrolcusu implements Initializable {
         }
     }
 
-    public void IlanEkle(){
+    public void IlanEkle() {
         if (!txtIsTanimi.getText().isEmpty() && !txtAtananOzellikler.getText().isEmpty()) {
             Ilan ilan = new Ilan(txtIsTanimi.getText(), txtAtananOzellikler.getText(),sistemdekiSirket);
             if (Ilanlar == null) {
@@ -273,7 +273,7 @@ public class SirketKontrolcusu implements Initializable {
         }
     }
 
-    public void AyrintilariGoster(){
+    public void AyrintilariGoster() {
         if (listBasvurular.getSelectionModel().getSelectedItem() != null) {
             String[] kisiBilgileri = listBasvurular.getSelectionModel().getSelectedItem().toString().split(" \\| ");
             iAADugum secilen = ElemanKontrolcusu.Kisiler.kisiAra(kisiBilgileri[1]);
@@ -315,9 +315,9 @@ public class SirketKontrolcusu implements Initializable {
             String[] ilanBilgileri = listIlanlar.getSelectionModel().getSelectedItem().toString().split(" \\| ");
             ilan = (Ilan) Ilanlar.get(Integer.valueOf(ilanBilgileri[0]));
             ObservableList<String> ingilizceBilenler = ilan.Basvuranlar.ingilizceBilenler();
-            if (ingilizceBilenler != null){
+            if (ingilizceBilenler != null) {
                 listOzel.setItems(ingilizceBilenler);
-            } else{
+            } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("HATA");
                 alert.setHeaderText("Listeleme Hatası!");
@@ -347,9 +347,9 @@ public class SirketKontrolcusu implements Initializable {
                         notOrtalamasi.add(kisi);
                 }
             }
-            if (notOrtalamasi != null){
+            if (notOrtalamasi != null) {
                 listOzel.setItems(notOrtalamasi);
-            } else{
+            } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("HATA");
                 alert.setHeaderText("Listeleme Hatası!");
