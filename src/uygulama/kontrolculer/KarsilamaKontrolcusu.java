@@ -44,7 +44,7 @@ public class KarsilamaKontrolcusu implements Initializable {
         kisiListesi.setItems(ElemanKontrolcusu.Kisiler.soldanSagaDolas());
 
         Enumeration e = SirketKontrolcusu.Sirketler.elements();
-        while(e.hasMoreElements()){
+        while (e.hasMoreElements()) {
             Sirket s = (Sirket) e.nextElement();
             sirketL.add(s.Ad);
         }
@@ -176,7 +176,6 @@ public class KarsilamaKontrolcusu implements Initializable {
         Integer elemanSayisi = 0;
         Integer derinlik = 0;
         if (ElemanKontrolcusu.Kisiler != null) {
-
             elemanSayisi = ElemanKontrolcusu.Kisiler.dugumSayisi();
             derinlik = ElemanKontrolcusu.Kisiler.derinlik();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

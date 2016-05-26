@@ -37,7 +37,6 @@ public class Obek {
             indis = ebeveyn;
             ebeveyn = (ebeveyn - 1) / 2;
         }
-
         obekDizisi[indis] = alt;
     }
 
@@ -70,7 +69,7 @@ public class Obek {
         obekDizisi[indis] = ust;
     }
 
-    public boolean KisiAra(Kisi kisi){
+    public boolean KisiAra(Kisi kisi) {
         boolean durum = false;
         for (int i = 0; i < boyut; i++) {
             if (obekDizisi[i].Kisi.Ad == kisi.Ad) {
@@ -83,7 +82,7 @@ public class Obek {
 
     public oDugum adaGoreKisiAra(String ad) {
         oDugum kisi = null;
-        for (int i = 0; i < boyut; i++){
+        for (int i = 0; i < boyut; i++) {
             if (obekDizisi[i].Kisi.Ad.equals(ad)) {
                 kisi = obekDizisi[i];
             }
@@ -92,7 +91,7 @@ public class Obek {
     }
 
     public void kisiGuncelle(String ad, Kisi kisi) {
-        for (int i = 0; i < boyut; i++){
+        for (int i = 0; i < boyut; i++) {
             if (obekDizisi[i].Kisi.Ad.equals(ad)) {
                 obekDizisi[i].Kisi = kisi;
             }

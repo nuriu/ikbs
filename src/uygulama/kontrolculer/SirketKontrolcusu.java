@@ -81,7 +81,7 @@ public class SirketKontrolcusu implements Initializable {
     }
 
     public void SistemeKaydet() throws Exception {
-        if(!isYeriAdi.getText().isEmpty() && !tamAdres.getText().isEmpty() && !telefon.getText().isEmpty() &&
+        if (!isYeriAdi.getText().isEmpty() && !tamAdres.getText().isEmpty() && !telefon.getText().isEmpty() &&
                 !faks.getText().isEmpty() && !ePosta.getText().isEmpty()) {
             if (sistemdekiSirket != null) {
                 kaydedilecekSirket = new Sirket(isYeriAdi.getText(), tamAdres.getText(), telefon.getText(),
@@ -170,7 +170,16 @@ public class SirketKontrolcusu implements Initializable {
         if (listIlanlar.getSelectionModel().getSelectedItem() != null) {
             String[] ilanBilgileri = listIlanlar.getSelectionModel().getSelectedItem().toString().split(" \\| ");
             ilan = (Ilan) Ilanlar.get(Integer.valueOf(ilanBilgileri[0]));
-            listBasvurular.setItems(ilan.Basvuranlar.KisileriListele());
+            if (ilan != null) {
+                listBasvurular.setItems(ilan.Basvuranlar.KisileriListele());
+            } else {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("UYARI");
+                alert.setHeaderText("Boş İlan!");
+                alert.setContentText("İlana başvuran kimse bulunamadı!");
+                alert.showAndWait();
+            }
+
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("HATA");
@@ -200,13 +209,14 @@ public class SirketKontrolcusu implements Initializable {
         }
     }
 
-    public void UygunOlaniIseAl(){
+    public void UygunOlaniIseAl() {
         if (ilan != null) {
             oDugum iseAlinan = ilan.Basvuranlar.enBuyuguSil();
             Ilanlar.remove(ilan.IlanNo);
             IlanListele();
             ilan = null;
             listBasvurular.setItems(null);
+            listOzel.setItems(null);
 
             String ayrintilar = "";
             ayrintilar += "Ad: \t\t\t\t" + iseAlinan.Kisi.Ad + "\n" +
@@ -237,13 +247,14 @@ public class SirketKontrolcusu implements Initializable {
     }
 
     public void secileniIseAl() {
-        if (listBasvurular.getSelectionModel().getSelectedItem() != null){
+        if (listBasvurular.getSelectionModel().getSelectedItem() != null) {
             String[] kisiBilgileri = listBasvurular.getSelectionModel().getSelectedItem().toString().split(" \\| ");
             oDugum iseAlinan = ilan.Basvuranlar.adaGoreKisiAra(kisiBilgileri[1]);
             Ilanlar.remove(ilan.IlanNo);
             IlanListele();
             ilan = null;
             listBasvurular.setItems(null);
+            listOzel.setItems(null);
 
             String ayrintilar = "";
             ayrintilar += "Ad: \t\t\t\t" + iseAlinan.Kisi.Ad + "\n" +

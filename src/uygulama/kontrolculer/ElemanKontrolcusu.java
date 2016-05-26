@@ -100,7 +100,6 @@ public class ElemanKontrolcusu implements Initializable {
                     else
                         lDeneyimler = FXCollections.observableArrayList(SistemdekiKisi.Deneyimler.elemanGetir(i));
                 }
-
                 deneyimListesi.setItems(lDeneyimler);
             }
 
@@ -111,7 +110,6 @@ public class ElemanKontrolcusu implements Initializable {
                     else
                         lEgitim = FXCollections.observableArrayList(SistemdekiKisi.EgitimDurumu.elemanGetir(i));
                 }
-
                 egitimListesi.setItems(lEgitim);
             }
 
@@ -384,7 +382,7 @@ public class ElemanKontrolcusu implements Initializable {
         }
     }
 
-    public void BasvuruYap(){
+    public void BasvuruYap() {
         if (listIsIlanlari.getSelectionModel().getSelectedItem() != null) {
             String[] ilanBilgileri = listIsIlanlari.getSelectionModel().getSelectedItem().toString().split(" \\| ");
             Ilan ilan = (Ilan) SirketKontrolcusu.Ilanlar.get(Integer.valueOf(ilanBilgileri[0]));

@@ -9,7 +9,7 @@ public class BagliListe extends BagliListeSoyut {
     public void basaEkle(EkBilgi deger) {
         bLDugum gecici = new bLDugum(deger);
 
-        if(Bas == null)
+        if (Bas == null)
             Bas = gecici;
         else {
             gecici.Sonraki = Bas;
@@ -22,11 +22,11 @@ public class BagliListe extends BagliListeSoyut {
     public void sonaEkle(EkBilgi deger) {
         bLDugum gecici = new bLDugum(deger);
 
-        if(Bas == null)
+        if (Bas == null)
             Bas = gecici;
         else {
             bLDugum sayac = Bas;
-            while(sayac.Sonraki != null)
+            while (sayac.Sonraki != null)
                 sayac = sayac.Sonraki;
             sayac.Sonraki = gecici;
         }
@@ -90,7 +90,7 @@ public class BagliListe extends BagliListeSoyut {
         else {
             bLDugum sayac = Bas;
             bLDugum gecici = new bLDugum();
-            for (int i = 1; i < pozisyon - 1; i++){
+            for (int i = 1; i < pozisyon - 1; i++) {
                 if (sayac.Sonraki != null)
                     sayac = sayac.Sonraki;
             }
@@ -122,7 +122,7 @@ public class BagliListe extends BagliListeSoyut {
         return null;
     }
 
-    public String listele(){
+    public String listele() {
         String sonuc = "";
         if (Bas != null) {
             for (int i = Boyut; i > 0; i--) {
@@ -132,14 +132,12 @@ public class BagliListe extends BagliListeSoyut {
         return sonuc;
     }
 
-
-
-    public boolean notOrtalamasi(){
+    public boolean notOrtalamasi() {
         bLDugum sayac = Bas;
         if (sayac != null) {
             for (int i = Boyut; i > 0; i--) {
-                if (sayac.Veri instanceof Egitim){
-                    if (((Egitim) sayac.Veri).NotOrtalamasi >= 3.0){
+                if (sayac.Veri instanceof Egitim) {
+                    if (((Egitim) sayac.Veri).NotOrtalamasi >= 3.0) {
                         return true;
                     } else return false;
                 }

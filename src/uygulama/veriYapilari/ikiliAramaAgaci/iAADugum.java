@@ -13,8 +13,7 @@ public class iAADugum {
     public iAADugum sag;
 
 
-    public iAADugum() {
-    }
+    public iAADugum() { }
 
     public iAADugum(Kisi kisi) {
         this.kisi = kisi;

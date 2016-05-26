@@ -13,8 +13,7 @@ public class Kisi {
     public String IlgiAlanlari;
     public String Referanslar;
 
-    public Kisi() {
-    }
+    public Kisi() {}
 
     public Kisi(String ad) {
         Ad = ad;

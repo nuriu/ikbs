@@ -9,8 +9,8 @@ public class IkiliAramaAgaci {
     public ObservableList<String> dugumler;
     private iAADugum kok;
     private int duzey = 0;
-    public IkiliAramaAgaci() {
-    }
+
+    public IkiliAramaAgaci() { }
 
     public IkiliAramaAgaci(iAADugum kok) {
         this.kok = kok;
@@ -36,7 +36,7 @@ public class IkiliAramaAgaci {
         return sayac;
     }
 
-    public int derinlik(){ return  derinlik(kok);}
+    public int derinlik() { return  derinlik(kok); }
 
     private int derinlik(iAADugum iAADugum) {
         if (iAADugum == null)
@@ -45,7 +45,7 @@ public class IkiliAramaAgaci {
         int solDerinlik = derinlik(iAADugum.sol);
         int sagDerinlik = derinlik(iAADugum.sag);
 
-        if(solDerinlik > sagDerinlik)
+        if (solDerinlik > sagDerinlik)
             return solDerinlik + 1;
 
         return sagDerinlik + 1;
