@@ -342,7 +342,7 @@ public class SirketKontrolcusu implements Initializable {
             for (String kisi: basvuranlar) {
                 String[] kisiBilgileri = kisi.split(" \\| ");
                 iAADugum k = ElemanKontrolcusu.Kisiler.kisiAra(kisiBilgileri[1]);
-                if (k.EgitimDurumu != null){
+                if (k.EgitimDurumu != null) {
                     if (k.EgitimDurumu.notOrtalamasi())
                         notOrtalamasi.add(kisi);
                 }

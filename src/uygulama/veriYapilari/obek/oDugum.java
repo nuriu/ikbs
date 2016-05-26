@@ -12,7 +12,7 @@ public class oDugum {
     public oDugum(Kisi kisi) {
         r = new Random();
         this.Kisi = kisi;
-        Uygunluk = r.nextDouble();
+        Uygunluk = r.nextDouble() * 10;
     }
     public  oDugum(){}
 }
