@@ -11,6 +11,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import uygulama.Main;
 import uygulama.eleman.Kisi;
+import uygulama.sirket.Ilan;
 import uygulama.sirket.Sirket;
 import uygulama.veriYapilari.ikiliAramaAgaci.IkiliAramaAgaci;
 import uygulama.veriYapilari.ikiliAramaAgaci.iAADugum;
@@ -103,6 +104,7 @@ public class KarsilamaKontrolcusu implements Initializable {
         if (kisiListesi.getSelectionModel().getSelectedItem() != null) {
             String[] silinecekKisininBilgileri = kisiListesi.getSelectionModel().getSelectedItem().split(" \\| ");
             ElemanKontrolcusu.Kisiler.kisiSil(silinecekKisininBilgileri[0]);
+            basvuruyuSil(silinecekKisininBilgileri[0]);
             kisiListesi.setItems(ElemanKontrolcusu.Kisiler.soldanSagaDolas());
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -170,10 +172,11 @@ public class KarsilamaKontrolcusu implements Initializable {
         }
     }
 
-    public void derinlikElemanSayisi(){
+    public void derinlikElemanSayisi() {
         Integer elemanSayisi = 0;
         Integer derinlik = 0;
         if (ElemanKontrolcusu.Kisiler != null) {
+
             elemanSayisi = ElemanKontrolcusu.Kisiler.dugumSayisi();
             derinlik = ElemanKontrolcusu.Kisiler.derinlik();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -200,5 +203,18 @@ public class KarsilamaKontrolcusu implements Initializable {
 
     public void soldanKoke() {
         kisiListesi.setItems(ElemanKontrolcusu.Kisiler.soldanKokeDolas());
+    }
+
+    private void basvuruyuSil(String ad) {
+        ObservableList<String> ilan = FXCollections.observableArrayList();
+        if (SirketKontrolcusu.Ilanlar != null) {
+            Enumeration e = SirketKontrolcusu.Ilanlar.elements();
+            while (e.hasMoreElements()) {
+                Ilan i = (Ilan) e.nextElement();
+                if (i.Basvuranlar.adaGoreKisiAra(ad) != null) {
+                    i.Basvuranlar.adaGoreKisiSil(ad);
+                }
+            }
+        }
     }
 }

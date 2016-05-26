@@ -74,7 +74,8 @@
             <Insets bottom="10.0" right="10.0" />
          </GridPane.margin>
       </Button>
-      <Button mnemonicParsing="false" onAction="#KarsilamaEkraninaDon" text="Geri Dön" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+      <Button mnemonicParsing="false" onAction="#KarsilamaEkraninaDon" text="Geri Dön" GridPane.columnIndex="2"
+              GridPane.halignment="RIGHT" GridPane.valignment="TOP">
          <GridPane.margin>
             <Insets right="10.0" top="10.0" />
          </GridPane.margin>
@@ -181,14 +182,14 @@
             <Insets bottom="50.0" left="10.0" right="10.0" top="80.0"/>
          </GridPane.margin>
       </ListView>
-      <Button mnemonicParsing="false" text="İngilizce Bilenler" GridPane.columnIndex="2" GridPane.rowIndex="1"
-              GridPane.valignment="BOTTOM" onAction="#ingilizceBilenleriListele">
+      <Button mnemonicParsing="false" onAction="#ingilizceBilenleriListele" text="İngilizce Bilenler"
+              GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
          <GridPane.margin>
             <Insets bottom="10.0" left="10.0"/>
          </GridPane.margin>
       </Button>
-      <Button mnemonicParsing="false" text="Notu 3.0'dan Yüksekler" GridPane.columnIndex="2" GridPane.halignment="RIGHT"
-              GridPane.rowIndex="1" GridPane.valignment="BOTTOM" onAction="#notaGoreListele">
+      <Button mnemonicParsing="false" onAction="#notaGoreListele" text="Notu 3.0'dan Yüksekler" GridPane.columnIndex="2"
+              GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
          <GridPane.margin>
             <Insets bottom="10.0" right="10.0"/>
          </GridPane.margin>

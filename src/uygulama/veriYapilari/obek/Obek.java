@@ -72,8 +72,8 @@ public class Obek {
 
     public boolean KisiAra(Kisi kisi){
         boolean durum = false;
-        for (int i = 0; i < boyut; i++){
-            if (obekDizisi[i].Kisi.Ad == kisi.Ad){
+        for (int i = 0; i < boyut; i++) {
+            if (obekDizisi[i].Kisi.Ad == kisi.Ad) {
                 durum = true;
                 break;
             }
@@ -91,7 +91,7 @@ public class Obek {
         return kisi;
     }
 
-    public void kisiGuncelle(String ad, Kisi kisi){
+    public void kisiGuncelle(String ad, Kisi kisi) {
         for (int i = 0; i < boyut; i++){
             if (obekDizisi[i].Kisi.Ad.equals(ad)) {
                 obekDizisi[i].Kisi = kisi;
@@ -99,25 +99,35 @@ public class Obek {
         }
     }
 
-    public ObservableList<String> KisileriListele(){
+    public ObservableList<String> KisileriListele() {
         ObservableList<String> basvuranlar = FXCollections.observableArrayList();
-        for (int i = 0; i < boyut; i++){
-            if (obekDizisi[i] != null){
-                basvuranlar.add(obekDizisi[i].Uygunluk + " | " + obekDizisi[i].Kisi.Ad);
+        for (int i = 0; i < boyut; i++) {
+            if (obekDizisi[i] != null) {
+                String uygunluk = String.format("%1.2f", obekDizisi[i].Uygunluk);
+                basvuranlar.add(uygunluk + " | " + obekDizisi[i].Kisi.Ad);
             }
         }
         return basvuranlar;
     }
 
-    public ObservableList<String> ingilizceBilenler(){
+    public ObservableList<String> ingilizceBilenler() {
         ObservableList<String> ingilizceBilenler = FXCollections.observableArrayList();
-        for (int i = 0; i < boyut; i++){
-            if (obekDizisi[i] != null){
-                if (obekDizisi[i].Kisi.YabanciDil.indexOf("ingilizce") != -1){
-                    ingilizceBilenler.add(obekDizisi[i].Uygunluk + " | " + obekDizisi[i].Kisi.Ad);
+        for (int i = 0; i < boyut; i++) {
+            if (obekDizisi[i] != null) {
+                if (obekDizisi[i].Kisi.YabanciDil.toLowerCase().contains("ingilizce")) {
+                    String uygunluk = String.format("%1.2f", obekDizisi[i].Uygunluk);
+                    ingilizceBilenler.add(uygunluk + " | " + obekDizisi[i].Kisi.Ad);
                 }
             }
         }
         return ingilizceBilenler;
+    }
+
+    public void adaGoreKisiSil(String ad) {
+        for (int i = 0; i < boyut; i++) {
+            if (obekDizisi[i].Kisi.Ad.equals(ad)) {
+                obekDizisi[i] = null;
+            }
+        }
     }
 }
