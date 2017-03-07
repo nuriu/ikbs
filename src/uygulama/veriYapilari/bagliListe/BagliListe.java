@@ -8,13 +8,10 @@ public class BagliListe extends BagliListeSoyut {
     @Override
     public void basaEkle(EkBilgi deger) {
         bLDugum gecici = new bLDugum(deger);
-
-        if (Bas == null)
-            Bas = gecici;
-        else {
-            gecici.Sonraki = Bas;
-            Bas = gecici;
-        }
+        
+        gecici.Sonraki = Bas;
+        Bas = gecici;
+   
         Boyut++;
     }
 
